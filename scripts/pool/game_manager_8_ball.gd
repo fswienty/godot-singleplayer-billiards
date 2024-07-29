@@ -31,15 +31,8 @@ var __
 
 
 func _ready():
-	if get_tree().get_network_unique_id() == 1:
-		randomize()
-		var seed_ = randi()
-		initialize_synced(seed_)
-
-
-func initialize_synced(seed_: int):
-	print("setting common random seed")
-	seed(seed_)
+	randomize()
+	seed(randi())
 
 	# connect signals
 	__ = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")

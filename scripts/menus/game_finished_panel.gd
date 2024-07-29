@@ -27,13 +27,9 @@ func initialize():
 			t1_list.add_child(label)
 		elif player_team == 2:
 			t2_list.add_child(label)
-	# show button or waiting label
-	if get_tree().get_network_unique_id() == 1:
-		lobby_button.show()
-		waiting_label.hide()
-	else:
-		lobby_button.hide()
-		waiting_label.show()
+
+	lobby_button.show()
+	waiting_label.hide()
 
 
 func display(winning_team: int):
