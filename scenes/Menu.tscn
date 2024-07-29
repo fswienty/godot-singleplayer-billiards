@@ -11,7 +11,6 @@
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 5 )
-DEBUG_MODE = true
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 

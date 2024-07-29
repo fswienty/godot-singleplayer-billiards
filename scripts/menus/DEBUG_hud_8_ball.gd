@@ -35,7 +35,7 @@ func _physics_process(_delta):
 		current_team.text = "Team 1"
 	else:
 		current_team.text = "Team 2"
-	current_player.text = Lobby.player_infos[manager.current_player_id].name
+	current_player.text = Globals.player_infos[manager.current_player_id].name
 	game_state.text = Enums.GameState.keys()[manager.game_state]
 
 	t1_ball_type.text = Enums.BallType.keys()[manager.t1_ball_type]

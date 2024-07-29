@@ -16,7 +16,7 @@ func initialize():
 	t1_team_label.initialize("Team 1")
 	t2_team_label.initialize("Team 2")
 	# add players to lists
-	for info in Lobby.player_infos.values():
+	for info in Globals.player_infos.values():
 		var player_name = info.name
 		var player_team = info.team
 		var label = Label.new()

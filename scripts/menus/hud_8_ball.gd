@@ -33,9 +33,9 @@ func update_players_and_ball_type():
 		ball_type.text = _get_ball_type_text(manager.t2_ball_type, manager.t2_8_ball_target)
 
 	if manager.current_player_id >= 0:
-		current_player.text = Lobby.player_infos[manager.current_player_id].name
+		current_player.text = Globals.player_infos[manager.current_player_id].name
 	if manager.next_player_id >= 0:
-		next_player.text = "Next: " + Lobby.player_infos[manager.next_player_id].name
+		next_player.text = "Next: " + Globals.player_infos[manager.next_player_id].name
 
 
 func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String:
@@ -50,7 +50,7 @@ func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String
 			_:
 				return "error, this should never be shown"
 	else:
-		return "Eight Ball "  #+ Enums.PocketLocation.keys()[team_8_ball_target]
+		return "Eight Ball " # + Enums.PocketLocation.keys()[team_8_ball_target]
 
 
 func update_pocketed_balls():

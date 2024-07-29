@@ -54,7 +54,8 @@ func _ready():
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
 
-	if get_tree().get_network_unique_id() == current_player_id:
+	print(current_player_id)
+	if current_player_id == 1:
 		game_state = Enums.GameState.QUEUE
 	else:
 		game_state = Enums.GameState.WAITING
@@ -71,7 +72,6 @@ func _physics_process(_delta):
 			queue_controller.run()
 		Enums.GameState.ROLLING:
 			if ball_manager.are_balls_still():
-				ball_manager.balls_active = false
 				var legal_play = _get_first_hit_legality() && !has_fouled
 				var go_again = legal_pocketing && legal_play
 				_on_balls_stopped(has_won, has_lost, legal_play)
@@ -92,8 +92,8 @@ func _get_player_id_for_turn(turn_number_: int) -> int:
 	var team_turn_number: int = int(ceil(turn_number_ as float / 2))
 	var current_team: int = 1 if is_t1_turn(turn_number_) else 2
 	var team_player_ids: Array = []
-	for key in Lobby.player_infos.keys():
-		if Lobby.player_infos[key].team == current_team:
+	for key in Globals.player_infos.keys():
+		if Globals.player_infos[key].team == current_team:
 			team_player_ids.append(key)
 	if team_player_ids.size() == 0:
 		return current_player_id
@@ -109,7 +109,6 @@ func is_t1_turn(turn_number_: int = -1) -> bool:
 
 # called only on peer that takes the shot
 func _on_queue_hit(impulse: Vector2):
-	ball_manager.balls_active = true
 	ball_manager.cue_ball.impulse = impulse
 	game_state = Enums.GameState.ROLLING
 
@@ -120,7 +119,7 @@ func _on_turn_ended(legal_play: bool):
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
-	if get_tree().get_network_unique_id() == current_player_id:
+	if current_player_id == 1:
 		if legal_play:
 			game_state = Enums.GameState.QUEUE
 		else:

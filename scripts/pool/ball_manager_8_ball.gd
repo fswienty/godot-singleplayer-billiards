@@ -2,7 +2,6 @@ class_name BallManager8Ball
 extends Node2D
 
 var cue_ball: Ball
-var balls_active: bool = false
 var hide_cue_ball: bool = false
 
 onready var ball_placer: Node2D = $BallPlacer
@@ -23,8 +22,6 @@ func _physics_process(_delta):
 		hide_cue_ball = false
 		cue_ball.global_position = Globals.cue_ball_inactive_pos
 		cue_ball.linear_velocity = Vector2.ZERO
-	# if balls_active:
-	# 	rpc_unreliable("_set_ball_states", _get_ball_states())
 
 
 # remote func _set_ball_states(states: Array):

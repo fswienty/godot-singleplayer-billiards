@@ -21,14 +21,11 @@ func _ready():
 	Globals.DEBUG_MODE = DEBUG_MODE
 	Globals.DEBUG_HUD = DEBUG_HUD
 	GlobalUi.set_console_visible(DEBUG_CONSOLE)
-	if DEBUG_MODE:
-		Lobby.player_infos = {
-			1: {name = "debug_host", team = 1}
-		}
-		main_menu.hide()
-		_on_game_started()
-		return
 
+	Globals.player_infos = {
+		1: {name = "PLAYER", team = 1},
+		2: {name = "AI", team = 2},
+	}
 	main_menu.show()
 	main_menu_open_anim.play("anim")
 

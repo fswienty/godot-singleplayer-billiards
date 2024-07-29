@@ -68,7 +68,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Lobby="*res://scripts/autoload/lobby.gd"
 BallTextures="*res://scripts/autoload/ball_textures.gd"
 SoundManager="*res://scripts/autoload/sound_manager.gd"
 Enums="*res://scripts/autoload/enums.gd"

@@ -39,8 +39,6 @@ func run():
 			state = _drag_mode()
 		Enums.QueueMode.MOUSE_WHEEL:
 			state = _mouse_wheel_mode()
-		Enums.QueueMode.KEYBOARD:
-			pass
 
 	_set_state(state)
 
