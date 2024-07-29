@@ -48,14 +48,8 @@ func _on_JoinButton_pressed():
 		lobby_code_input.grab_focus()
 		return
 	lobby_code_input.text = lobby_code_input.text.to_upper()
-	var success = yield(Lobby.join(player_name_input.text, lobby_code_input.text), "completed")
-	if success:
-		emit_signal("entered_lobby")
-	else:
-		GlobalUi.show_error("Lobby not found")
-		lobby_code_error_anim.play("anim")
-		lobby_code_input.caret_position = 999
-		lobby_code_input.grab_focus()
+	__ = Lobby.join(player_name_input.text)
+	emit_signal("entered_lobby")
 
 
 # Strips player name of white space and shows error if needed.

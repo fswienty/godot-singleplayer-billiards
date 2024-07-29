@@ -26,15 +26,13 @@ var __
 
 
 func init():
-	lobby_code_button_text = "Invite Code: " + Gotm.lobby.name
+	lobby_code_button_text = "Invite Code: " + "TODO REMOVE"
 	lobby_code_button.text = lobby_code_button_text
 	if get_tree().is_network_server():
-		randomize_button.show()
 		dummy_button.hide()
 		start_button.show()
 		waiting_label.hide()
 	else:
-		randomize_button.hide()
 		dummy_button.show()
 		start_button.hide()
 		waiting_label.show()
@@ -43,10 +41,7 @@ func init():
 
 func _ready():
 	__ = Lobby.connect("player_infos_updated", self, "_on_player_infos_updated")
-	__ = t1_button.connect("pressed", self, "_on_T1Button_pressed")
-	__ = t2_button.connect("pressed", self, "_on_T2Button_pressed")
 	__ = lobby_code_button.connect("pressed", self, "_on_LobbyCodeButton_pressed")
-	__ = lobby_code_button_timer.connect("timeout", self, "_reset_lobby_code_button_text")
 	__ = start_button.connect("pressed", self, "_on_StartButton_pressed")
 	__ = randomize_button.connect("pressed", self, "_on_RandomizeButton_pressed")
 	__ = back_button.connect("pressed", self, "_on_BackButton_pressed")
@@ -87,41 +82,15 @@ func _on_player_infos_updated():
 			t0_panel.list.add_child(label)
 
 
-func _on_T1Button_pressed():
-	SoundManager.click()
-	_set_team(1)
-
-
-func _on_T2Button_pressed():
-	SoundManager.click()
-	_set_team(2)
-
-
 func _on_LobbyCodeButton_pressed():
 	SoundManager.click()
-	OS.clipboard = Gotm.lobby.name
 	lobby_code_button.text = "Copied to clipboard!"
 	lobby_code_button_timer.start()
 
 
-func _reset_lobby_code_button_text():
-	lobby_code_button.text = lobby_code_button_text
-
-
 func _on_StartButton_pressed():
 	SoundManager.click()
-	if Globals.DEBUG_MODE:
-		emit_signal("game_started")
-	var can_start = Lobby.can_start_game()
-	match can_start:
-		0:
-			emit_signal("game_started")
-		1:
-			t1_empty_anim.play("anim")
-			GlobalUi.show_error("Team 1 is empty!")
-		2:
-			t2_empty_anim.play("anim")
-			GlobalUi.show_error("Team 2 is empty!")
+	emit_signal("game_started")
 
 
 func _on_RandomizeButton_pressed():
@@ -132,9 +101,3 @@ func _on_RandomizeButton_pressed():
 func _on_BackButton_pressed():
 	SoundManager.click()
 	emit_signal("went_back")
-	Lobby.leave()
-
-
-func _set_team(team):
-	var sender_id = get_tree().get_rpc_sender_id()
-	Lobby.set_team(sender_id, team)

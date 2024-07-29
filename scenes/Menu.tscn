@@ -37,7 +37,7 @@ script = ExtResource( 5 )
 
 [node name="Background" parent="." instance=ExtResource( 6 )]
 
-[node name="ConnectMenu" type="CenterContainer" parent="."]
+[node name="MainMenu" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 300 )
@@ -47,7 +47,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConnectMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
 margin_left = 162.0
 margin_top = 99.0
 margin_right = 862.0
@@ -58,7 +58,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="ConnectMenu/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="MainMenu/VBoxContainer"]
 margin_right = 700.0
 margin_bottom = 125.0
 custom_colors/font_color = Color( 0.901961, 0.901961, 0.901961, 1 )
@@ -70,13 +70,13 @@ custom_fonts/font = ExtResource( 11 )
 text = "Pool Alone"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer"]
 margin_top = 175.0
 margin_right = 700.0
 margin_bottom = 377.0
 custom_constants/separation = 100
 
-[node name="ConnectionVBoxContainer" type="VBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer"]
+[node name="ConnectionVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
 margin_right = 300.0
 margin_bottom = 202.0
 rect_min_size = Vector2( 300, 0 )
@@ -84,7 +84,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 20
 
-[node name="PlayerNameLineEdit" type="LineEdit" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
+[node name="PlayerNameLineEdit" type="LineEdit" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
 unique_name_in_owner = true
 margin_right = 300.0
 margin_bottom = 46.0
@@ -93,14 +93,14 @@ max_length = 16
 placeholder_text = "Enter Name"
 caret_blink = true
 
-[node name="HSeparator" type="HSeparator" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
 margin_top = 66.0
 margin_right = 300.0
 margin_bottom = 70.0
 theme = ExtResource( 4 )
 custom_styles/separator = SubResource( 2 )
 
-[node name="HostButton" type="Button" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
+[node name="HostButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
 unique_name_in_owner = true
 margin_top = 90.0
 margin_right = 300.0
@@ -111,12 +111,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer"]
 margin_top = 156.0
 margin_right = 300.0
 margin_bottom = 202.0
 
-[node name="LobbyCodeLineEdit" type="LineEdit" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer/HBoxContainer"]
+[node name="LobbyCodeLineEdit" type="LineEdit" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_right = 148.0
 margin_bottom = 46.0
@@ -129,7 +129,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="ConnectMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer/HBoxContainer"]
+[node name="JoinButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/ConnectionVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 152.0
 margin_right = 300.0
@@ -141,7 +141,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsVBoxContainer" type="VBoxContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer"]
+[node name="ControlsVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
 margin_left = 400.0
 margin_right = 700.0
 margin_bottom = 202.0
@@ -150,12 +150,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="ControlSchemePanelContainer" type="PanelContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer"]
+[node name="ControlSchemePanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer"]
 margin_right = 300.0
 margin_bottom = 30.0
 theme_type_variation = "RoundedPanel"
 
-[node name="ControlSchemeLabel" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemePanelContainer"]
+[node name="ControlSchemeLabel" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemePanelContainer"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 298.0
@@ -163,14 +163,14 @@ margin_bottom = 28.0
 text = "Control Scheme"
 align = 1
 
-[node name="ControlSchemeTabContainer" type="TabContainer" parent="ConnectMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer"]
+[node name="ControlSchemeTabContainer" type="TabContainer" parent="MainMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer"]
 unique_name_in_owner = true
 margin_top = 40.0
 margin_right = 300.0
 margin_bottom = 202.0
 size_flags_vertical = 3
 
-[node name="Drag" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemeTabContainer"]
+[node name="Drag" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemeTabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -180,7 +180,7 @@ margin_bottom = -10.0
 text = "Click and drag the queue to take aim and set the strength. Release to shoot."
 autowrap = true
 
-[node name="Scroll Wheel" type="Label" parent="ConnectMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemeTabContainer"]
+[node name="Scroll Wheel" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/ControlsVBoxContainer/ControlSchemeTabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -192,7 +192,6 @@ text = "Move the mouse to aim, use the scroll wheel to set the strength. Click t
 autowrap = true
 
 [node name="LobbyMenu" type="MarginContainer" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
