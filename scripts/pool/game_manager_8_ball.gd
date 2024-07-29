@@ -54,11 +54,7 @@ func _ready():
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
 
-	print(current_player_id)
-	if current_player_id == 1:
-		game_state = Enums.GameState.QUEUE
-	else:
-		game_state = Enums.GameState.WAITING
+	game_state = Enums.GameState.QUEUE
 
 	if Globals.DEBUG_MODE:
 		game_state = Enums.GameState.BALL_IN_HAND
@@ -66,10 +62,8 @@ func _ready():
 
 func _physics_process(_delta):
 	match game_state:
-		Enums.GameState.WAITING:
-			pass
 		Enums.GameState.QUEUE:
-			queue_controller.run()
+			queue_controller.run(current_player_id)
 		Enums.GameState.ROLLING:
 			if ball_manager.are_balls_still():
 				var legal_play = _get_first_hit_legality() && !has_fouled
@@ -80,10 +74,9 @@ func _physics_process(_delta):
 					table.indicate_8_ball_target(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
-					game_state = Enums.GameState.WAITING
 					_on_turn_ended(legal_play)
 		Enums.GameState.BALL_IN_HAND:
-			var placed: bool = ball_manager.update_ball_in_hand()
+			var placed: bool = ball_manager.update_ball_in_hand(current_player_id)
 			if placed:
 				game_state = Enums.GameState.QUEUE
 
@@ -107,23 +100,20 @@ func is_t1_turn(turn_number_: int = -1) -> bool:
 		return turn_number_ % 2 != 0
 
 
-# called only on peer that takes the shot
 func _on_queue_hit(impulse: Vector2):
 	ball_manager.cue_ball.impulse = impulse
 	game_state = Enums.GameState.ROLLING
 
 
-# called on all peers including last active peer when their turn is over
 func _on_turn_ended(legal_play: bool):
 	turn_number += 1
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
-	if current_player_id == 1:
-		if legal_play:
-			game_state = Enums.GameState.QUEUE
-		else:
-			game_state = Enums.GameState.BALL_IN_HAND
+	if legal_play:
+		game_state = Enums.GameState.QUEUE
+	else:
+		game_state = Enums.GameState.BALL_IN_HAND
 
 
 func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):

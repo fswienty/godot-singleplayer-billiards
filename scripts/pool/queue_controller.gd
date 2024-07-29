@@ -28,19 +28,33 @@ func initialize(cue_ball_: Ball):
 	cue_ball = cue_ball_
 
 
-func run():
+func run(current_player_id: int):
 	if cue_ball == null:
 		printerr("missing cue ball!")
 		return
 
-	var state = []  # [visible, rot, queue_pos, line_pos]
-	match Globals.queue_mode:
-		Enums.QueueMode.DRAG:
-			state = _drag_mode()
-		Enums.QueueMode.MOUSE_WHEEL:
-			state = _mouse_wheel_mode()
+	print("QUEUE" + (" PLAYER" if current_player_id == 1 else " AI"))
 
-	_set_state(state)
+	var state = []  # [visible, rot, queue_pos]
+	if current_player_id == 1:
+		# let player control queue
+		match Globals.queue_mode:
+			Enums.QueueMode.DRAG:
+				state = _drag_mode()
+			Enums.QueueMode.MOUSE_WHEEL:
+				state = _mouse_wheel_mode()
+	else:
+		# let ai control queue
+		state = _ai_mode()
+
+	# set visibility
+	self.visible = state[0]
+	# set queue sprite
+	queue.rotation = state[1]
+	queue.global_position = state[2]
+	# set line
+	line.rotation = state[1] + PI / 2
+	line.global_position = cue_ball.global_position
 
 
 func _drag_mode() -> Array:
@@ -68,7 +82,7 @@ func _drag_mode() -> Array:
 
 	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
 	var rot = ball_to_mouse.angle()
-	return [visible_, rot + PI, queue_pos, ball_pos]
+	return [visible_, rot + PI, queue_pos]
 
 
 func _mouse_wheel_mode() -> Array:
@@ -94,15 +108,9 @@ func _mouse_wheel_mode() -> Array:
 		- (distance_at_rest + intensity * max_distance) * ball_to_mouse.normalized()
 	)
 	var rot = ball_to_mouse.angle()
-	return [visible_, rot, queue_pos, ball_pos]
+	return [visible_, rot, queue_pos]
 
-
-func _set_state(state: Array):
-	# set visibility
-	self.visible = state[0]
-	# set queue sprite
-	queue.rotation = state[1]
-	queue.global_position = state[2]
-	# set line
-	line.rotation = state[1] + PI / 2
-	line.global_position = state[3]
+func _ai_mode() -> Array:
+	emit_signal("queue_hit", Vector2(100, 1))
+	return [false, 0.0, Vector2(1, 1)]
+	# return [visible_, rot, queue_pos]

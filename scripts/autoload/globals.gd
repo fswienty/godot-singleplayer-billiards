@@ -6,6 +6,7 @@ const cue_ball_inactive_pos: Vector2 = Vector2(9999999, 9999999)
 const menu_transition_time: float = 0.3
 
 var player_infos: Dictionary = {}
+var ai_difficulty: float = 1.0
 
 var queue_mode = Enums.QueueMode.DRAG
 
