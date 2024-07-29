@@ -23,19 +23,19 @@ func _physics_process(_delta):
 		hide_cue_ball = false
 		cue_ball.global_position = Globals.cue_ball_inactive_pos
 		cue_ball.linear_velocity = Vector2.ZERO
-	if balls_active:
-		rpc_unreliable("_set_ball_states", _get_ball_states())
+	# if balls_active:
+	# 	rpc_unreliable("_set_ball_states", _get_ball_states())
 
 
-remote func _set_ball_states(states: Array):
-	var balls: Array = ball_holder.get_children()
-	if balls.size() != states.size():
-		printerr("balls array is not the same size as states array!")
-		return
-	for i in range(balls.size()):
-		balls[i].linear_velocity = Vector2.ZERO
-		balls[i].global_position = states[i][0]
-		balls[i].current_velocity = states[i][1]
+# remote func _set_ball_states(states: Array):
+# 	var balls: Array = ball_holder.get_children()
+# 	if balls.size() != states.size():
+# 		printerr("balls array is not the same size as states array!")
+# 		return
+# 	for i in range(balls.size()):
+# 		balls[i].linear_velocity = Vector2.ZERO
+# 		balls[i].global_position = states[i][0]
+# 		balls[i].current_velocity = states[i][1]
 
 
 func check_all_pocketed(type) -> bool:
@@ -52,11 +52,11 @@ func hit_cue_ball(impulse: Vector2):
 func update_ball_in_hand() -> bool:
 	if cue_ball.global_position != Globals.cue_ball_inactive_pos:
 		cue_ball.global_position = Globals.cue_ball_inactive_pos
-		rpc_unreliable("_set_ball_states", _get_ball_states())
+		# rpc_unreliable("_set_ball_states", _get_ball_states())
 	var res = ball_in_hand.run()
 	if res.placed:
 		cue_ball.global_position = res.pos
-		rpc_unreliable("_set_ball_states", _get_ball_states())
+		# rpc_unreliable("_set_ball_states", _get_ball_states())
 		return true
 	return false
 

@@ -36,10 +36,6 @@ func hide_error(animated: bool = false):
 
 
 func show_error(error_text: String):
-	_show_error(error_text)
-
-
-remote func _show_error(error_text: String):
 	error_label.text = error_text
 	show_error_anim.play("anim")
 	error_label_timer.start()

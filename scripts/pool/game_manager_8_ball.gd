@@ -34,10 +34,10 @@ func _ready():
 	if get_tree().get_network_unique_id() == 1:
 		randomize()
 		var seed_ = randi()
-		rpc("initialize_synced", seed_)
+		initialize_synced(seed_)
 
 
-remotesync func initialize_synced(seed_: int):
+func initialize_synced(seed_: int):
 	print("setting common random seed")
 	seed(seed_)
 
@@ -81,14 +81,14 @@ func _physics_process(_delta):
 				ball_manager.balls_active = false
 				var legal_play = _get_first_hit_legality() && !has_fouled
 				var go_again = legal_pocketing && legal_play
-				rpc("_on_balls_stopped", has_won, has_lost, legal_play)
+				_on_balls_stopped(has_won, has_lost, legal_play)
 				if go_again:
 					var indicate_target = t1_8_ball_target if is_t1_turn() else t2_8_ball_target
 					table.indicate_8_ball_target(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
 					game_state = Enums.GameState.WAITING
-					rpc("_on_turn_ended", legal_play)
+					_on_turn_ended(legal_play)
 		Enums.GameState.BALL_IN_HAND:
 			var placed: bool = ball_manager.update_ball_in_hand()
 			if placed:
@@ -122,7 +122,7 @@ func _on_queue_hit(impulse: Vector2):
 
 
 # called on all peers including last active peer when their turn is over
-remotesync func _on_turn_ended(legal_play: bool):
+func _on_turn_ended(legal_play: bool):
 	turn_number += 1
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
@@ -134,7 +134,7 @@ remotesync func _on_turn_ended(legal_play: bool):
 			game_state = Enums.GameState.BALL_IN_HAND
 
 
-remotesync func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):
+func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):
 	# check for game over
 	if has_won_ and legal_play:
 		game_finished_panel.display(1 if is_t1_turn() else 2)

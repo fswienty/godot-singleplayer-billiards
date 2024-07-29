@@ -49,9 +49,5 @@ func display(winning_team: int):
 
 func _on_LobbyButton_pressed():
 	SoundManager.click()
-	rpc("_back_to_lobby")
-
-
-remotesync func _back_to_lobby():
 	get_tree().paused = false
 	__ = get_tree().change_scene("res://scenes/Menu.tscn")

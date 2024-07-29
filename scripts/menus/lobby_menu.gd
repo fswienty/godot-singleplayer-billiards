@@ -89,12 +89,12 @@ func _on_player_infos_updated():
 
 func _on_T1Button_pressed():
 	SoundManager.click()
-	rpc_id(1, "_set_team", 1)
+	_set_team(1)
 
 
 func _on_T2Button_pressed():
 	SoundManager.click()
-	rpc_id(1, "_set_team", 2)
+	_set_team(2)
 
 
 func _on_LobbyCodeButton_pressed():
@@ -111,11 +111,11 @@ func _reset_lobby_code_button_text():
 func _on_StartButton_pressed():
 	SoundManager.click()
 	if Globals.DEBUG_MODE:
-		rpc("_start_game")
+		emit_signal("game_started")
 	var can_start = Lobby.can_start_game()
 	match can_start:
 		0:
-			rpc("_start_game")
+			emit_signal("game_started")
 		1:
 			t1_empty_anim.play("anim")
 			GlobalUi.show_error("Team 1 is empty!")
@@ -131,24 +131,10 @@ func _on_RandomizeButton_pressed():
 
 func _on_BackButton_pressed():
 	SoundManager.click()
-	if get_tree().get_network_unique_id() == 1:
-		# do stuff when host leaves
-		rpc("_go_back")
-		Lobby.leave()
-	else:
-		# do stuff when client leaves
-		_go_back()
-		Lobby.leave()
-
-
-remotesync func _go_back():
 	emit_signal("went_back")
+	Lobby.leave()
 
 
-remotesync func _start_game():
-	emit_signal("game_started")
-
-
-remotesync func _set_team(team):
+func _set_team(team):
 	var sender_id = get_tree().get_rpc_sender_id()
 	Lobby.set_team(sender_id, team)

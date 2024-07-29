@@ -42,10 +42,7 @@ func run():
 		Enums.QueueMode.KEYBOARD:
 			pass
 
-	if not state[0]:  # check if the queue has become invisible
-		rpc("_set_state", state)
-	else:
-		rpc_unreliable("_set_state", state)
+	_set_state(state)
 
 
 func _drag_mode() -> Array:
@@ -102,7 +99,7 @@ func _mouse_wheel_mode() -> Array:
 	return [visible_, rot, queue_pos, ball_pos]
 
 
-remotesync func _set_state(state: Array):
+func _set_state(state: Array):
 	# set visibility
 	self.visible = state[0]
 	# set queue sprite

@@ -47,22 +47,14 @@ func _set_type():
 			push_error("invalid ball number:" + str(number))
 
 
-remotesync func play_ball_hit_sound(intensity: float):
-	SoundManager.ball_hit(intensity)
-
-
-remotesync func play_rail_hit_sound(intensity: float):
-	SoundManager.rail_hit(intensity)
-
-
 func _on_Ball_body_entered(body: Node):
 	if body.is_in_group("ball"):
 		var intensity = (current_velocity - linear_velocity).length()
-		rpc("play_ball_hit_sound", intensity)
+		SoundManager.ball_hit(intensity)
 		emit_signal("ball_hit", type, body.type)
 	elif body.is_in_group("rail"):
 		var intensity = (current_velocity - linear_velocity).length()
-		rpc("play_rail_hit_sound", intensity)
+		SoundManager.rail_hit(intensity)
 	else:
 		print("Unhandled _on_Ball_body_entered() collision: ", body.name)
 
