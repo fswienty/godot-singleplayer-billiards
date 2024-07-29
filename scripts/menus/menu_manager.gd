@@ -13,6 +13,7 @@ var __
 
 func _ready():
 	__ = main_menu.connect("game_started", self, "_on_game_started")
+	__ = main_menu.connect("game_quit", self, "_on_game_quit")
 
 	main_menu_open_anim = Animations.fade_in_anim(main_menu, Globals.menu_transition_time)
 
@@ -35,3 +36,11 @@ func _on_game_started():
 	main_menu_open_anim.play_backwards("anim")
 	yield (main_menu_open_anim, "animation_finished")
 	__ = get_tree().change_scene("res://scenes/EightBall.tscn")
+
+
+func _on_game_quit():
+	GlobalUi.hide_error()
+	main_menu_open_anim.play_backwards("anim")
+	yield (main_menu_open_anim, "animation_finished")
+	print("ayy")
+	get_tree().quit()

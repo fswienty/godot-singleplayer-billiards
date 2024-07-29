@@ -111,6 +111,8 @@ func _mouse_wheel_mode() -> Array:
 	return [visible_, rot, queue_pos]
 
 func _ai_mode() -> Array:
+	# TODO find good shot
+	# TODO lerp queue into position
 	emit_signal("queue_hit", Vector2(100, 1))
 	return [false, 0.0, Vector2(1, 1)]
 	# return [visible_, rot, queue_pos]
