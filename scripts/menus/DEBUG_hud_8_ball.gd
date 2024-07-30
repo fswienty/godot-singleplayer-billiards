@@ -7,12 +7,12 @@ onready var current_player: Label = $Inset/CurrentPlayer/NameLabel/Name
 onready var current_team: Label = $Inset/CurrentPlayer/TeamLabel/Team
 onready var game_state: Label = $Inset/CurrentPlayer/GameStateLabel/GameState
 
-onready var t1_ball_type: Label = $Inset/GeneralInfo/T1TypeLabel/T1Type
-onready var t1_pocketed_balls: Label = $Inset/GeneralInfo/T1PocketedLabel/T1Pocketed
-onready var t1_eight_target: Label = $Inset/GeneralInfo/T1EightTargetLabel/T1EightTarget
-onready var t2_ball_type: Label = $Inset/GeneralInfo/T2TypeLabel/T2Type
-onready var t2_pocketed_balls: Label = $Inset/GeneralInfo/T2PocketedLabel/T2Pocketed
-onready var t2_eight_target: Label = $Inset/GeneralInfo/T2EightTargetLabel/T2EightTarget
+onready var player_ball_type: Label = $Inset/GeneralInfo/T1TypeLabel/T1Type
+onready var player_pocketed_balls: Label = $Inset/GeneralInfo/T1PocketedLabel/T1Pocketed
+onready var player_eight_target: Label = $Inset/GeneralInfo/T1EightTargetLabel/T1EightTarget
+onready var ai_ball_type: Label = $Inset/GeneralInfo/T2TypeLabel/T2Type
+onready var ai_pocketed_balls: Label = $Inset/GeneralInfo/T2PocketedLabel/T2Pocketed
+onready var ai_eight_target: Label = $Inset/GeneralInfo/T2EightTargetLabel/T2EightTarget
 
 onready var first_hit: Label = $Inset/TurnInfo/FirstHitLabel/FirstHit
 onready var legal_pocketing: Label = $Inset/TurnInfo/LegalPocketingLabel/LegalPocketing
@@ -31,19 +31,19 @@ func _physics_process(_delta):
 	if not processing:
 		return
 
-	if manager.t1_turn:
+	if manager.player_turn:
 		current_team.text = "Team 1"
 	else:
 		current_team.text = "Team 2"
 	current_player.text = Globals.player_infos[manager.current_player_id].name
 	game_state.text = Enums.GameState.keys()[manager.game_state]
 
-	t1_ball_type.text = Enums.BallType.keys()[manager.t1_ball_type]
-	t2_ball_type.text = Enums.BallType.keys()[manager.t2_ball_type]
-	t1_pocketed_balls.text = str(manager.t1_pocketed_balls)
-	t2_pocketed_balls.text = str(manager.t2_pocketed_balls)
-	t1_eight_target.text = Enums.PocketLocation.keys()[manager.t1_8_ball_target]
-	t2_eight_target.text = Enums.PocketLocation.keys()[manager.t2_8_ball_target]
+	player_ball_type.text = Enums.BallType.keys()[manager.player_ball_type]
+	ai_ball_type.text = Enums.BallType.keys()[manager.ai_ball_type]
+	player_pocketed_balls.text = str(manager.player_pocketed_balls)
+	ai_pocketed_balls.text = str(manager.ai_pocketed_balls)
+	player_eight_target.text = Enums.PocketLocation.keys()[manager.player_8_ball_target]
+	ai_eight_target.text = Enums.PocketLocation.keys()[manager.ai_8_ball_target]
 
 	first_hit.text = Enums.BallType.keys()[manager.first_hit_type]
 	legal_pocketing.text = str(manager.legal_pocketing)

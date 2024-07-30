@@ -13,12 +13,12 @@ var first_hit_type = Enums.BallType.NONE
 var current_player_id: int = -1
 var next_player_id: int = -1
 var turn_number = 1
-var t1_ball_type: int = Enums.BallType.NONE
-var t2_ball_type: int = Enums.BallType.NONE
-var t1_8_ball_target: int = Enums.PocketLocation.NONE
-var t2_8_ball_target: int = Enums.PocketLocation.NONE
-var t1_pocketed_balls: Array = []
-var t2_pocketed_balls: Array = []
+var player_ball_type: int = Enums.BallType.NONE
+var ai_ball_type: int = Enums.BallType.NONE
+var player_8_ball_target: int = Enums.PocketLocation.NONE
+var ai_8_ball_target: int = Enums.PocketLocation.NONE
+var player_pocketed_balls: Array = []
+var ai_pocketed_balls: Array = []
 
 onready var table = $Table
 onready var ball_manager: BallManager8Ball = $BallManager
@@ -51,7 +51,7 @@ func _ready():
 	game_finished_panel.initialize()
 
 	# turn_number += 1  # to make ai go first
-	
+
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
@@ -72,7 +72,7 @@ func _physics_process(_delta):
 				var go_again = legal_pocketing && legal_play
 				_on_balls_stopped(has_won, has_lost, legal_play)
 				if go_again:
-					var indicate_target = t1_8_ball_target if is_t1_turn() else t2_8_ball_target
+					var indicate_target = player_8_ball_target if is_player_turn() else ai_8_ball_target
 					table.indicate_8_ball_target(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
@@ -85,7 +85,7 @@ func _physics_process(_delta):
 
 func _get_player_id_for_turn(turn_number_: int) -> int:
 	var team_turn_number: int = int(ceil(turn_number_ as float / 2))
-	var current_team: int = 1 if is_t1_turn(turn_number_) else 2
+	var current_team: int = 1 if is_player_turn(turn_number_) else 2
 	var team_player_ids: Array = []
 	for key in Globals.player_infos.keys():
 		if Globals.player_infos[key].team == current_team:
@@ -95,7 +95,7 @@ func _get_player_id_for_turn(turn_number_: int) -> int:
 	return team_player_ids[team_turn_number % team_player_ids.size()]
 
 
-func is_t1_turn(turn_number_: int = -1) -> bool:
+func is_player_turn(turn_number_: int = -1) -> bool:
 	if turn_number_ == -1:
 		return turn_number % 2 != 0
 	else:
@@ -121,10 +121,10 @@ func _on_turn_ended(legal_play: bool):
 func _on_balls_stopped(has_won_: bool, has_lost_: bool, legal_play: bool):
 	# check for game over
 	if has_won_ and legal_play:
-		game_finished_panel.display(1 if is_t1_turn() else 2)
+		game_finished_panel.display(1 if is_player_turn() else 2)
 		return
 	if (has_won_ and not legal_play) or has_lost_:
-		game_finished_panel.display(2 if is_t1_turn() else 1)
+		game_finished_panel.display(2 if is_player_turn() else 1)
 		return
 
 	# reset for next turn
@@ -143,16 +143,16 @@ func _get_first_hit_legality() -> bool:
 	var hit_nothing: bool = first_hit_type == Enums.BallType.NONE
 	var hit_eight: bool = first_hit_type == Enums.BallType.EIGHT
 	var hit_wrong_type: bool = false
-	var can_hit_eight: bool = t1_ball_type == Enums.BallType.NONE
-	if is_t1_turn():
-		if t1_8_ball_target != Enums.BallType.NONE:
+	var can_hit_eight: bool = player_ball_type == Enums.BallType.NONE
+	if is_player_turn():
+		if player_8_ball_target != Enums.BallType.NONE:
 			can_hit_eight = true
-		if first_hit_type == t2_ball_type:
+		if first_hit_type == ai_ball_type:
 			hit_wrong_type = true
 	else:
-		if t2_8_ball_target != Enums.BallType.NONE:
+		if ai_8_ball_target != Enums.BallType.NONE:
 			can_hit_eight = true
-		if first_hit_type == t1_ball_type:
+		if first_hit_type == player_ball_type:
 			hit_wrong_type = true
 	if hit_nothing || hit_wrong_type || (hit_eight && !can_hit_eight):
 		return false
@@ -181,7 +181,7 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 		_handle_8_ball_pocketed(pocket)
 
 	# handle first ball pocketed
-	if t1_ball_type == Enums.BallType.NONE:
+	if player_ball_type == Enums.BallType.NONE:
 		rounds_first_pocketing = true
 		_assign_ball_types(ball)
 
@@ -195,60 +195,60 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 
 func _handle_8_ball_pocketed(pocket: Pocket):
-	if is_t1_turn():
-		if pocket.location == t1_8_ball_target:
+	if is_player_turn():
+		if pocket.location == player_8_ball_target:
 			has_won = true
 		else:
 			has_lost = true
 	else:
-		if pocket.location == t2_8_ball_target:
+		if pocket.location == ai_8_ball_target:
 			has_won = true
 		else:
 			has_lost = true
 
 
 func _assign_ball_types(ball: Ball):
-	if is_t1_turn() and ball.type == Enums.BallType.FULL:
-		t1_ball_type = Enums.BallType.FULL
-		t2_ball_type = Enums.BallType.HALF
-	elif is_t1_turn() and ball.type == Enums.BallType.HALF:
-		t1_ball_type = Enums.BallType.HALF
-		t2_ball_type = Enums.BallType.FULL
-	elif not is_t1_turn() and ball.type == Enums.BallType.FULL:
-		t2_ball_type = Enums.BallType.FULL
-		t1_ball_type = Enums.BallType.HALF
-	elif not is_t1_turn() and ball.type == Enums.BallType.HALF:
-		t2_ball_type = Enums.BallType.HALF
-		t1_ball_type = Enums.BallType.FULL
+	if is_player_turn() and ball.type == Enums.BallType.FULL:
+		player_ball_type = Enums.BallType.FULL
+		ai_ball_type = Enums.BallType.HALF
+	elif is_player_turn() and ball.type == Enums.BallType.HALF:
+		player_ball_type = Enums.BallType.HALF
+		ai_ball_type = Enums.BallType.FULL
+	elif not is_player_turn() and ball.type == Enums.BallType.FULL:
+		ai_ball_type = Enums.BallType.FULL
+		player_ball_type = Enums.BallType.HALF
+	elif not is_player_turn() and ball.type == Enums.BallType.HALF:
+		ai_ball_type = Enums.BallType.HALF
+		player_ball_type = Enums.BallType.FULL
 
 
 func _handle_pocketing(ball: Ball):
-	if ball.type == t1_ball_type:
-		t1_pocketed_balls.push_front(ball.number)
-		if is_t1_turn():
+	if ball.type == player_ball_type:
+		player_pocketed_balls.push_front(ball.number)
+		if is_player_turn():
 			legal_pocketing = true
 		else:
 			has_fouled = true
-	elif ball.type == t2_ball_type:
-		t2_pocketed_balls.push_front(ball.number)
-		if not is_t1_turn():
+	elif ball.type == ai_ball_type:
+		ai_pocketed_balls.push_front(ball.number)
+		if not is_player_turn():
 			legal_pocketing = true
 		else:
 			has_fouled = true
 
 
 func _check_last_non_8_ball(pocket: Pocket):
-	var t1_all_pocketed: bool = ball_manager.check_all_pocketed(t1_ball_type)
-	var t1_needs_8_target: bool = t1_8_ball_target == Enums.PocketLocation.NONE
-	if t1_all_pocketed and t1_needs_8_target:
-		t1_8_ball_target = table.get_opposite_pocket(pocket.location)
-		print("t1_all_pocketed: ", t1_all_pocketed and t1_needs_8_target)
+	var player_all_pocketed: bool = ball_manager.check_all_pocketed(player_ball_type)
+	var player_needs_8_target: bool = player_8_ball_target == Enums.PocketLocation.NONE
+	if player_all_pocketed and player_needs_8_target:
+		player_8_ball_target = table.get_opposite_pocket(pocket.location)
+		print("player_all_pocketed: ", player_all_pocketed and player_needs_8_target)
 
-	var t2_all_pocketed: bool = ball_manager.check_all_pocketed(t2_ball_type)
-	var t2_needs_8_target: bool = t2_8_ball_target == Enums.PocketLocation.NONE
-	if t2_all_pocketed and t2_needs_8_target:
-		t2_8_ball_target = table.get_opposite_pocket(pocket.location)
-		print("t2_all_pocketed: ", t2_all_pocketed and t2_needs_8_target)
+	var ai_all_pocketed: bool = ball_manager.check_all_pocketed(ai_ball_type)
+	var ai_needs_8_target: bool = ai_8_ball_target == Enums.PocketLocation.NONE
+	if ai_all_pocketed and ai_needs_8_target:
+		ai_8_ball_target = table.get_opposite_pocket(pocket.location)
+		print("ai_all_pocketed: ", ai_all_pocketed and ai_needs_8_target)
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):

@@ -9,8 +9,8 @@ onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
 onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
 
 onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLabel
-onready var t1_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T1BallContainer
-onready var t2_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T2BallContainer
+onready var player_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T1BallContainer
+onready var ai_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T2BallContainer
 
 var __
 
@@ -25,12 +25,12 @@ func update():
 
 
 func update_players_and_ball_type():
-	if manager.is_t1_turn():
+	if manager.is_player_turn():
 		current_team.text = "Team 1"
-		ball_type.text = _get_ball_type_text(manager.t1_ball_type, manager.t1_8_ball_target)
+		ball_type.text = _get_ball_type_text(manager.player_ball_type, manager.player_8_ball_target)
 	else:
 		current_team.text = "Team 2"
-		ball_type.text = _get_ball_type_text(manager.t2_ball_type, manager.t2_8_ball_target)
+		ball_type.text = _get_ball_type_text(manager.ai_ball_type, manager.ai_8_ball_target)
 
 	if manager.current_player_id >= 0:
 		current_player.text = Globals.player_infos[manager.current_player_id].name
@@ -55,18 +55,18 @@ func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String
 
 func update_pocketed_balls():
 	# clear old balls
-	for child in t1_pocketed.get_children():
-		t1_pocketed.remove_child(child)
+	for child in player_pocketed.get_children():
+		player_pocketed.remove_child(child)
 		child.queue_free()
-	for child in t2_pocketed.get_children():
-		t2_pocketed.remove_child(child)
+	for child in ai_pocketed.get_children():
+		ai_pocketed.remove_child(child)
 		child.queue_free()
 	# add current balls
-	for ball_number in manager.t1_pocketed_balls:
+	for ball_number in manager.player_pocketed_balls:
 		var ball_container = ball_container_scn.instance()
 		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
-		t1_pocketed.add_child(ball_container)
-	for ball_number in manager.t2_pocketed_balls:
+		player_pocketed.add_child(ball_container)
+	for ball_number in manager.ai_pocketed_balls:
 		var ball_container = ball_container_scn.instance()
 		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
-		t2_pocketed.add_child(ball_container)
+		ai_pocketed.add_child(ball_container)
