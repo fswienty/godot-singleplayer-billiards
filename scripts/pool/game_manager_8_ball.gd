@@ -50,6 +50,8 @@ func _ready():
 		debug_hud.initialize(self)
 	game_finished_panel.initialize()
 
+	# turn_number += 1  # to make ai go first
+	
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
@@ -63,7 +65,7 @@ func _ready():
 func _physics_process(_delta):
 	match game_state:
 		Enums.GameState.QUEUE:
-			queue_controller.run(current_player_id)
+			queue_controller.run(current_player_id == 1)
 		Enums.GameState.ROLLING:
 			if ball_manager.are_balls_still():
 				var legal_play = _get_first_hit_legality() && !has_fouled
@@ -76,7 +78,7 @@ func _physics_process(_delta):
 				else:
 					_on_turn_ended(legal_play)
 		Enums.GameState.BALL_IN_HAND:
-			var placed: bool = ball_manager.update_ball_in_hand(current_player_id)
+			var placed: bool = ball_manager.update_ball_in_hand(current_player_id == 1)
 			if placed:
 				game_state = Enums.GameState.QUEUE
 

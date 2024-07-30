@@ -1,2 +1,6 @@
 add ai in queue controller
+    
+    maybe
+        should be able to handle break
+
 add ai in ball manager for ball in hand

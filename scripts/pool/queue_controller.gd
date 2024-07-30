@@ -28,15 +28,15 @@ func initialize(cue_ball_: Ball):
 	cue_ball = cue_ball_
 
 
-func run(current_player_id: int):
+func run(player_turn: bool):
 	if cue_ball == null:
 		printerr("missing cue ball!")
 		return
 
-	print("QUEUE" + (" PLAYER" if current_player_id == 1 else " AI"))
+	print("QUEUE" + (" PLAYER" if player_turn else " AI"))
 
 	var state = []  # [visible, rot, queue_pos]
-	if current_player_id == 1:
+	if player_turn:
 		# let player control queue
 		match Globals.queue_mode:
 			Enums.QueueMode.DRAG:
@@ -111,8 +111,12 @@ func _mouse_wheel_mode() -> Array:
 	return [visible_, rot, queue_pos]
 
 func _ai_mode() -> Array:
+	# find possible shots
+	
+
 	# TODO find good shot
 	# TODO lerp queue into position
-	emit_signal("queue_hit", Vector2(100, 1))
+	# TODO take shot when lerp has finished
+	emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
 	return [false, 0.0, Vector2(1, 1)]
 	# return [visible_, rot, queue_pos]

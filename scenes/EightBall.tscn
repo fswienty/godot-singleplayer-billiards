@@ -140,9 +140,9 @@ text = "Solilds"
 valign = 1
 
 [node name="BottomBarContainer" type="PanelContainer" parent="UI/Hud_8Ball"]
-margin_top = 556.0
+margin_top = 532.0
 margin_right = 1024.0
-margin_bottom = 600.0
+margin_bottom = 576.0
 rect_min_size = Vector2( 0, 44 )
 size_flags_vertical = 10
 custom_styles/panel = SubResource( 3 )
@@ -209,6 +209,7 @@ size_flags_vertical = 6
 custom_constants/separation = 35
 
 [node name="DEBUG_Hud_8Ball" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 13 )
@@ -558,6 +559,7 @@ __meta__ = {
 
 [node name="GameFinished" type="PanelContainer" parent="UI"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 200.0
@@ -570,16 +572,16 @@ script = ExtResource( 16 )
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 604.0
-margin_bottom = 290.0
+margin_bottom = 266.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/GameFinished/VBoxContainer"]
 margin_right = 584.0
-margin_bottom = 174.0
+margin_bottom = 150.0
 size_flags_vertical = 3
 
 [node name="T1Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
 margin_right = 290.0
-margin_bottom = 174.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -596,7 +598,7 @@ margin_bottom = 60.0
 [node name="T2Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
 margin_left = 294.0
 margin_right = 584.0
-margin_bottom = 174.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -611,24 +613,24 @@ margin_right = 290.0
 margin_bottom = 60.0
 
 [node name="HSeparator" type="HSeparator" parent="UI/GameFinished/VBoxContainer"]
-margin_top = 184.0
+margin_top = 160.0
 margin_right = 584.0
-margin_bottom = 188.0
+margin_bottom = 164.0
 
 [node name="WaitingLabel" type="Label" parent="UI/GameFinished/VBoxContainer"]
 margin_left = 216.0
-margin_top = 198.0
+margin_top = 174.0
 margin_right = 367.0
-margin_bottom = 224.0
+margin_bottom = 200.0
 size_flags_horizontal = 4
 text = "Waiting for host..."
 
 [node name="LobbyButton" type="Button" parent="UI/GameFinished/VBoxContainer"]
 pause_mode = 2
 margin_left = 212.0
-margin_top = 234.0
+margin_top = 210.0
 margin_right = 371.0
-margin_bottom = 280.0
+margin_bottom = 256.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Back to Lobby"
