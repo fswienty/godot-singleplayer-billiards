@@ -1,9 +1,9 @@
 extends Control
 
-onready var player_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/T1Container/Team
-onready var ai_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/T2Container/Team
-onready var player_list: VBoxContainer = $VBoxContainer/HBoxContainer/T1Container/Players
-onready var ai_list: VBoxContainer = $VBoxContainer/HBoxContainer/T2Container/Players
+onready var player_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/PlayerContainer/Team
+onready var ai_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/AiContainer/Team
+onready var player_list: VBoxContainer = $VBoxContainer/HBoxContainer/PlayerContainer/Players
+onready var ai_list: VBoxContainer = $VBoxContainer/HBoxContainer/AiContainer/Players
 onready var lobby_button: Button = $VBoxContainer/LobbyButton
 onready var waiting_label: Label = $VBoxContainer/WaitingLabel
 

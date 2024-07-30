@@ -162,7 +162,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+[node name="PlayerBallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
 margin_left = 145.0
 margin_top = 17.0
 margin_right = 145.0
@@ -199,7 +199,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2BallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+[node name="AiBallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
 margin_left = 875.0
 margin_top = 17.0
 margin_right = 875.0
@@ -299,7 +299,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="PlayerTypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_right = 178.0
 margin_bottom = 26.0
 text = "Team 1 Ball Type:"
@@ -307,7 +307,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1TypeLabel"]
+[node name="PlayerType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerTypeLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -321,7 +321,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T1PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="PlayerPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 36.0
 margin_right = 178.0
 margin_bottom = 62.0
@@ -330,7 +330,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1PocketedLabel"]
+[node name="PlayerPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerPocketedLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -344,7 +344,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T1EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="PlayerEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 72.0
 margin_right = 178.0
 margin_bottom = 98.0
@@ -353,7 +353,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T1EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T1EightTargetLabel"]
+[node name="PlayerEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerEightTargetLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -372,7 +372,7 @@ margin_top = 108.0
 margin_right = 178.0
 margin_bottom = 112.0
 
-[node name="T2TypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="AiTypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 122.0
 margin_right = 178.0
 margin_bottom = 148.0
@@ -381,7 +381,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2Type" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2TypeLabel"]
+[node name="AiType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiTypeLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.10236
@@ -395,7 +395,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T2PocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="AiPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 158.0
 margin_right = 178.0
 margin_bottom = 184.0
@@ -404,7 +404,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2Pocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2PocketedLabel"]
+[node name="AiPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiPocketedLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -418,7 +418,7 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="T2EightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
+[node name="AiEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 margin_top = 194.0
 margin_right = 178.0
 margin_bottom = 220.0
@@ -427,7 +427,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="T2EightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/T2EightTargetLabel"]
+[node name="AiEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiEightTargetLabel"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -579,35 +579,35 @@ margin_right = 584.0
 margin_bottom = 150.0
 size_flags_vertical = 3
 
-[node name="T1Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
+[node name="PlayerContainer" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
 margin_right = 290.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container" instance=ExtResource( 17 )]
+[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/PlayerContainer" instance=ExtResource( 17 )]
 margin_left = 21.0
 margin_right = 269.0
 margin_bottom = 50.0
 
-[node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T1Container"]
+[node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/PlayerContainer"]
 margin_top = 60.0
 margin_right = 290.0
 margin_bottom = 60.0
 
-[node name="T2Container" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
+[node name="AiContainer" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer"]
 margin_left = 294.0
 margin_right = 584.0
 margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container" instance=ExtResource( 17 )]
+[node name="Team" parent="UI/GameFinished/VBoxContainer/HBoxContainer/AiContainer" instance=ExtResource( 17 )]
 margin_left = 21.0
 margin_right = 269.0
 margin_bottom = 50.0
 
-[node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/T2Container"]
+[node name="Players" type="VBoxContainer" parent="UI/GameFinished/VBoxContainer/HBoxContainer/AiContainer"]
 margin_top = 60.0
 margin_right = 290.0
 margin_bottom = 60.0

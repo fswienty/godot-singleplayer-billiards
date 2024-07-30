@@ -7,12 +7,12 @@ onready var current_player: Label = $Inset/CurrentPlayer/NameLabel/Name
 onready var current_team: Label = $Inset/CurrentPlayer/TeamLabel/Team
 onready var game_state: Label = $Inset/CurrentPlayer/GameStateLabel/GameState
 
-onready var player_ball_type: Label = $Inset/GeneralInfo/T1TypeLabel/T1Type
-onready var player_pocketed_balls: Label = $Inset/GeneralInfo/T1PocketedLabel/T1Pocketed
-onready var player_eight_target: Label = $Inset/GeneralInfo/T1EightTargetLabel/T1EightTarget
-onready var ai_ball_type: Label = $Inset/GeneralInfo/T2TypeLabel/T2Type
-onready var ai_pocketed_balls: Label = $Inset/GeneralInfo/T2PocketedLabel/T2Pocketed
-onready var ai_eight_target: Label = $Inset/GeneralInfo/T2EightTargetLabel/T2EightTarget
+onready var player_ball_type: Label = $Inset/GeneralInfo/PlayerTypeLabel/PlayerType
+onready var player_pocketed_balls: Label = $Inset/GeneralInfo/PlayerPocketedLabel/PlayerPocketed
+onready var player_eight_target: Label = $Inset/GeneralInfo/PlayerEightTargetLabel/PlayerEightTarget
+onready var ai_ball_type: Label = $Inset/GeneralInfo/AiTypeLabel/AiType
+onready var ai_pocketed_balls: Label = $Inset/GeneralInfo/AiPocketedLabel/AiPocketed
+onready var ai_eight_target: Label = $Inset/GeneralInfo/AiEightTargetLabel/AiEightTarget
 
 onready var first_hit: Label = $Inset/TurnInfo/FirstHitLabel/FirstHit
 onready var legal_pocketing: Label = $Inset/TurnInfo/LegalPocketingLabel/LegalPocketing

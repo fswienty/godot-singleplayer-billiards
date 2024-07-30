@@ -9,8 +9,8 @@ onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
 onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
 
 onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLabel
-onready var player_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T1BallContainer
-onready var ai_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/T2BallContainer
+onready var player_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/PlayerBallContainer
+onready var ai_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/AiBallContainer
 
 var __
 
