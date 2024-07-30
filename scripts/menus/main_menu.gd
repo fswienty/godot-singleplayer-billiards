@@ -10,20 +10,42 @@ var scroll_wheel_tab_title: String = "Scroll Wheel"
 
 onready var play_button: Button = $"%PlayButton"
 onready var quit_button: Button = $"%QuitButton"
+onready var increase_diffuculty_button: Button = $"%IncreaseDifficultyButton"
+onready var decrease_diffuculty_button: Button = $"%DecreaseDifficultyButton"
+onready var difficulty_label: Label = $"%AiDifficultyLabel"
 
 var __
 
 
 func _ready():
 	__ = play_button.connect("pressed", self, "_on_PlayButton_pressed")
+	__ = increase_diffuculty_button.connect("pressed", self, "_on_IncreaseDifficultyButton_pressed")
+	__ = decrease_diffuculty_button.connect("pressed", self, "_on_DecreaseDifficultyButton_pressed")
 	__ = quit_button.connect("pressed", self, "_on_QuitButton_pressed")
-	Globals.queue_mode = Enums.QueueMode.DRAG
 	modulate = Color.transparent
+
+
+func _update_difficulty_label():
+	difficulty_label.text = Globals.ai_levels[Globals.current_ai_level]["name"]
 
 
 func _on_PlayButton_pressed():
 	SoundManager.click()
 	emit_signal("game_started")
+
+
+func _on_IncreaseDifficultyButton_pressed():
+	SoundManager.click()
+	if Globals.current_ai_level < Globals.ai_levels.size():
+		Globals.current_ai_level += 1
+	_update_difficulty_label()
+
+
+func _on_DecreaseDifficultyButton_pressed():
+	SoundManager.click()
+	if Globals.current_ai_level > 1:
+		Globals.current_ai_level -= 1
+	_update_difficulty_label()
 
 
 func _on_QuitButton_pressed():

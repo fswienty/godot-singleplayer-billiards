@@ -23,6 +23,11 @@ func _ready():
 	Globals.DEBUG_HUD = DEBUG_HUD
 	GlobalUi.set_console_visible(DEBUG_CONSOLE)
 
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		Globals.queue_mode = Enums.QueueMode.TOUCH
+	else:
+		Globals.queue_mode = Enums.QueueMode.DRAG
+
 	Globals.player_infos = {
 		1: {name = "PLAYER", team = 1},
 		2: {name = "AI", team = 2},
