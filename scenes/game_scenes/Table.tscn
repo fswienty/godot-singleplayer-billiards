@@ -55,24 +55,42 @@ z_as_relative = false
 position = Vector2( -228, -116 )
 location = 1
 
+[node name="UL_AiTarget" type="Node2D" parent="Pockets/UL_Pocket"]
+position = Vector2( 10, 10 )
+
 [node name="U_Pocket" parent="Pockets" instance=ExtResource( 1 )]
 position = Vector2( 0, -126.667 )
 location = 2
+
+[node name="U_AiTarget" type="Node2D" parent="Pockets/U_Pocket"]
+position = Vector2( 0, 12 )
 
 [node name="UR_Pocket" parent="Pockets" instance=ExtResource( 1 )]
 position = Vector2( 228, -116 )
 location = 3
 
+[node name="UR_AiTarget" type="Node2D" parent="Pockets/UR_Pocket"]
+position = Vector2( -10, 10 )
+
 [node name="DL_Pocket" parent="Pockets" instance=ExtResource( 1 )]
 position = Vector2( -228, 116 )
+
+[node name="DL_AiTarget" type="Node2D" parent="Pockets/DL_Pocket"]
+position = Vector2( 10, -10 )
 
 [node name="D_Pocket" parent="Pockets" instance=ExtResource( 1 )]
 position = Vector2( 0, 126.667 )
 location = 5
 
+[node name="D_AiTarget" type="Node2D" parent="Pockets/D_Pocket"]
+position = Vector2( 0, -12 )
+
 [node name="DR_Pocket" parent="Pockets" instance=ExtResource( 1 )]
 position = Vector2( 228, 116 )
 location = 6
+
+[node name="DR_AiTarget" type="Node2D" parent="Pockets/DR_Pocket"]
+position = Vector2( -10, -10 )
 
 [node name="HeadSpot" type="Node2D" parent="."]
 position = Vector2( -160, 0.666667 )

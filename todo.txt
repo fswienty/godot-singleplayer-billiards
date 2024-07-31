@@ -1,5 +1,6 @@
+soft shadows for balls and queue?
+
 add ai in queue controller
-    
     maybe
         should be able to handle break
 

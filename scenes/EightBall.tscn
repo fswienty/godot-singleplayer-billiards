@@ -702,3 +702,7 @@ z_index = 30
 z_as_relative = false
 texture = ExtResource( 12 )
 offset = Vector2( -512, 0 )
+
+[node name="AiThinkingTimer" type="Timer" parent="QueueController"]
+process_mode = 0
+one_shot = true

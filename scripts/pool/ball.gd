@@ -13,6 +13,7 @@ var impulse: Vector2 = Vector2.ZERO
 func initialize():
 	_set_texture()
 	_set_type()
+	add_to_group("BallType" + str(type))
 	name = "Ball_" + str(number)
 
 

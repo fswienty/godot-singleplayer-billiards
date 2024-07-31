@@ -36,7 +36,7 @@ func hit_cue_ball(impulse: Vector2):
 
 
 func update_ball_in_hand(player_turn: bool) -> bool:
-	print("BALL IN HAND" + (" PLAYER" if player_turn else " AI"))
+	# print("BALL IN HAND" + (" PLAYER" if player_turn else " AI"))
 
 	if cue_ball.global_position != Globals.cue_ball_inactive_pos:
 		cue_ball.global_position = Globals.cue_ball_inactive_pos

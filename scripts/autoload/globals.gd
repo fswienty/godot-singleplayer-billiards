@@ -14,7 +14,7 @@ const ai_levels: Dictionary = {
 }
 var current_ai_level: int = 2
 
-var queue_mode = Enums.QueueMode.DRAG
+var queue_mode = Enums.QueueControl.DRAG
 
 var DEBUG_MODE: bool = false
 var DEBUG_HUD: bool = false

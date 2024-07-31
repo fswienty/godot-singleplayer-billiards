@@ -13,12 +13,13 @@ var cue_ball: Ball
 var dragged_distance: float = 0.0
 var start_hold_distance: float = 0.0
 
-# vars for two step control scheme
-var is_second_step: bool = false
-
 # vars for mouse wheel mode
 var intensity: float = 0.0
 var intensity_increment: float = 0.1
+
+# vars for ai
+var ai_ball_type: int = Enums.BallType.NONE
+onready var ai_thinking_timer: Timer = $AiThinkingTimer
 
 onready var queue: Sprite = $QueueSprite
 onready var line: Line2D = $LineMask/Line2D
@@ -33,15 +34,15 @@ func run(player_turn: bool):
 		printerr("missing cue ball!")
 		return
 
-	print("QUEUE" + (" PLAYER" if player_turn else " AI"))
+	# print("QUEUE" + (" PLAYER" if player_turn else " AI"))
 
 	var state = []  # [visible, rot, queue_pos]
 	if player_turn:
 		# let player control queue
 		match Globals.queue_mode:
-			Enums.QueueMode.DRAG:
+			Enums.QueueControl.DRAG:
 				state = _drag_mode()
-			Enums.QueueMode.MOUSE_WHEEL:
+			Enums.QueueControl.MOUSE_WHEEL:
 				state = _mouse_wheel_mode()
 	else:
 		# let ai control queue
@@ -58,7 +59,6 @@ func run(player_turn: bool):
 
 
 func _drag_mode() -> Array:
-	var visible_: bool = true
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var ball_pos: Vector2 = cue_ball.global_position
 	var ball_to_mouse: Vector2 = mouse_pos - ball_pos
@@ -76,17 +76,16 @@ func _drag_mode() -> Array:
 			* -ball_to_mouse.normalized()
 		)
 		dragged_distance = 0
-		visible_ = false
 		if impulse != Vector2.ZERO:
 			emit_signal("queue_hit", impulse)
+			return [false, 0, Vector2.ZERO]
 
 	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
 	var rot = ball_to_mouse.angle()
-	return [visible_, rot + PI, queue_pos]
+	return [true, rot + PI, queue_pos]
 
 
 func _mouse_wheel_mode() -> Array:
-	var visible_: bool = true
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var ball_pos: Vector2 = cue_ball.global_position
 	var ball_to_mouse: Vector2 = mouse_pos - ball_pos
@@ -99,24 +98,54 @@ func _mouse_wheel_mode() -> Array:
 	if Input.is_action_just_released("lmb"):
 		var impulse: Vector2 = force_mult * intensity * ball_to_mouse.normalized()
 		intensity = 0
-		visible_ = false
 		if impulse != Vector2.ZERO:
 			emit_signal("queue_hit", impulse)
+			return [false, 0, Vector2.ZERO]
 
 	var queue_pos = (
 		ball_pos
 		- (distance_at_rest + intensity * max_distance) * ball_to_mouse.normalized()
 	)
 	var rot = ball_to_mouse.angle()
-	return [visible_, rot, queue_pos]
+	return [false, rot, queue_pos]
 
 func _ai_mode() -> Array:
-	# find possible shots
-	
+	var cue_ball_pos: Vector2
+	var queue_visible = true
 
-	# TODO find good shot
+	if ai_thinking_timer.is_stopped():
+		ai_thinking_timer.start()
+		print("lemme think...")
+
+		cue_ball_pos = cue_ball.global_position
+		var target_balls = _get_target_balls()
+
+		# find some possible shots
+
+		# TODO find good shot
+		# TODO take shot when lerp has finished
+
+	# this sucks and i'm sorry
+	if ai_thinking_timer.time_left < 0.1:
+		emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
+		return [false, Time.get_ticks_msec()/50.0, cue_ball.global_position]
+
 	# TODO lerp queue into position
-	# TODO take shot when lerp has finished
-	emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
-	return [false, 0.0, Vector2(1, 1)]
+	return [true, Time.get_ticks_msec()/50.0, cue_ball.global_position]
 	# return [visible_, rot, queue_pos]
+
+
+func _get_target_balls():
+	var target_balls = get_tree().get_nodes_in_group("BallType" + str(ai_ball_type))
+	var balls_full = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.FULL))
+	var balls_half = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.HALF))
+
+	match ai_ball_type:
+		Enums.BallType.FULL:
+			target_balls = balls_full
+		Enums.BallType.HALF:
+			target_balls = balls_half
+		_:
+			target_balls = balls_full + balls_half
+	
+	return target_balls
