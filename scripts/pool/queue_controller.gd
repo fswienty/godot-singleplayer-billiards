@@ -109,10 +109,12 @@ func _mouse_wheel_mode() -> Array:
 	var rot = ball_to_mouse.angle()
 	return [false, rot, queue_pos]
 
+var show_lines: bool
 func _ai_mode() -> Array:
 	var cue_ball_pos: Vector2
 
 	if ai_thinking_timer.is_stopped():
+		show_lines = true
 		ai_thinking_timer.start()
 		print("lemme think...")
 
@@ -123,10 +125,14 @@ func _ai_mode() -> Array:
 
 		# TODO rank shots
 
+	if show_lines:
+		show_lines = false
+		print("hohoho")
 
 	# take shot
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
+		show_lines = true
 		emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
 		return [false, Time.get_ticks_msec()/50.0, cue_ball.global_position]
 
