@@ -111,7 +111,6 @@ func _mouse_wheel_mode() -> Array:
 
 func _ai_mode() -> Array:
 	var cue_ball_pos: Vector2
-	var queue_visible = true
 
 	if ai_thinking_timer.is_stopped():
 		ai_thinking_timer.start()
@@ -120,11 +119,12 @@ func _ai_mode() -> Array:
 		cue_ball_pos = cue_ball.global_position
 		var target_balls = _get_target_balls()
 
-		# find some possible shots
+		# TODO find some possible shots
 
-		# TODO find good shot
-		# TODO take shot when lerp has finished
+		# TODO rank shots
 
+
+	# take shot
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
 		emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())

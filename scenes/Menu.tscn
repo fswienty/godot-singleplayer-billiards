@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/fonts/ui_font_24.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/menus/main_menu.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/ui/arrow-big-right.svg" type="Texture" id=3]
 [ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=4]
 [ext_resource path="res://scripts/menus/menu_manager.gd" type="Script" id=5]
 [ext_resource path="res://scenes/background/Background.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/images/ui/arrow-big-left.svg" type="Texture" id=7]
 [ext_resource path="res://scripts/menus/mute_button.gd" type="Script" id=8]
 [ext_resource path="res://assets/images/ui/audioOn.png" type="Texture" id=9]
 [ext_resource path="res://assets/images/ui/audioOff.png" type="Texture" id=10]
@@ -94,45 +95,44 @@ custom_constants/separation = 10
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer"]
-margin_top = 29.0
+margin_top = 33.0
 margin_right = 300.0
-margin_bottom = 83.0
+margin_bottom = 79.0
 alignment = 1
 
 [node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 54.0
-margin_bottom = 54.0
+margin_right = 64.0
+margin_bottom = 46.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 1 )
-text = "<"
+icon = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
-margin_left = 58.0
-margin_right = 242.0
-margin_bottom = 54.0
+margin_left = 68.0
+margin_right = 232.0
+margin_bottom = 46.0
 size_flags_horizontal = 3
 
 [node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 margin_left = 20.0
-margin_top = 14.0
-margin_right = 164.0
-margin_bottom = 40.0
+margin_top = 10.0
+margin_right = 144.0
+margin_bottom = 36.0
 text = "Normal"
 align = 1
 
 [node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 246.0
+margin_left = 236.0
 margin_right = 300.0
-margin_bottom = 54.0
+margin_bottom = 46.0
 theme = ExtResource( 4 )
-custom_fonts/font = ExtResource( 1 )
-text = ">"
+icon = ExtResource( 3 )
+icon_align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
