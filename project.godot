@@ -6,64 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "RigidBody2D",
-"class": "Ball",
-"language": "GDScript",
-"path": "res://scripts/pool/ball.gd"
-}, {
-"base": "Area2D",
-"class": "BallInHand",
-"language": "GDScript",
-"path": "res://scripts/pool/ball_in_hand.gd"
-}, {
-"base": "Node2D",
-"class": "BallManager8Ball",
-"language": "GDScript",
-"path": "res://scripts/pool/ball_manager_8_ball.gd"
-}, {
-"base": "HBoxContainer",
-"class": "GameFinishedTeamLabel",
-"language": "GDScript",
-"path": "res://scripts/menus/game_finished_team_label.gd"
-}, {
-"base": "Node",
-"class": "GameManager8Ball",
-"language": "GDScript",
-"path": "res://scripts/pool/game_manager_8_ball.gd"
-}, {
-"base": "PanelContainer",
-"class": "PlayerContainer",
-"language": "GDScript",
-"path": "res://scripts/menus/player_container.gd"
-}, {
-"base": "Area2D",
-"class": "Pocket",
-"language": "GDScript",
-"path": "res://scripts/pool/pocket.gd"
-}, {
-"base": "Node2D",
-"class": "QueueController",
-"language": "GDScript",
-"path": "res://scripts/pool/queue_controller.gd"
-} ]
-_global_script_class_icons={
-"Ball": "",
-"BallInHand": "",
-"BallManager8Ball": "",
-"GameFinishedTeamLabel": "",
-"GameManager8Ball": "",
-"PlayerContainer": "",
-"Pocket": "",
-"QueueController": ""
-}
+config_version=5
 
 [application]
 
 config/name="Pool Alone"
 run/main_scene="res://scenes/Menu.tscn"
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
@@ -82,9 +31,10 @@ gdscript/warnings/unused_variable=false
 
 [display]
 
-window/size/height=576
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/size/viewport_width=1024
+window/size/viewport_height=576
+window/stretch/mode="canvas_items"
+window/handheld/orientation=1
 
 [global]
 
@@ -99,35 +49,38 @@ theme/custom="res://ui_theme/ui_theme_1.tres"
 
 lmb={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 rmb={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 mouse_wheel_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 mouse_wheel_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
 }
 console_toggle={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":96,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [physics]
 
-common/enable_pause_aware_picking=true
 2d/default_gravity=0
+common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+renderer/rendering_method="mobile"
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+anti_aliasing/quality/msaa_2d=2
+environment/defaults/default_environment="res://default_env.tres"

@@ -4,9 +4,9 @@ extends Node2D
 var cue_ball: Ball
 var hide_cue_ball: bool = false
 
-onready var ball_placer: Node2D = $BallPlacer
-onready var ball_holder: Node2D = $BallHolder
-onready var ball_in_hand: BallInHand = $BallInHand
+@onready var ball_placer: Node2D = $BallPlacer
+@onready var ball_holder: Node2D = $BallHolder
+@onready var ball_in_hand: BallInHand = $BallInHand
 
 
 func initialize():

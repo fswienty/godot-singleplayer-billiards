@@ -2,15 +2,13 @@ extends CanvasLayer
 
 var show_error_anim: AnimationPlayer
 
-onready var error_label: Label = $ErrorLabel
-onready var error_label_timer: Timer = error_label.get_node("Timer")
-onready var console: TextEdit = $ConsoleTextEdit
-
-var __
+@onready var error_label: Label = $ErrorLabel
+@onready var error_label_timer: Timer = error_label.get_node("Timer")
+@onready var console: TextEdit = $ConsoleTextEdit
 
 
 func _ready():
-	__ = error_label_timer.connect("timeout", self, "_slide_out_error_label")
+	error_label_timer.connect("timeout", Callable(self, "_slide_out_error_label"))
 
 	show_error_anim = Animations.slide_in_anim(error_label, "y", 100, Globals.menu_transition_time)
 	hide_error()
@@ -23,15 +21,15 @@ func _input(event: InputEvent):
 		console.visible = !console.visible
 
 
-func set_console_visible(visible: bool):
-	console.visible = visible
+func set_console_visible(visible_: bool):
+	console.visible = visible_
 
 
 func hide_error(animated: bool = false):
 	if animated and error_label_timer.time_left > 0:
 		show_error_anim.play_backwards("anim")
 	else:
-		error_label.rect_position = Vector2(0, -1000)
+		error_label.position = Vector2(0, -1000)
 	error_label_timer.stop()
 
 

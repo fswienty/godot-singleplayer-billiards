@@ -1,14 +1,14 @@
 extends Node
 
-onready var head_spot = $HeadSpot
-onready var foot_spot = $FootSpot
+@onready var head_spot = $HeadSpot
+@onready var foot_spot = $FootSpot
 
-onready var ul_pocket: Pocket = $Pockets/UL_Pocket
-onready var u_pocket: Pocket = $Pockets/U_Pocket
-onready var ur_pocket: Pocket = $Pockets/UR_Pocket
-onready var dl_pocket: Pocket = $Pockets/DL_Pocket
-onready var d_pocket: Pocket = $Pockets/D_Pocket
-onready var dr_pocket: Pocket = $Pockets/DR_Pocket
+@onready var ul_pocket: Pocket = $Pockets/UL_Pocket
+@onready var u_pocket: Pocket = $Pockets/U_Pocket
+@onready var ur_pocket: Pocket = $Pockets/UR_Pocket
+@onready var dl_pocket: Pocket = $Pockets/DL_Pocket
+@onready var d_pocket: Pocket = $Pockets/D_Pocket
+@onready var dr_pocket: Pocket = $Pockets/DR_Pocket
 
 
 func get_head_spot() -> Vector2:

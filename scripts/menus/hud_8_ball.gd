@@ -4,15 +4,13 @@ var manager: GameManager8Ball
 
 var ball_container_scn = preload("res://scenes/ui_scenes/BallContainer.tscn")
 
-onready var current_team: Label = $TopBarContainer/HBoxContainer/TeamLabel
-onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
-onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
+@onready var current_team: Label = $TopBarContainer/HBoxContainer/TeamLabel
+@onready var current_player: Label = $TopBarContainer/HBoxContainer/NameLabel
+@onready var ball_type: Label = $TopBarContainer/HBoxContainer/BallTypesContainer/BallTypeText
 
-onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLabel
-onready var player_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/PlayerBallContainer
-onready var ai_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/AiBallContainer
-
-var __
+@onready var next_player: Label = $BottomBarContainer/HBoxContainer/NextPlayerLabel
+@onready var player_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/PlayerBallContainer
+@onready var ai_pocketed: HBoxContainer = $BottomBarContainer/HBoxContainer/AiBallContainer
 
 
 func initialize(manager_: GameManager8Ball):
@@ -63,10 +61,10 @@ func update_pocketed_balls():
 		child.queue_free()
 	# add current balls
 	for ball_number in manager.player_pocketed_balls:
-		var ball_container = ball_container_scn.instance()
+		var ball_container = ball_container_scn.instantiate()
 		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
 		player_pocketed.add_child(ball_container)
 	for ball_number in manager.ai_pocketed_balls:
-		var ball_container = ball_container_scn.instance()
+		var ball_container = ball_container_scn.instantiate()
 		ball_container.get_node("TextureRect").texture = BallTextures.get_texture(ball_number)
 		ai_pocketed.add_child(ball_container)

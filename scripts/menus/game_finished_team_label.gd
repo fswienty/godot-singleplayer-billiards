@@ -1,10 +1,10 @@
 extends HBoxContainer
 class_name GameFinishedTeamLabel
 
-onready var trophy_left: TextureRect = $TrophyLeft
-onready var trophy_right: TextureRect = $TrophyRight
-onready var team_label: Label = $Label
-onready var win_animation_player: AnimationPlayer = $AnimationPlayer
+@onready var trophy_left: TextureRect = $TrophyLeft
+@onready var trophy_right: TextureRect = $TrophyRight
+@onready var team_label: Label = $Label
+@onready var win_animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func initialize(team_name: String):

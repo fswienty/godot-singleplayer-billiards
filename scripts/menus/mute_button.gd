@@ -1,7 +1,7 @@
 extends Button
 
-export(Texture) var sound_on_icon
-export(Texture) var sound_off_icon
+@export var sound_on_icon: Texture2D
+@export var sound_off_icon: Texture2D
 
 
 func _on_MuteButton_pressed():

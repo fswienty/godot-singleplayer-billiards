@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Click9.wav-f7cf8e867c1354bda631a2358bf2c40d.sample"
+type="AudioStreamWAV"
+uid="uid://b8ox14spwfedd"
+path="res://.godot/imported/Click9.wav-f7cf8e867c1354bda631a2358bf2c40d.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/Click9.wav"
-dest_files=[ "res://.import/Click9.wav-f7cf8e867c1354bda631a2358bf2c40d.sample" ]
+dest_files=["res://.godot/imported/Click9.wav-f7cf8e867c1354bda631a2358bf2c40d.sample"]
 
 [params]
 

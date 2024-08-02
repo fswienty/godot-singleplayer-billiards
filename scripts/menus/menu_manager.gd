@@ -2,18 +2,16 @@ extends Node
 
 var main_menu_open_anim: AnimationPlayer
 
-export var DEBUG_MODE: bool = false
-export var DEBUG_HUD: bool = false
-export var DEBUG_CONSOLE: bool = false
+@export var DEBUG_MODE: bool = false
+@export var DEBUG_HUD: bool = false
+@export var DEBUG_CONSOLE: bool = false
 
-onready var main_menu = $MainMenu
-
-var __
+@onready var main_menu = $MainMenu
 
 
 func _ready():
-	__ = main_menu.connect("game_started", self, "_on_game_started")
-	__ = main_menu.connect("game_quit", self, "_on_game_quit")
+	main_menu.connect("game_started", Callable(self, "_on_game_started"))
+	main_menu.connect("game_quit", Callable(self, "_on_game_quit"))
 
 	main_menu_open_anim = Animations.fade_in_anim(main_menu, Globals.menu_transition_time)
 
@@ -39,13 +37,13 @@ func _ready():
 func _on_game_started():
 	GlobalUi.hide_error()
 	main_menu_open_anim.play_backwards("anim")
-	yield (main_menu_open_anim, "animation_finished")
-	__ = get_tree().change_scene("res://scenes/EightBall.tscn")
+	await main_menu_open_anim.animation_finished
+	get_tree().change_scene_to_file("res://scenes/EightBall.tscn")
 
 
 func _on_game_quit():
 	GlobalUi.hide_error()
 	main_menu_open_anim.play_backwards("anim")
-	yield (main_menu_open_anim, "animation_finished")
+	await main_menu_open_anim.animation_finished
 	print("ayy")
 	get_tree().quit()

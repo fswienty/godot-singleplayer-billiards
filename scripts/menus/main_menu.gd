@@ -8,21 +8,19 @@ var lobby_code_error_anim: AnimationPlayer
 var drag_tab_title: String = "Drag"
 var scroll_wheel_tab_title: String = "Scroll Wheel"
 
-onready var play_button: Button = $"%PlayButton"
-onready var quit_button: Button = $"%QuitButton"
-onready var increase_diffuculty_button: Button = $"%IncreaseDifficultyButton"
-onready var decrease_diffuculty_button: Button = $"%DecreaseDifficultyButton"
-onready var difficulty_label: Label = $"%AiDifficultyLabel"
-
-var __
+@onready var play_button: Button = $"%PlayButton"
+@onready var quit_button: Button = $"%QuitButton"
+@onready var increase_diffuculty_button: Button = $"%IncreaseDifficultyButton"
+@onready var decrease_diffuculty_button: Button = $"%DecreaseDifficultyButton"
+@onready var difficulty_label: Label = $"%AiDifficultyLabel"
 
 
 func _ready():
-	__ = play_button.connect("pressed", self, "_on_PlayButton_pressed")
-	__ = increase_diffuculty_button.connect("pressed", self, "_on_IncreaseDifficultyButton_pressed")
-	__ = decrease_diffuculty_button.connect("pressed", self, "_on_DecreaseDifficultyButton_pressed")
-	__ = quit_button.connect("pressed", self, "_on_QuitButton_pressed")
-	modulate = Color.transparent
+	play_button.connect("pressed", Callable(self, "_on_PlayButton_pressed"))
+	increase_diffuculty_button.connect("pressed", Callable(self, "_on_IncreaseDifficultyButton_pressed"))
+	decrease_diffuculty_button.connect("pressed", Callable(self, "_on_DecreaseDifficultyButton_pressed"))
+	quit_button.connect("pressed", Callable(self, "_on_QuitButton_pressed"))
+	modulate = Color.TRANSPARENT
 
 
 func _update_difficulty_label():

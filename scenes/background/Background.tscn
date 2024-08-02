@@ -1,15 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://hc5wol3p1jq5"]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/background/background_material.tres" type="Material" id=2]
+[ext_resource type="Material" uid="uid://beg1hjtdvmjx4" path="res://scenes/background/background_material.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://byad6vd7dmmmm" path="res://assets/images/balls/background.png" id="2_qy30f"]
 
 [node name="Background" type="Control"]
+texture_repeat = 2
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 2 )
-position = Vector2( 512, 300 )
-scale = Vector2( 20, 15 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4096
-texture = ExtResource( 1 )
+texture_repeat = 2
+material = ExtResource("2")
+position = Vector2(512, 300)
+scale = Vector2(20, 15)
+texture = ExtResource("2_qy30f")

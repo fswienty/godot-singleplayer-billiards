@@ -3,9 +3,9 @@ extends Node2D
 
 signal queue_hit
 
-export(float) var distance_at_rest: float = 15.0
-export(float) var max_distance: float = 70.0
-export(float) var force_mult = 1000.0
+@export var distance_at_rest: float = 15.0
+@export var max_distance: float = 70.0
+@export var force_mult: float = 1000.0
 
 var cue_ball: Ball
 
@@ -19,10 +19,10 @@ var intensity_increment: float = 0.1
 
 # vars for ai
 var ai_ball_type: int = Enums.BallType.NONE
-onready var ai_thinking_timer: Timer = $AiThinkingTimer
+@onready var ai_thinking_timer: Timer = $AiThinkingTimer
 
-onready var queue: Sprite = $QueueSprite
-onready var line: Line2D = $LineMask/Line2D
+@onready var queue: Sprite2D = $QueueSprite
+@onready var line: Line2D = $LineMask/Line2D
 
 
 func initialize(cue_ball_: Ball):

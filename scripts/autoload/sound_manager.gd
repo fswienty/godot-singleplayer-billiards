@@ -10,14 +10,14 @@ var _rail_player: AudioStreamPlayer
 var _last_rail_hit: int = 0
 var _pocket_player: AudioStreamPlayer
 
-onready var _click_sound = preload("res://assets/audio/sfx/Click9.wav")
-onready var _ball_sound = preload("res://assets/audio/sfx/ball_hit.wav")
-onready var _rail_sound = preload("res://assets/audio/sfx/rail.wav")
-onready var _pocket_sound = preload("res://assets/audio/sfx/pocket.wav")
+@onready var _click_sound = preload("res://assets/audio/sfx/Click9.wav")
+@onready var _ball_sound = preload("res://assets/audio/sfx/ball_hit.wav")
+@onready var _rail_sound = preload("res://assets/audio/sfx/rail.wav")
+@onready var _pocket_sound = preload("res://assets/audio/sfx/pocket.wav")
 
 
 func _ready():
-	self.pause_mode = Node.PAUSE_MODE_PROCESS
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	_click_player = AudioStreamPlayer.new()
 	_click_player.stream = _click_sound
@@ -40,21 +40,21 @@ func click():
 
 
 func ball_hit(intensity: float):
-	if OS.get_ticks_msec() - _last_ball_hit < 30 or intensity == 0:
+	if Time.get_ticks_msec() - _last_ball_hit < 30 or intensity == 0:
 		return
 	# print("bonk! " + str(intensity))
 	_ball_player.volume_db = _intensity_to_db(intensity, 500)
 	_ball_player.pitch_scale = 1 + (2 * randf() - 1) / 100
-	_last_ball_hit = OS.get_ticks_msec()
+	_last_ball_hit = Time.get_ticks_msec()
 	_ball_player.play()
 
 
 func rail_hit(intensity: float):
-	if OS.get_ticks_msec() - _last_rail_hit < 30:
+	if Time.get_ticks_msec() - _last_rail_hit < 30:
 		return
 	_rail_player.volume_db = -5 + _intensity_to_db(intensity, 500)
 	_rail_player.pitch_scale = 1 + (2 * randf() - 1) / 100
-	_last_ball_hit = OS.get_ticks_msec()
+	_last_ball_hit = Time.get_ticks_msec()
 	_rail_player.play()
 
 

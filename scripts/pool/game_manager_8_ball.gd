@@ -22,14 +22,12 @@ var ai_ball_type: int = Enums.BallType.NONE
 var ai_8_ball_target: int = Enums.PocketLocation.NONE
 var ai_pocketed_balls: Array = []
 
-onready var table = $Table
-onready var ball_manager: BallManager8Ball = $BallManager
-onready var queue_controller: QueueController = $QueueController
-onready var hud = $UI/Hud_8Ball
-onready var debug_hud = $UI/DEBUG_Hud_8Ball
-onready var game_finished_panel = $UI/GameFinished
-
-var __
+@onready var table = $Table
+@onready var ball_manager: BallManager8Ball = $BallManager
+@onready var queue_controller: QueueController = $QueueController
+@onready var hud = $UI/Hud_8Ball
+@onready var debug_hud = $UI/DEBUG_Hud_8Ball
+@onready var game_finished_panel = $UI/GameFinished
 
 
 func _ready():
@@ -37,8 +35,8 @@ func _ready():
 	seed(randi())
 
 	# connect signals
-	__ = ball_manager.ball_placer.connect("ball_placed", self, "_on_BallPlacer_ball_placed")
-	__ = queue_controller.connect("queue_hit", self, "_on_queue_hit")
+	ball_manager.ball_placer.connect("ball_placed", Callable(self, "_on_BallPlacer_ball_placed"))
+	queue_controller.connect("queue_hit", Callable(self, "_on_queue_hit"))
 
 	# initialize nodes
 	ball_manager.initialize()
@@ -257,5 +255,5 @@ func _check_last_non_8_ball(pocket: Pocket):
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):
-	__ = ball.connect("ball_pocketed", self, "_on_ball_pocketed")
-	__ = ball.connect("ball_hit", self, "_on_ball_hit")
+	ball.connect("ball_pocketed", Callable(self, "_on_ball_pocketed"))
+	ball.connect("ball_hit", Callable(self, "_on_ball_hit"))

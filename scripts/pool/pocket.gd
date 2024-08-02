@@ -3,13 +3,13 @@ extends Area2D
 
 enum PocketLocation {NONE, UP_LEFT, UP, UP_RIGHT, DOWN_LEFT, DOWN, DOWN_RIGHT}
 
-export(PocketLocation) var location
+@export var location: PocketLocation
 
 var ai_target: Vector2 = Vector2.ZERO
 var target_direction: Vector2 = Vector2.ZERO
 
-onready var indicator = $Indicator
-onready var indicator_anim: AnimationPlayer = $Indicator/AnimationPlayer
+@onready var indicator = $Indicator
+@onready var indicator_anim: AnimationPlayer = $Indicator/AnimationPlayer
 
 
 func _ready():

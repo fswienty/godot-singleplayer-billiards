@@ -1,154 +1,123 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://cuhgt8fgqamll"]
 
-[ext_resource path="res://scripts/menus/main_menu.gd" type="Script" id=2]
-[ext_resource path="res://assets/images/ui/arrow-big-right.svg" type="Texture" id=3]
-[ext_resource path="res://ui_theme/ui_theme_1.tres" type="Theme" id=4]
-[ext_resource path="res://scripts/menus/menu_manager.gd" type="Script" id=5]
-[ext_resource path="res://scenes/background/Background.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/images/ui/arrow-big-left.svg" type="Texture" id=7]
-[ext_resource path="res://scripts/menus/mute_button.gd" type="Script" id=8]
-[ext_resource path="res://assets/images/ui/audioOn.png" type="Texture" id=9]
-[ext_resource path="res://assets/images/ui/audioOff.png" type="Texture" id=10]
-[ext_resource path="res://assets/fonts/title_font.tres" type="DynamicFont" id=11]
+[ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://wqfkom15nwup" path="res://assets/images/ui/arrow-big-right.svg" id="3"]
+[ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
+[ext_resource type="Script" path="res://scripts/menus/menu_manager.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://hc5wol3p1jq5" path="res://scenes/background/Background.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://2hcbhonhpwwe" path="res://assets/images/ui/arrow-big-left.svg" id="7"]
+[ext_resource type="Script" path="res://scripts/menus/mute_button.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://dtektw0lthuhh" path="res://assets/images/ui/audioOn.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://db6bmlrrg4whd" path="res://assets/images/ui/audioOff.png" id="10"]
+[ext_resource type="FontFile" uid="uid://mtlexfimdp2g" path="res://assets/fonts/title_font.tres" id="11"]
 
 [node name="Menu" type="CanvasLayer"]
-script = ExtResource( 5 )
+script = ExtResource("5")
+DEBUG_MODE = null
+DEBUG_HUD = null
+DEBUG_CONSOLE = null
 
-[node name="Background" parent="." instance=ExtResource( 6 )]
+[node name="Background" parent="." instance=ExtResource("6")]
 
 [node name="MainMenu" type="CenterContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 300 )
-script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+pivot_offset = Vector2(0, 300)
+script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
-margin_left = 162.0
-margin_top = 144.0
-margin_right = 862.0
-margin_bottom = 431.0
-rect_min_size = Vector2( 300, 0 )
-custom_constants/separation = 50
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="TitleLabel" type="Label" parent="MainMenu/VBoxContainer"]
-margin_right = 700.0
-margin_bottom = 125.0
-custom_colors/font_color = Color( 0.901961, 0.901961, 0.901961, 1 )
-custom_colors/font_outline_modulate = Color( 0.054902, 0.054902, 0.054902, 1 )
-custom_colors/font_color_shadow = Color( 0.054902, 0.054902, 0.054902, 1 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 2
-custom_fonts/font = ExtResource( 11 )
+layout_mode = 2
+theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
+theme_override_colors/font_shadow_color = Color(0.054902, 0.054902, 0.054902, 1)
+theme_override_colors/font_outline_color = Color(0.0939458, 0.0919693, 0.0911199, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("11")
+theme_override_font_sizes/font_size = 91
 text = "Pool Alone"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer"]
-margin_top = 175.0
-margin_right = 700.0
-margin_bottom = 287.0
-custom_constants/separation = 100
+layout_mode = 2
+theme_override_constants/separation = 100
 
 [node name="PlayQuitVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
-margin_right = 300.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 300, 0 )
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 20
+theme_override_constants/separation = 20
 
 [node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/PlayQuitVBoxContainer"]
 unique_name_in_owner = true
-margin_right = 300.0
-margin_bottom = 46.0
-theme = ExtResource( 4 )
+layout_mode = 2
+theme = ExtResource("4")
 text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/PlayQuitVBoxContainer"]
 unique_name_in_owner = true
-margin_top = 66.0
-margin_right = 300.0
-margin_bottom = 112.0
-theme = ExtResource( 4 )
+layout_mode = 2
+theme = ExtResource("4")
 text = "Quit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="OpponentVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
-margin_left = 400.0
-margin_right = 700.0
-margin_bottom = 112.0
-rect_min_size = Vector2( 300, 0 )
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 10
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer"]
-margin_top = 33.0
-margin_right = 300.0
-margin_bottom = 79.0
+layout_mode = 2
 alignment = 1
 
 [node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 64.0
-margin_bottom = 46.0
-theme = ExtResource( 4 )
-icon = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
+theme = ExtResource("4")
+icon = ExtResource("7")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
-margin_left = 68.0
-margin_right = 232.0
-margin_bottom = 46.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
-margin_left = 20.0
-margin_top = 10.0
-margin_right = 144.0
-margin_bottom = 36.0
+layout_mode = 2
 text = "Normal"
-align = 1
+horizontal_alignment = 1
 
 [node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 236.0
-margin_right = 300.0
-margin_bottom = 46.0
-theme = ExtResource( 4 )
-icon = ExtResource( 3 )
-icon_align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 2
+theme = ExtResource("4")
+icon = ExtResource("3")
+icon_alignment = 1
 
 [node name="MuteButton" type="Button" parent="."]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -108.0
-margin_top = -87.0
-margin_right = -18.0
-margin_bottom = -17.0
-icon = ExtResource( 9 )
-script = ExtResource( 8 )
-sound_on_icon = ExtResource( 9 )
-sound_off_icon = ExtResource( 10 )
+offset_left = -108.0
+offset_top = -87.0
+offset_right = -18.0
+offset_bottom = -17.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("9")
+script = ExtResource("8")
+sound_on_icon = ExtResource("9")
+sound_off_icon = ExtResource("10")
 
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]

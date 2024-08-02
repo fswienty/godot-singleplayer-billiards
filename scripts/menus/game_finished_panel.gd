@@ -1,18 +1,16 @@
 extends Control
 
-onready var player_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/PlayerContainer/Team
-onready var ai_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/AiContainer/Team
-onready var player_list: VBoxContainer = $VBoxContainer/HBoxContainer/PlayerContainer/Players
-onready var ai_list: VBoxContainer = $VBoxContainer/HBoxContainer/AiContainer/Players
-onready var lobby_button: Button = $VBoxContainer/LobbyButton
-onready var waiting_label: Label = $VBoxContainer/WaitingLabel
-
-var __
+@onready var player_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/PlayerContainer/Team
+@onready var ai_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/AiContainer/Team
+@onready var player_list: VBoxContainer = $VBoxContainer/HBoxContainer/PlayerContainer/Players
+@onready var ai_list: VBoxContainer = $VBoxContainer/HBoxContainer/AiContainer/Players
+@onready var lobby_button: Button = $VBoxContainer/LobbyButton
+@onready var waiting_label: Label = $VBoxContainer/WaitingLabel
 
 
 func initialize():
 	hide()
-	__ = lobby_button.connect("pressed", self, "_on_LobbyButton_pressed")
+	lobby_button.connect("pressed", Callable(self, "_on_LobbyButton_pressed"))
 	player_team_label.initialize("Team 1")
 	ai_team_label.initialize("Team 2")
 	# add players to lists
@@ -21,7 +19,7 @@ func initialize():
 		var player_team = info.team
 		var label = Label.new()
 		label.clip_text = true
-		label.align = Label.ALIGN_CENTER
+		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.text = str(player_name)
 		if player_team == 1:
 			player_list.add_child(label)
@@ -46,4 +44,4 @@ func display(winning_team: int):
 func _on_LobbyButton_pressed():
 	SoundManager.click()
 	get_tree().paused = false
-	__ = get_tree().change_scene("res://scenes/Menu.tscn")
+	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

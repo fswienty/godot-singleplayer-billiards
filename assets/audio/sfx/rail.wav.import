@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/rail.wav-23f244f523026fea3d54047d18ece94c.sample"
+type="AudioStreamWAV"
+uid="uid://b4df0rx16m6dc"
+path="res://.godot/imported/rail.wav-23f244f523026fea3d54047d18ece94c.sample"
 
 [deps]
 
 source_file="res://assets/audio/sfx/rail.wav"
-dest_files=[ "res://.import/rail.wav-23f244f523026fea3d54047d18ece94c.sample" ]
+dest_files=["res://.godot/imported/rail.wav-23f244f523026fea3d54047d18ece94c.sample"]
 
 [params]
 

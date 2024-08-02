@@ -9,17 +9,17 @@ var new_ball: Ball
 var balls_to_place = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 var positions: Dictionary = _get_positions()
 
-export(PackedScene) var ball_scn
-export(NodePath) var table_np
+@export var ball_scn: PackedScene
+@export var table_np: NodePath
 
-onready var table: Node2D = get_node(table_np)
+@onready var table: Node2D = get_node(table_np)
 
 
 func place_balls(ball_holder_: Node2D):
 	ball_holder = ball_holder_
 
 	# add cue ball
-	new_ball = ball_scn.instance()
+	new_ball = ball_scn.instantiate()
 	new_ball.number = 0
 	new_ball.position = table.get_head_spot()
 	_add_ball_to_scene(new_ball)
@@ -48,7 +48,7 @@ func place_balls(ball_holder_: Node2D):
 
 
 func _place_in_rack(number, position):
-	new_ball = ball_scn.instance()
+	new_ball = ball_scn.instantiate()
 	new_ball.number = number
 	balls_to_place.erase(number)
 	new_ball.position = table.get_foot_spot() + positions[position]
