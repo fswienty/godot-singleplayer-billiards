@@ -3,9 +3,12 @@ extends Node2D
 
 signal queue_hit
 
-@export var distance_at_rest: float = 15.0
-@export var max_distance: float = 70.0
-@export var force_mult: float = 1000.0
+# @export var distance_at_rest: float = 15.0
+# @export var max_distance: float = 70.0
+# @export var force_mult: float = 1000.0
+var distance_at_rest: float = 15.0
+var max_distance: float = 70.0
+var force_mult: float = 1000.0
 
 var cue_ball: Ball
 
@@ -44,6 +47,8 @@ func run(player_turn: bool):
 				state = _drag_mode()
 			Enums.QueueControl.MOUSE_WHEEL:
 				state = _mouse_wheel_mode()
+			Enums.QueueControl.TOUCH:
+				state = _touch_mode()
 	else:
 		# let ai control queue
 		state = _ai_mode()
@@ -109,6 +114,16 @@ func _mouse_wheel_mode() -> Array:
 	var rot = ball_to_mouse.angle()
 	return [false, rot, queue_pos]
 
+
+func _touch_mode() -> Array:
+	print("TODO TOUCH MODE")
+	return _drag_mode() 
+
+func _draw():
+	pass
+	# draw_line(Vector2(0, 0), Vector2(300, 300), Color.WHITE, 50)
+
+
 var show_lines: bool
 func _ai_mode() -> Array:
 	var cue_ball_pos: Vector2
@@ -122,6 +137,8 @@ func _ai_mode() -> Array:
 		var target_balls = _get_target_balls()
 
 		# TODO find some possible shots
+		for target_ball in target_balls:
+			DebugDraw2d.line(cue_ball_pos, target_ball.global_position, Color.RED, 2, 2)
 
 		# TODO rank shots
 
