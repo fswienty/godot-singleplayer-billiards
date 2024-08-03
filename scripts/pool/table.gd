@@ -4,7 +4,6 @@ class_name Table
 @onready var head_spot = $HeadSpot
 @onready var foot_spot = $FootSpot
 
-# var pockets = Array([], TYPE_OBJECT, &"Node", Pocket)
 var pockets: Array[Pocket]
 
 @onready var ul_pocket: Pocket = $Pockets/UL_Pocket
@@ -46,8 +45,8 @@ func get_opposite_pocket(pocket_location):
 		return Enums.PocketLocation.UP_LEFT
 
 
-func indicate_8_ball_target(pocketLocation):
-	match pocketLocation:
+func indicate_pocket(pocket_location):
+	match pocket_location:
 		Enums.PocketLocation.UP_LEFT:
 			ul_pocket.indicate()
 		Enums.PocketLocation.UP:

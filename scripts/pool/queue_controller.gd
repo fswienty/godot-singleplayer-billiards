@@ -128,6 +128,11 @@ func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
 	var result = space_state.intersect_ray(query)
 	return result.is_empty()
 
+class ShotCandidate:
+	var ball: Node2D
+	var pockets: Array[Pocket]
+	var cue_angles: Array[float]
+	var pocket_angles: Array[float]
 
 var ai_time = 5
 func _ai_mode() -> Array:
@@ -141,32 +146,39 @@ func _ai_mode() -> Array:
 
 		### find some possible shots ###
 		var direct_target_balls = {}
+		var shot_candidates: Array[ShotCandidate] = []
 		for ball in valid_target_balls:
-			# add target balls that can be hit directly to dict
-			if _has_line_of_sight(cue_ball, ball, space_state):
-				direct_target_balls[ball] = []
+			if not _has_line_of_sight(cue_ball, ball, space_state):
+				continue
 
-		for ball in direct_target_balls:
+			direct_target_balls[ball] = []
+			var shot_candidate = ShotCandidate.new()
+			shot_candidate.ball = ball
+			shot_candidates.push_back(shot_candidate)
+
 			for pocket in table.pockets:
 				# only consider pockets that lie ahead
 				var cue_to_ball = ball.global_position - cue_ball.global_position
 				var ball_to_pocket = pocket.ai_target.global_position - ball.global_position
-				var angle = rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
+				var cue_angle = rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
 				var pocket_angle = rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(angle) > 80:
+				if abs(cue_angle) > 80:
 					continue
 				if abs(pocket_angle) > 45:
 					continue	
 				if _has_line_of_sight(ball, pocket.ai_target, space_state):
 					direct_target_balls[ball].push_back(pocket)
 
-		
+
+		# visualize viable shots
 		for ball in direct_target_balls:
 			DebugDraw2d.line(cue_ball.global_position, ball.global_position, Color.RED, 2, ai_time)
 			for pocket in direct_target_balls[ball]:
 				DebugDraw2d.line(ball.global_position, pocket.ai_target.global_position, Color.BLUE, 2, ai_time)
 
-		# TODO rank shots
+		# visualize viable shots from shot_candidates
+
+		### rank shots ###
 
 
 	# take shot

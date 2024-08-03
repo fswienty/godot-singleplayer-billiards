@@ -1,7 +1,9 @@
 soft shadows for balls and queue?
 credit tabler icons
+fix pocketed balls display
 
 add ai in queue controller
+    needs to handle 8ball
     maybe
         should be able to handle break
 

@@ -73,7 +73,7 @@ func _physics_process(_delta):
 				_on_balls_stopped(has_player_won, has_player_lost, legal_play)
 				if go_again:
 					var indicate_target = player_8_ball_target if is_player_turn() else ai_8_ball_target
-					table.indicate_8_ball_target(indicate_target)
+					table.indicate_pocket(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
 					_on_turn_ended(legal_play)
