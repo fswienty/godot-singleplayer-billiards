@@ -1,7 +1,11 @@
 extends Node
+class_name Table
 
 @onready var head_spot = $HeadSpot
 @onready var foot_spot = $FootSpot
+
+# var pockets = Array([], TYPE_OBJECT, &"Node", Pocket)
+var pockets: Array[Pocket]
 
 @onready var ul_pocket: Pocket = $Pockets/UL_Pocket
 @onready var u_pocket: Pocket = $Pockets/U_Pocket
@@ -10,6 +14,14 @@ extends Node
 @onready var d_pocket: Pocket = $Pockets/D_Pocket
 @onready var dr_pocket: Pocket = $Pockets/DR_Pocket
 
+func _ready():
+	pockets.push_back(ul_pocket)
+	pockets.push_back(u_pocket)
+	pockets.push_back(ur_pocket)
+	pockets.push_back(dl_pocket)
+	pockets.push_back(d_pocket)
+	pockets.push_back(dr_pocket)
+	
 
 func get_head_spot() -> Vector2:
 	return head_spot.position * self.scale

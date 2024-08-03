@@ -1,7 +1,9 @@
-class_name QueueController
 extends Node2D
+class_name QueueController
 
 signal queue_hit
+
+@export var table: Table
 
 # @export var distance_at_rest: float = 15.0
 # @export var max_distance: float = 70.0
@@ -119,37 +121,57 @@ func _touch_mode() -> Array:
 	print("TODO TOUCH MODE")
 	return _drag_mode() 
 
-func _draw():
-	pass
-	# draw_line(Vector2(0, 0), Vector2(300, 300), Color.WHITE, 50)
+
+func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
+	var query = PhysicsRayQueryParameters2D.create(node_a.global_position, node_b.global_position)
+	query.exclude = [node_a, node_b]
+	var result = space_state.intersect_ray(query)
+	return result.is_empty()
 
 
-var show_lines: bool
+var ai_time = 5
 func _ai_mode() -> Array:
-	var cue_ball_pos: Vector2
-
+	ai_thinking_timer.wait_time = ai_time
 	if ai_thinking_timer.is_stopped():
-		show_lines = true
 		ai_thinking_timer.start()
 		print("lemme think...")
 
-		cue_ball_pos = cue_ball.global_position
-		var target_balls = _get_target_balls()
+		var space_state = get_world_2d().direct_space_state
+		var valid_target_balls = _get_valid_target_balls()
 
-		# TODO find some possible shots
-		for target_ball in target_balls:
-			DebugDraw2d.line(cue_ball_pos, target_ball.global_position, Color.RED, 2, 2)
+		### find some possible shots ###
+		var direct_target_balls = {}
+		for ball in valid_target_balls:
+			# add target balls that can be hit directly to dict
+			if _has_line_of_sight(cue_ball, ball, space_state):
+				direct_target_balls[ball] = []
+
+		for ball in direct_target_balls:
+			for pocket in table.pockets:
+				# only consider pockets that lie ahead
+				var cue_to_ball = ball.global_position - cue_ball.global_position
+				var ball_to_pocket = pocket.ai_target.global_position - ball.global_position
+				var angle = rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
+				var pocket_angle = rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
+				if abs(angle) > 80:
+					continue
+				if abs(pocket_angle) > 45:
+					continue	
+				if _has_line_of_sight(ball, pocket.ai_target, space_state):
+					direct_target_balls[ball].push_back(pocket)
+
+		
+		for ball in direct_target_balls:
+			DebugDraw2d.line(cue_ball.global_position, ball.global_position, Color.RED, 2, ai_time)
+			for pocket in direct_target_balls[ball]:
+				DebugDraw2d.line(ball.global_position, pocket.ai_target.global_position, Color.BLUE, 2, ai_time)
 
 		# TODO rank shots
 
-	if show_lines:
-		show_lines = false
-		print("hohoho")
 
 	# take shot
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
-		show_lines = true
 		emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
 		return [false, Time.get_ticks_msec()/50.0, cue_ball.global_position]
 
@@ -158,11 +180,12 @@ func _ai_mode() -> Array:
 	# return [visible_, rot, queue_pos]
 
 
-func _get_target_balls():
+func _get_valid_target_balls():
 	var target_balls = get_tree().get_nodes_in_group("BallType" + str(ai_ball_type))
 	var balls_full = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.FULL))
 	var balls_half = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.HALF))
 
+	# TODO handle end of game where 8 ball is target
 	match ai_ball_type:
 		Enums.BallType.FULL:
 			target_balls = balls_full

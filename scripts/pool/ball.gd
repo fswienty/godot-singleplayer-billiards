@@ -1,5 +1,5 @@
-class_name Ball
 extends RigidBody2D
+class_name Ball
 
 signal ball_pocketed
 signal ball_hit

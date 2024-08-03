@@ -1,5 +1,5 @@
-class_name BallManager8Ball
 extends Node2D
+class_name BallManager8Ball
 
 var cue_ball: Ball
 var hide_cue_ball: bool = false

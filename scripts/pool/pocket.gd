@@ -1,12 +1,12 @@
-class_name Pocket
 extends Area2D
+class_name Pocket
 
 enum PocketLocation {NONE, UP_LEFT, UP, UP_RIGHT, DOWN_LEFT, DOWN, DOWN_RIGHT}
 
 @export var location: PocketLocation
 
-var ai_target: Vector2 = Vector2.ZERO
-var target_direction: Vector2 = Vector2.ZERO
+var ai_target: Node2D
+var target_direction := Vector2.ZERO
 
 @onready var indicator = $Indicator
 @onready var indicator_anim: AnimationPlayer = $Indicator/AnimationPlayer
@@ -15,23 +15,28 @@ var target_direction: Vector2 = Vector2.ZERO
 func _ready():
 	indicator.visible = false
 
+	var ai_target_offset := Vector2.ZERO
 	match location:
 		PocketLocation.UP_LEFT:
-			ai_target = Vector2(10, 10)
+			ai_target_offset = Vector2(10, 10)
 		PocketLocation.UP:
-			ai_target = Vector2(0, 12)
+			ai_target_offset = Vector2(0, 12)
 		PocketLocation.UP_RIGHT:
-			ai_target = Vector2(-10, 10)
+			ai_target_offset = Vector2(-10, 10)
 		PocketLocation.DOWN_LEFT:
-			ai_target = Vector2(10, -10)
+			ai_target_offset = Vector2(10, -10)
 		PocketLocation.DOWN:
-			ai_target = Vector2(0, -12)
+			ai_target_offset = Vector2(0, -12)
 		PocketLocation.DOWN_RIGHT:
-			ai_target = Vector2(-10, -10)
+			ai_target_offset = Vector2(-10, -10)
 
-	target_direction = -ai_target.normalized()
-	ai_target = global_position + ai_target
-	print(ai_target)
+	ai_target = Node2D.new()
+	add_child(ai_target)
+	ai_target.global_position = self.global_position + ai_target_offset
+	# DebugDraw2d.cube_filled(ai_target.global_position, 5, Color.WHITE, 999999)
+
+	target_direction = (self.global_position - ai_target.global_position).normalized()
+	print(ai_target.global_position)
 
 func indicate():
 	indicator_anim.play("indicate")

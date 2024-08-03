@@ -1,5 +1,5 @@
-class_name BallInHand
 extends Area2D
+class_name BallInHand
 
 
 func initialize():

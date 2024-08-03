@@ -26,8 +26,8 @@ func arrow(from, to, color = Color(1, 0, 1), line_width = 1, duration = 0):
 	var arrow_start_2 = arrow_head_start - arrow_normal * arrow_head_size
 
 	var line = Line.new(from, to, color, line_width, duration)
-	var head_line_1 = Line.new(arrow_start_1, to - arrow_dir * line_width/2, color, line_width, duration)
-	var head_line_2 = Line.new(arrow_start_2, to - arrow_dir * line_width/2, color, line_width, duration)
+	var head_line_1 = Line.new(arrow_start_1, to - arrow_dir * line_width / 2, color, line_width, duration)
+	var head_line_2 = Line.new(arrow_start_2, to - arrow_dir * line_width / 2, color, line_width, duration)
 
 	lines.push_back(line)
 	lines.push_back(head_line_1)
@@ -87,6 +87,8 @@ func _process_primitives(primitives, delta):
 		if primitive.duration_left < 0:
 			indices_to_remove.push_back(i)
 		primitive.duration_left -= delta
+
+	indices_to_remove.sort_custom(func(a, b): return a > b)
 	for i in indices_to_remove:
 		primitives.remove_at(i)
 

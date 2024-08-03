@@ -1,5 +1,5 @@
-class_name GameManager8Ball
 extends Node
+class_name GameManager8Ball
 
 var game_state = Enums.GameState.NONE
 
