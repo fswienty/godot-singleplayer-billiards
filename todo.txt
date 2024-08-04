@@ -3,6 +3,7 @@ credit tabler icons
 fix pocketed balls display
 
 add ai in queue controller
+    allow less cut angle when distance is smaller
     needs to handle 8ball
     maybe
         should be able to handle break

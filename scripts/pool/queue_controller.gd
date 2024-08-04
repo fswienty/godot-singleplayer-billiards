@@ -205,13 +205,13 @@ func _ai_mode() -> Array:
 			emit_signal("queue_hit", force_mult * shot_direction)
 		return [false, 0, cue_ball.global_position]
 
-	# lerp queue into position
-	var final_angle = -best_shot.final_direction.angle_to(Vector2.RIGHT)
+	var initial_direction = Vector2.RIGHT
 	var thinking_progress = 1 - ai_thinking_timer.time_left / ai_thinking_time
+	var queue_offset_direction = initial_direction.slerp(best_shot.final_direction, thinking_progress)
 	return [
 		true,
-		lerp_angle(0, final_angle, thinking_progress),
-		cue_ball.global_position - best_shot.final_direction * 50  # TODO fix
+		-queue_offset_direction.angle_to(initial_direction),
+		cue_ball.global_position - queue_offset_direction * 50
 	]
 
 
