@@ -23,7 +23,7 @@ func _physics_process(_delta):
 	if impulse != Vector2.ZERO:
 		apply_central_impulse(impulse)
 		impulse = Vector2.ZERO
-		current_velocity = linear_velocity
+		# current_velocity = linear_velocity  # TODO check if necessary?
 
 
 func _integrate_forces(_state):

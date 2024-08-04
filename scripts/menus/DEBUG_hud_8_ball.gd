@@ -4,7 +4,6 @@ var processing: bool = false
 var manager: GameManager8Ball
 
 @onready var current_player: Label = $Inset/CurrentPlayer/NameLabel/Name
-@onready var current_team: Label = $Inset/CurrentPlayer/TeamLabel/Team
 @onready var game_state: Label = $Inset/CurrentPlayer/GameStateLabel/GameState
 
 @onready var player_ball_type: Label = $Inset/GeneralInfo/PlayerTypeLabel/PlayerType
@@ -31,10 +30,6 @@ func _physics_process(_delta):
 	if not processing:
 		return
 
-	if manager.current_player_id == 1:
-		current_team.text = "PLAYER"
-	else:
-		current_team.text = "AI"
 	current_player.text = Globals.player_infos[manager.current_player_id].name
 	game_state.text = Enums.GameState.keys()[manager.game_state]
 

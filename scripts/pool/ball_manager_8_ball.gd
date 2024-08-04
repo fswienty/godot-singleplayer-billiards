@@ -55,16 +55,9 @@ func remove(ball_: Ball):
 
 func are_balls_still() -> bool:
 	for ball in ball_holder.get_children():
-		if ball.linear_velocity != Vector2.ZERO:
+		if ball.linear_velocity.length_squared() > 5:
 			return false
 	return true
-
-
-func _get_ball_states() -> Array:
-	var states: Array = []
-	for ball in ball_holder.get_children():
-		states.append([ball.global_position, ball.current_velocity])
-	return states
 
 
 func _get_cue_ball() -> Ball:

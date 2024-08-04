@@ -45,6 +45,7 @@ script = ExtResource("4")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Hud_8Ball" type="VBoxContainer" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -143,7 +144,6 @@ size_flags_vertical = 6
 theme_override_constants/separation = 35
 
 [node name="DEBUG_Hud_8Ball" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,17 +169,6 @@ offset_left = -131.5
 offset_right = 131.5
 offset_bottom = 39.0
 
-[node name="TeamLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
-layout_mode = 2
-text = "Current Team:"
-
-[node name="Team" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer/TeamLabel"]
-layout_mode = 0
-offset_left = 135.0
-offset_right = 262.0
-offset_bottom = 14.0
-text = "aaaaaa"
-
 [node name="NameLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/CurrentPlayer"]
 layout_mode = 2
 text = "Current Player:"
@@ -199,7 +188,7 @@ text = "Game State:"
 layout_mode = 0
 offset_left = 135.0
 offset_right = 262.0
-offset_bottom = 14.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="GeneralInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
@@ -212,15 +201,18 @@ layout_mode = 2
 text = "Team 1 Ball Type:"
 
 [node name="PlayerType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerTypeLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 6.61501
+offset_top = -13.0
+offset_right = 65.615
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "aaaaaa"
 
 [node name="PlayerPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
@@ -228,15 +220,18 @@ layout_mode = 2
 text = "Team 1 Pocketed:"
 
 [node name="PlayerPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerPocketedLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 6.61501
+offset_top = -13.0
+offset_right = 65.615
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "aaaaaa"
 
 [node name="PlayerEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
@@ -244,15 +239,18 @@ layout_mode = 2
 text = "Team 1 Eight Target:"
 
 [node name="PlayerEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerEightTargetLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 6.61501
+offset_top = -12.0
+offset_right = 65.615
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "aaaaaa"
 
 [node name="HSeparator" type="HSeparator" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
@@ -263,15 +261,16 @@ layout_mode = 2
 text = "Team 2 Ball Type:"
 
 [node name="AiType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiTypeLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.10236
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 7.0
+offset_top = -13.0
+offset_right = 48.4964
+offset_bottom = 13.0
 text = "aaaaaa"
 
 [node name="AiPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
@@ -279,15 +278,18 @@ layout_mode = 2
 text = "Team 2 Pocketed:"
 
 [node name="AiPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiPocketedLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 7.0
+offset_top = -13.0
+offset_right = 66.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "aaaaaa"
 
 [node name="AiEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
@@ -295,15 +297,18 @@ layout_mode = 2
 text = "Team 2 Eight Target:"
 
 [node name="AiEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiEightTargetLabel"]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 8.0
-offset_top = -7.0
-offset_right = 48.0
-offset_bottom = 7.0
+offset_left = 7.0
+offset_top = -13.0
+offset_right = 66.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 2
 text = "aaaaaa"
 
 [node name="TurnInfo" type="VBoxContainer" parent="UI/DEBUG_Hud_8Ball/Inset"]
@@ -436,6 +441,7 @@ size_flags_vertical = 8
 text = "Back to Lobby"
 
 [node name="Background" parent="." instance=ExtResource("14")]
+visible = false
 
 [node name="Table" parent="." instance=ExtResource("3")]
 position = Vector2(512, 288)

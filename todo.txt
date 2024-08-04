@@ -8,3 +8,6 @@ add ai in queue controller
         should be able to handle break
 
 add ai in ball manager for ball in hand
+
+chaos billiard:
+    just do next turn immediately lol

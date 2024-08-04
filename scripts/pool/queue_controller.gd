@@ -128,72 +128,119 @@ func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
 	var result = space_state.intersect_ray(query)
 	return result.is_empty()
 
-class ShotCandidate:
-	var ball: Node2D
-	var pockets: Array[Pocket]
-	var cue_angles: Array[float]
-	var pocket_angles: Array[float]
 
-var ai_time = 5
+class ShotCandidate:
+	var ball: Ball  # the ball to hit
+	var pocket: Pocket = null  # the pocket the ball is supposed to enter
+	var cut_angle: float  # angle between the path of the cue ball and the desired path of the target ball
+	var pocket_angle: float  # angle between the ideal pocket entry direction and the expected entry direction
+	var final_direction: Vector2  # direction to play the cue ball to achieve the necessary ball deflection
+	var score := -1.0  # how good the shot candidate is
+
+
+var ai_thinking_time = 2
+var shot_candidates: Array[ShotCandidate] = []
+var best_shot: ShotCandidate
 func _ai_mode() -> Array:
-	ai_thinking_timer.wait_time = ai_time
+	ai_thinking_timer.wait_time = ai_thinking_time
+
 	if ai_thinking_timer.is_stopped():
 		ai_thinking_timer.start()
-		print("lemme think...")
 
-		var space_state = get_world_2d().direct_space_state
-		var valid_target_balls = _get_valid_target_balls()
+		var space_state := get_world_2d().direct_space_state
+		var valid_target_balls := _get_valid_target_balls()
 
 		### find some possible shots ###
-		var direct_target_balls = {}
-		var shot_candidates: Array[ShotCandidate] = []
+		shot_candidates = []
 		for ball in valid_target_balls:
 			if not _has_line_of_sight(cue_ball, ball, space_state):
 				continue
 
-			direct_target_balls[ball] = []
-			var shot_candidate = ShotCandidate.new()
-			shot_candidate.ball = ball
-			shot_candidates.push_back(shot_candidate)
-
 			for pocket in table.pockets:
 				# only consider pockets that lie ahead
-				var cue_to_ball = ball.global_position - cue_ball.global_position
-				var ball_to_pocket = pocket.ai_target.global_position - ball.global_position
-				var cue_angle = rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
-				var pocket_angle = rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(cue_angle) > 80:
+				var shot_candidate = ShotCandidate.new()
+				var cue_to_ball: Vector2 = ball.global_position - cue_ball.global_position
+				var ball_to_pocket: Vector2 = pocket.ai_target.global_position - ball.global_position
+				var cut_angle := rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
+				var pocket_angle := rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
+				if abs(cut_angle) > 80:
 					continue
-				if abs(pocket_angle) > 45:
+				if abs(pocket_angle) > 50:
 					continue	
+				shot_candidate.ball = ball as Ball
 				if _has_line_of_sight(ball, pocket.ai_target, space_state):
-					direct_target_balls[ball].push_back(pocket)
-
+					shot_candidate.pocket = pocket
+					shot_candidate.cut_angle = cut_angle
+					shot_candidate.pocket_angle = pocket_angle
+					shot_candidate.final_direction = _get_final_direction(shot_candidate) # TODO
+				else:
+					shot_candidate.final_direction = _get_final_direction(shot_candidate) # TODO
+				shot_candidates.push_back(shot_candidate)
+		
+		if shot_candidates.size() == 0:
+			print("no shots found")
 
 		# visualize viable shots
-		for ball in direct_target_balls:
-			DebugDraw2d.line(cue_ball.global_position, ball.global_position, Color.RED, 2, ai_time)
-			for pocket in direct_target_balls[ball]:
-				DebugDraw2d.line(ball.global_position, pocket.ai_target.global_position, Color.BLUE, 2, ai_time)
+		for sc in shot_candidates:
+			DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 2, ai_thinking_time)
+			if sc.pocket:
+				DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 2, ai_thinking_time)
 
-		# visualize viable shots from shot_candidates
-
-		### rank shots ###
-
+		### evaluate shots ###
+		_rank_shot_candidates()
+		best_shot = shot_candidates.front()
+		DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
+		if best_shot.pocket:
+			DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
 
 	# take shot
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
-		emit_signal("queue_hit", force_mult * Vector2(1, 1).normalized())
-		return [false, Time.get_ticks_msec()/50.0, cue_ball.global_position]
+		if best_shot == null:
+			print("NO BEST SHOT, JUST DOING SMTH IDK MAN")
+			var random_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
+			emit_signal("queue_hit", force_mult * random_direction)
+		else:
+			var shot_direction = (best_shot.ball.global_position - cue_ball.global_position).normalized()
+			emit_signal("queue_hit", force_mult * shot_direction)
+		return [false, 0, cue_ball.global_position]
 
-	# TODO lerp queue into position
-	return [true, Time.get_ticks_msec()/50.0, cue_ball.global_position]
-	# return [visible_, rot, queue_pos]
+	# lerp queue into position
+	var final_angle = -best_shot.final_direction.angle_to(Vector2.RIGHT)
+	var thinking_progress = 1 - ai_thinking_timer.time_left / ai_thinking_time
+	return [
+		true,
+		lerp_angle(0, final_angle, thinking_progress),
+		cue_ball.global_position - best_shot.final_direction * 50  # TODO fix
+	]
 
 
-func _get_valid_target_balls():
-	var target_balls = get_tree().get_nodes_in_group("BallType" + str(ai_ball_type))
+func _get_final_direction(shot_candidate: ShotCandidate):
+	var cue_to_ball: Vector2 = shot_candidate.ball.global_position - cue_ball.global_position
+	return cue_to_ball.normalized()
+
+func _rank_shot_candidates():
+	for sc in shot_candidates:
+		var total_distance = cue_ball.global_position.distance_to(sc.ball.global_position)
+		if sc.pocket:
+			total_distance += sc.ball.global_position.distance_to(sc.pocket.global_position)
+
+		var total_angle = abs(sc.cut_angle) + abs(sc.pocket_angle)
+		sc.score = 1 / (total_distance + total_angle) # higher score is better
+		print("dist: ", total_distance, " angle: ", total_angle, " score: ", sc.score)
+	
+	shot_candidates.sort_custom(_compare_shot_candidates)
+
+func _compare_shot_candidates(sc_a: ShotCandidate, sc_b: ShotCandidate):
+	if sc_a.pocket != null and sc_b.pocket == null:
+		return true
+	if sc_a.pocket == null and sc_b.pocket != null:
+		return false
+	return sc_a.score > sc_b.score
+
+
+func _get_valid_target_balls() -> Array[Node]:
+	var target_balls := get_tree().get_nodes_in_group("BallType" + str(ai_ball_type))
 	var balls_full = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.FULL))
 	var balls_half = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.HALF))
 
