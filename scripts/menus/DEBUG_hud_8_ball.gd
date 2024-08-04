@@ -31,10 +31,10 @@ func _physics_process(_delta):
 	if not processing:
 		return
 
-	if manager.player_turn:
-		current_team.text = "Team 1"
+	if manager.current_player_id == 1:
+		current_team.text = "PLAYER"
 	else:
-		current_team.text = "Team 2"
+		current_team.text = "AI"
 	current_player.text = Globals.player_infos[manager.current_player_id].name
 	game_state.text = Enums.GameState.keys()[manager.game_state]
 
@@ -49,5 +49,5 @@ func _physics_process(_delta):
 	legal_pocketing.text = str(manager.legal_pocketing)
 	fouled.text = str(manager.has_fouled)
 	first_hit_legal.text = str(manager._get_first_hit_legality())
-	won.text = str(manager.has_won)
-	lost.text = str(manager.has_lost)
+	won.text = str(manager.has_player_won)
+	lost.text = str(manager.has_player_lost)

@@ -30,6 +30,10 @@ func _ready():
 		1: {name = "PLAYER", team = 1},
 		2: {name = "AI", team = 2},
 	}
+
+	if DEBUG_MODE:
+		get_tree().change_scene_to_file("res://scenes/EightBall.tscn")
+
 	main_menu.show()
 	main_menu_open_anim.play("anim")
 
