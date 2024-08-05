@@ -132,13 +132,15 @@ func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
 class ShotCandidate:
 	var ball: Ball  # the ball to hit
 	var pocket: Pocket = null  # the pocket the ball is supposed to enter
+	var cue_to_ball: Vector2
+	var ball_to_pocket: Vector2
 	var cut_angle: float  # angle between the path of the cue ball and the desired path of the target ball
 	var pocket_angle: float  # angle between the ideal pocket entry direction and the expected entry direction
 	var final_direction: Vector2  # direction to play the cue ball to achieve the necessary ball deflection
 	var score := -1.0  # how good the shot candidate is
 
-
-var ai_thinking_time = 2
+var ball_diameter = 19.5
+var ai_thinking_time = 0.75
 var shot_candidates: Array[ShotCandidate] = []
 var best_shot: ShotCandidate
 func _ai_mode() -> Array:
@@ -170,15 +172,22 @@ func _ai_mode() -> Array:
 				shot_candidate.ball = ball as Ball
 				if _has_line_of_sight(ball, pocket.ai_target, space_state):
 					shot_candidate.pocket = pocket
-					shot_candidate.cut_angle = cut_angle
-					shot_candidate.pocket_angle = pocket_angle
-					shot_candidate.final_direction = _get_final_direction(shot_candidate) # TODO
+					shot_candidate.cue_to_ball = cue_to_ball
+					shot_candidate.ball_to_pocket = ball_to_pocket
+					shot_candidate.final_direction = _get_final_direction(shot_candidate)
 				else:
-					shot_candidate.final_direction = _get_final_direction(shot_candidate) # TODO
+					shot_candidate.final_direction = _get_final_direction(shot_candidate)
 				shot_candidates.push_back(shot_candidate)
 		
-		if shot_candidates.size() == 0:
-			print("no shots found")
+		### evaluate shots ###
+		_rank_shot_candidates()
+
+		if shot_candidates.size() > 0:
+			best_shot = shot_candidates.front()
+		else:
+			best_shot = ShotCandidate.new()
+			best_shot.final_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
+
 
 		# visualize viable shots
 		for sc in shot_candidates:
@@ -186,12 +195,11 @@ func _ai_mode() -> Array:
 			if sc.pocket:
 				DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 2, ai_thinking_time)
 
-		### evaluate shots ###
-		_rank_shot_candidates()
-		best_shot = shot_candidates.front()
-		DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
-		if best_shot.pocket:
-			DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
+		# visualize best shot
+		if best_shot and best_shot.ball:
+			DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
+			if best_shot.pocket:
+				DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
 
 	# take shot
 	# this sucks and i'm sorry
@@ -201,8 +209,8 @@ func _ai_mode() -> Array:
 			var random_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
 			emit_signal("queue_hit", force_mult * random_direction)
 		else:
-			var shot_direction = (best_shot.ball.global_position - cue_ball.global_position).normalized()
-			emit_signal("queue_hit", force_mult * shot_direction)
+			# var shot_direction = (best_shot.ball.global_position - cue_ball.global_position).normalized()
+			emit_signal("queue_hit", force_mult * best_shot.final_direction)
 		return [false, 0, cue_ball.global_position]
 
 	var initial_direction = Vector2.RIGHT
@@ -215,16 +223,16 @@ func _ai_mode() -> Array:
 	]
 
 
-func _get_final_direction(shot_candidate: ShotCandidate):
-	var cue_to_ball: Vector2 = shot_candidate.ball.global_position - cue_ball.global_position
-	return cue_to_ball.normalized()
+func _get_final_direction(sc: ShotCandidate):
+	var final_target_position: Vector2 = sc.ball.global_position - sc.ball_to_pocket.normalized() * ball_diameter
+	var cue_to_target := final_target_position - cue_ball.global_position
+	return cue_to_target.normalized()
 
 func _rank_shot_candidates():
 	for sc in shot_candidates:
 		var total_distance = cue_ball.global_position.distance_to(sc.ball.global_position)
 		if sc.pocket:
 			total_distance += sc.ball.global_position.distance_to(sc.pocket.global_position)
-
 		var total_angle = abs(sc.cut_angle) + abs(sc.pocket_angle)
 		sc.score = 1 / (total_distance + total_angle) # higher score is better
 		print("dist: ", total_distance, " angle: ", total_angle, " score: ", sc.score)

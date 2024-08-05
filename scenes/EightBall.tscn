@@ -198,7 +198,7 @@ offset_bottom = 111.0
 
 [node name="PlayerTypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 1 Ball Type:"
+text = "Player Ball Type:"
 
 [node name="PlayerType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerTypeLabel"]
 layout_mode = 1
@@ -217,7 +217,7 @@ text = "aaaaaa"
 
 [node name="PlayerPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 1 Pocketed:"
+text = "Player Pocketed:"
 
 [node name="PlayerPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerPocketedLabel"]
 layout_mode = 1
@@ -236,7 +236,7 @@ text = "aaaaaa"
 
 [node name="PlayerEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 1 Eight Target:"
+text = "Player  8 Target:"
 
 [node name="PlayerEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/PlayerEightTargetLabel"]
 layout_mode = 1
@@ -258,7 +258,7 @@ layout_mode = 2
 
 [node name="AiTypeLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 2 Ball Type:"
+text = "AI Ball Type:"
 
 [node name="AiType" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiTypeLabel"]
 layout_mode = 1
@@ -275,7 +275,7 @@ text = "aaaaaa"
 
 [node name="AiPocketedLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 2 Pocketed:"
+text = "AI Pocketed:"
 
 [node name="AiPocketed" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiPocketedLabel"]
 layout_mode = 1
@@ -294,7 +294,7 @@ text = "aaaaaa"
 
 [node name="AiEightTargetLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo"]
 layout_mode = 2
-text = "Team 2 Eight Target:"
+text = "AI 8 Target:"
 
 [node name="AiEightTarget" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/GeneralInfo/AiEightTargetLabel"]
 layout_mode = 1
@@ -324,9 +324,9 @@ text = "First Hit:"
 
 [node name="FirstHit" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="LegalPocketingLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
@@ -335,9 +335,9 @@ text = "Legal Pocketing:"
 
 [node name="LegalPocketing" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LegalPocketingLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="FouledLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
@@ -346,9 +346,9 @@ text = "Fouled:"
 
 [node name="Fouled" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FouledLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="FirstHitLegalLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
@@ -357,9 +357,9 @@ text = "First Hit Legal:"
 
 [node name="FirstHitLegal" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/FirstHitLegalLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="WonLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
@@ -368,9 +368,9 @@ text = "Won:"
 
 [node name="Won" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/WonLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="LostLabel" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo"]
@@ -379,9 +379,9 @@ text = "Lost:"
 
 [node name="Lost" type="Label" parent="UI/DEBUG_Hud_8Ball/Inset/TurnInfo/LostLabel"]
 layout_mode = 0
-offset_left = 133.0
-offset_right = 260.0
-offset_bottom = 14.0
+offset_left = 146.0
+offset_right = 273.0
+offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="GameFinished" type="PanelContainer" parent="UI"]

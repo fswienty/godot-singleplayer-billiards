@@ -245,13 +245,13 @@ func _check_last_non_8_ball(pocket: Pocket):
 	var player_needs_8_target: bool = player_8_ball_target == Enums.PocketLocation.NONE
 	if player_all_pocketed and player_needs_8_target:
 		player_8_ball_target = table.get_opposite_pocket(pocket.location)
-		print("player_all_pocketed: ", player_all_pocketed and player_needs_8_target)
+		print("player_all_pocketed!")
 
 	var ai_all_pocketed: bool = ball_manager.check_all_pocketed(ai_ball_type)
 	var ai_needs_8_target: bool = ai_8_ball_target == Enums.PocketLocation.NONE
 	if ai_all_pocketed and ai_needs_8_target:
 		ai_8_ball_target = table.get_opposite_pocket(pocket.location)
-		print("ai_all_pocketed: ", ai_all_pocketed and ai_needs_8_target)
+		print("ai_all_pocketed!")
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):

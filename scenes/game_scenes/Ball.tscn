@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://wvhmr3o3ycg5"]
+[gd_scene load_steps=7 format=3 uid="uid://wvhmr3o3ycg5"]
 
 [ext_resource type="Texture2D" uid="uid://brn20lyg8c3aq" path="res://assets/images/balls/black_full_8.png" id="1"]
 [ext_resource type="Script" path="res://scripts/pool/ball.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="3_yx5cv"]
 
 [sub_resource type="PhysicsMaterial" id="3"]
 friction = 0.0
@@ -42,6 +43,8 @@ scale = Vector2(0.0859375, 0.0859375)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PocketDetector"]
 shape = SubResource("8")
+
+[node name="GlobalUi" parent="." instance=ExtResource("3_yx5cv")]
 
 [connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]
 [connection signal="area_entered" from="PocketDetector" to="." method="_on_PocketDetector_area_entered"]
