@@ -50,5 +50,4 @@ func _on_game_quit():
 	GlobalUi.hide_error()
 	main_menu_open_anim.play_backwards("anim")
 	await main_menu_open_anim.animation_finished
-	print("ayy")
 	get_tree().quit()

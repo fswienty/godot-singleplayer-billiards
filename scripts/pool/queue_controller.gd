@@ -10,7 +10,7 @@ signal queue_hit
 # @export var force_mult: float = 1000.0
 var distance_at_rest: float = 15.0
 var max_distance: float = 70.0
-var force_mult: float = 1000.0
+var force_mult: float = 1200.0
 
 var cue_ball: Ball
 
@@ -166,9 +166,9 @@ func _ai_mode() -> Array:
 				var ball_to_pocket: Vector2 = pocket.ai_target.global_position - ball.global_position
 				var cut_angle := rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
 				var pocket_angle := rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(cut_angle) > 50:
+				if abs(cut_angle) > 70:
 					continue
-				if abs(pocket_angle) > 40:
+				if abs(pocket_angle) > 45:
 					continue	
 				shot_candidate.ball = ball as Ball
 				if _has_line_of_sight(ball, pocket.ai_target, space_state):

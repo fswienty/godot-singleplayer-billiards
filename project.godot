@@ -76,8 +76,10 @@ console_toggle={
 
 [physics]
 
+2d/run_on_separate_thread=true
+common/physics_ticks_per_second=600
+2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=0
-common/enable_pause_aware_picking=true
 
 [rendering]
 
