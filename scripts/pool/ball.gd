@@ -29,7 +29,6 @@ func _physics_process(_delta):
 func _integrate_forces(_state):
 	rotation_degrees = 0
 
-
 func _set_texture():
 	$Sprite2D.texture = BallTextures.get_texture(number)
 
@@ -50,11 +49,11 @@ func _set_type():
 
 func _on_Ball_body_entered(body: Node):
 	if body.is_in_group("ball"):
-		var intensity = (current_velocity - linear_velocity).length()
+		var intensity = self.linear_velocity.length()
 		SoundManager.ball_hit(intensity)
 		emit_signal("ball_hit", type, body.type)
 	elif body.is_in_group("rail"):
-		var intensity = (current_velocity - linear_velocity).length()
+		var intensity = self.linear_velocity.length() * 5
 		SoundManager.rail_hit(intensity)
 	else:
 		print("Unhandled _on_Ball_body_entered() collision: ", body.name)

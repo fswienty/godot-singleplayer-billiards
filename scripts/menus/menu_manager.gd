@@ -33,6 +33,7 @@ func _ready():
 
 	if DEBUG_MODE:
 		get_tree().change_scene_to_file("res://scenes/EightBall.tscn")
+		return
 
 	main_menu.show()
 	main_menu_open_anim.play("anim")

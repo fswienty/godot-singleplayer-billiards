@@ -45,7 +45,6 @@ script = ExtResource("4")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Hud_8Ball" type="VBoxContainer" parent="UI"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -441,7 +440,6 @@ size_flags_vertical = 8
 text = "Back to Lobby"
 
 [node name="Background" parent="." instance=ExtResource("14")]
-visible = false
 
 [node name="Table" parent="." instance=ExtResource("3")]
 position = Vector2(512, 288)

@@ -50,16 +50,13 @@ func _ready():
 		debug_hud.initialize(self)
 	game_finished_panel.initialize()
 
-	# turn_number += 1  # to make ai go first
+	# turn_number += 1 # to make ai go first
 
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
 
 	game_state = Enums.GameState.QUEUE
-
-	if Globals.DEBUG_MODE:
-		game_state = Enums.GameState.BALL_IN_HAND
 
 
 func _physics_process(_delta):
@@ -103,13 +100,13 @@ func is_player_turn(turn_number_: int = -1) -> bool:
 
 
 func _on_queue_hit(impulse: Vector2):
-	print("_on_queue_hit", impulse)
 	ball_manager.cue_ball.impulse = impulse
 	game_state = Enums.GameState.ROLLING
 
 
 func _on_turn_ended(legal_play: bool):
 	turn_number += 1
+	turn_number += 2 # let ai play every turn
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()

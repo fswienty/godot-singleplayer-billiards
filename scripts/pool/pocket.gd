@@ -36,7 +36,6 @@ func _ready():
 	# DebugDraw2d.cube_filled(ai_target.global_position, 5, Color.WHITE, 999999)
 
 	target_direction = (self.global_position - ai_target.global_position).normalized()
-	print(ai_target.global_position)
 
 func indicate():
 	indicator_anim.play("indicate")

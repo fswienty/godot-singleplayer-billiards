@@ -139,8 +139,9 @@ class ShotCandidate:
 	var final_direction: Vector2  # direction to play the cue ball to achieve the necessary ball deflection
 	var score := -1.0  # how good the shot candidate is
 
-var ball_diameter = 19.5
-var ai_thinking_time = 0.75
+
+var ball_diameter := 20  #16.62814  # higher -> ball goes shorter
+var ai_thinking_time := 0.5
 var shot_candidates: Array[ShotCandidate] = []
 var best_shot: ShotCandidate
 func _ai_mode() -> Array:
@@ -165,9 +166,9 @@ func _ai_mode() -> Array:
 				var ball_to_pocket: Vector2 = pocket.ai_target.global_position - ball.global_position
 				var cut_angle := rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
 				var pocket_angle := rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(cut_angle) > 80:
+				if abs(cut_angle) > 50:
 					continue
-				if abs(pocket_angle) > 50:
+				if abs(pocket_angle) > 40:
 					continue	
 				shot_candidate.ball = ball as Ball
 				if _has_line_of_sight(ball, pocket.ai_target, space_state):

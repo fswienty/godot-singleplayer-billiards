@@ -24,6 +24,21 @@ func place_balls(ball_holder_: Node2D):
 	new_ball.position = table.get_head_spot()
 	_add_ball_to_scene(new_ball)
 
+	# DEBUG BALL PLACEMENT
+	# new_ball = ball_scn.instantiate()
+	# new_ball.number = 1
+	# new_ball.position = table.get_head_spot() + Vector2(150, 50)
+	# _add_ball_to_scene(new_ball)
+	# new_ball = ball_scn.instantiate()
+	# new_ball.number = 1
+	# new_ball.position = table.get_head_spot() + Vector2(10, -50)
+	# _add_ball_to_scene(new_ball)
+	# new_ball = ball_scn.instantiate()
+	# new_ball.number = 1
+	# new_ball.position = table.get_head_spot() + Vector2(350, 50)
+	# _add_ball_to_scene(new_ball)
+	# return
+
 	# add 8 ball (position 5)
 	_place_in_rack(8, "5")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=12 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://wqfkom15nwup" path="res://assets/images/ui/arrow-big-right.svg" id="3"]
@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dtektw0lthuhh" path="res://assets/images/ui/audioOn.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://db6bmlrrg4whd" path="res://assets/images/ui/audioOff.png" id="10"]
 [ext_resource type="FontFile" uid="uid://mtlexfimdp2g" path="res://assets/fonts/title_font.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="11_o5u3k"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("5")
-DEBUG_HUD = true
 
 [node name="Background" parent="." instance=ExtResource("6")]
 
@@ -117,5 +117,8 @@ icon = ExtResource("9")
 script = ExtResource("8")
 sound_on_icon = ExtResource("9")
 sound_off_icon = ExtResource("10")
+
+[node name="GlobalUi" parent="." instance=ExtResource("11_o5u3k")]
+visible = false
 
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]

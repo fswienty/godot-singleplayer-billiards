@@ -1,12 +1,14 @@
 soft shadows for balls and queue?
 credit tabler icons
 fix pocketed balls display
+accept 8 ball in any pocket
+
+custom physics solver
+    _integrate_forces?
 
 add ai in queue controller
-    allow less cut angle when distance is smaller
+    disallow large cut angles when distance is smaller
     needs to handle 8ball
-    maybe
-        should be able to handle break
 
 add ai in ball manager for ball in hand
 
