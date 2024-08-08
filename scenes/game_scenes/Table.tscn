@@ -22,14 +22,14 @@ region_rect = Rect2(165, 51, 227, 30)
 [node name="Pockets" type="Sprite2D" parent="Graphics"]
 z_index = 1
 z_as_relative = false
-scale = Vector2(0.278, 0.278)
+scale = Vector2(0.556, 0.556)
 texture = ExtResource("5")
 region_rect = Rect2(165, 51, 227, 30)
 
 [node name="Border" type="Sprite2D" parent="Graphics"]
 z_index = 10
 z_as_relative = false
-scale = Vector2(0.277778, 0.277778)
+scale = Vector2(0.556, 0.556)
 texture = ExtResource("4")
 
 [node name="Border" type="Sprite2D" parent="Graphics/Border"]

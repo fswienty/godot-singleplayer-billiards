@@ -498,8 +498,8 @@ antialiased = true
 [node name="QueueSprite" type="Sprite2D" parent="QueueController"]
 z_index = 30
 z_as_relative = false
-position = Vector2(181, -223)
-scale = Vector2(0.35, 0.45)
+position = Vector2(660, -216.996)
+scale = Vector2(0.7, 0.9)
 texture = ExtResource("12")
 offset = Vector2(-512, 0)
 
