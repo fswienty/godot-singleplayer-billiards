@@ -34,17 +34,22 @@ func check_all_pocketed(type) -> bool:
 func hit_cue_ball(impulse: Vector2):
 	cue_ball.impulse = impulse
 
+func reset_cue_ball():
+	cue_ball.linear_velocity = Vector2.ZERO
+	var table = ball_placer.table
+	cue_ball.global_position = table.global_position + table.get_head_spot()
+	return true
 
-func update_ball_in_hand(player_turn: bool) -> bool:
-	# print("BALL IN HAND" + (" PLAYER" if player_turn else " AI"))
+# func update_ball_in_hand(player_turn: bool) -> bool:
+# 	# print("BALL IN HAND" + (" PLAYER" if player_turn else " AI"))
 
-	if cue_ball.global_position != Globals.cue_ball_inactive_pos:
-		cue_ball.global_position = Globals.cue_ball_inactive_pos
-	var res = ball_in_hand.run()
-	if res.placed:
-		cue_ball.global_position = res.pos
-		return true
-	return false
+# 	if cue_ball.global_position != Globals.cue_ball_inactive_pos:
+# 		cue_ball.global_position = Globals.cue_ball_inactive_pos
+# 	var res = ball_in_hand.run()
+# 	if res.placed:
+# 		cue_ball.global_position = res.pos
+# 		return true
+# 	return false
 
 
 func remove(ball_: Ball):

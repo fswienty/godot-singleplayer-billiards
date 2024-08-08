@@ -8,15 +8,12 @@ signal queue_hit
 # @export var distance_at_rest: float = 15.0
 # @export var max_distance: float = 70.0
 # @export var force_mult: float = 1000.0
-var distance_at_rest: float = 15.0
-var max_distance: float = 70.0
+var distance_at_rest: float = 50.0
+var max_distance: float = 120.0
 var force_mult: float = 1200.0
 
 var cue_ball: Ball
 
-# vars for direct control scheme
-var dragged_distance: float = 0.0
-var start_hold_distance: float = 0.0
 
 # vars for mouse wheel mode
 var intensity: float = 0.0
@@ -65,10 +62,12 @@ func run(player_turn: bool):
 	line.global_position = cue_ball.global_position
 
 
+# vars for direct control scheme
+var dragged_distance: float = 0.0
+var start_hold_distance: float = 0.0
 func _drag_mode() -> Array:
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var ball_pos: Vector2 = cue_ball.global_position
-	var ball_to_mouse: Vector2 = mouse_pos - ball_pos
+	var ball_to_mouse: Vector2 = mouse_pos - cue_ball.global_position
 
 	# handle dragging while lmb pressed
 	if Input.is_action_just_pressed("lmb"):
@@ -87,9 +86,9 @@ func _drag_mode() -> Array:
 			emit_signal("queue_hit", impulse)
 			return [false, 0, Vector2.ZERO]
 
-	var queue_pos = ball_pos + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
-	var rot = ball_to_mouse.angle()
-	return [true, rot + PI, queue_pos]
+	var queue_pos = cue_ball.global_position + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
+	var rot = ball_to_mouse.angle() + PI
+	return [true, rot, queue_pos]
 
 
 func _mouse_wheel_mode() -> Array:
@@ -117,9 +116,48 @@ func _mouse_wheel_mode() -> Array:
 	return [false, rot, queue_pos]
 
 
+func _input(event):
+	# if event is InputEventMouseButton:
+	# 	if event.button_index == BUTTON_LEFT:
+	# 		if event.pressed:
+	# 			Input.action_press("lmb")
+	# 			initial_pos = event.position
+	# 		else:
+	# 			Input.action_release("lmb")
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			Input.action_press("lmb")
+			initial_pos = event.position
+		else:
+			Input.action_release("lmb")
+
+var drag_vector := Vector2.LEFT
+var initial_pos: Vector2
 func _touch_mode() -> Array:
-	print("TODO TOUCH MODE")
-	return _drag_mode() 
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+
+	# handle dragging while lmb pressed
+	if Input.is_action_just_pressed("lmb"):
+		initial_pos = mouse_pos
+	if Input.is_action_pressed("lmb"):
+		drag_vector = mouse_pos - initial_pos
+		dragged_distance = clamp(drag_vector.length(), 0, max_distance)
+	if Input.is_action_just_released("lmb"):
+		var impulse: Vector2 = (
+			force_mult
+			* (dragged_distance / max_distance)
+			* -drag_vector.normalized()
+		)
+		if dragged_distance < distance_at_rest:
+			impulse = Vector2.ZERO
+		dragged_distance = 0
+		if impulse != Vector2.ZERO:
+			emit_signal("queue_hit", impulse)
+			return [false, 0, Vector2.ZERO]
+
+	var queue_pos = cue_ball.global_position + max(distance_at_rest, dragged_distance) * drag_vector.normalized()
+	var rot = drag_vector.angle() + PI
+	return [true, rot, queue_pos]
 
 
 func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
@@ -140,10 +178,11 @@ class ShotCandidate:
 	var score := -1.0  # how good the shot candidate is
 
 
-var ball_diameter := 20  #16.62814  # higher -> ball goes shorter
-var ai_thinking_time := 0.5
+var ball_diameter := 20.0
+var ai_thinking_time = 0.5
 var shot_candidates: Array[ShotCandidate] = []
 var best_shot: ShotCandidate
+var initial_queue_direction: Vector2
 func _ai_mode() -> Array:
 	ai_thinking_timer.wait_time = ai_thinking_time
 
@@ -162,20 +201,17 @@ func _ai_mode() -> Array:
 			for pocket in table.pockets:
 				# only consider pockets that lie ahead
 				var shot_candidate = ShotCandidate.new()
+				shot_candidate.ball = ball as Ball
 				var cue_to_ball: Vector2 = ball.global_position - cue_ball.global_position
 				var ball_to_pocket: Vector2 = pocket.ai_target.global_position - ball.global_position
 				var cut_angle := rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
 				var pocket_angle := rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(cut_angle) > 70:
-					continue
-				if abs(pocket_angle) > 45:
-					continue	
-				shot_candidate.ball = ball as Ball
-				if _has_line_of_sight(ball, pocket.ai_target, space_state):
-					shot_candidate.pocket = pocket
-					shot_candidate.cue_to_ball = cue_to_ball
-					shot_candidate.ball_to_pocket = ball_to_pocket
-					shot_candidate.final_direction = _get_final_direction(shot_candidate)
+				if abs(cut_angle) < 60 and abs(pocket_angle) < 45:
+					if _has_line_of_sight(ball, pocket.ai_target, space_state):
+						shot_candidate.pocket = pocket
+						shot_candidate.cue_to_ball = cue_to_ball
+						shot_candidate.ball_to_pocket = ball_to_pocket
+						shot_candidate.final_direction = _get_final_direction(shot_candidate)
 				else:
 					shot_candidate.final_direction = _get_final_direction(shot_candidate)
 				shot_candidates.push_back(shot_candidate)
@@ -186,9 +222,12 @@ func _ai_mode() -> Array:
 		if shot_candidates.size() > 0:
 			best_shot = shot_candidates.front()
 		else:
+			# Alternative: do magic to consider more complicated shots
 			best_shot = ShotCandidate.new()
 			best_shot.final_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
 
+		initial_queue_direction = best_shot.final_direction.rotated(2 * (2*randf()-1))
+		# initial_queue_direction = Vector2.RIGHT
 
 		# visualize viable shots
 		for sc in shot_candidates:
@@ -206,20 +245,17 @@ func _ai_mode() -> Array:
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
 		if best_shot == null:
-			print("NO BEST SHOT, JUST DOING SMTH IDK MAN")
 			var random_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
 			emit_signal("queue_hit", force_mult * random_direction)
 		else:
-			# var shot_direction = (best_shot.ball.global_position - cue_ball.global_position).normalized()
 			emit_signal("queue_hit", force_mult * best_shot.final_direction)
 		return [false, 0, cue_ball.global_position]
 
-	var initial_direction = Vector2.RIGHT
 	var thinking_progress = 1 - ai_thinking_timer.time_left / ai_thinking_time
-	var queue_offset_direction = initial_direction.slerp(best_shot.final_direction, thinking_progress)
+	var queue_offset_direction = initial_queue_direction.slerp(best_shot.final_direction, thinking_progress)
 	return [
 		true,
-		-queue_offset_direction.angle_to(initial_direction),
+		-queue_offset_direction.angle_to(Vector2.RIGHT),
 		cue_ball.global_position - queue_offset_direction * 50
 	]
 
@@ -236,7 +272,6 @@ func _rank_shot_candidates():
 			total_distance += sc.ball.global_position.distance_to(sc.pocket.global_position)
 		var total_angle = abs(sc.cut_angle) + abs(sc.pocket_angle)
 		sc.score = 1 / (total_distance + total_angle) # higher score is better
-		print("dist: ", total_distance, " angle: ", total_angle, " score: ", sc.score)
 	
 	shot_candidates.sort_custom(_compare_shot_candidates)
 
@@ -252,9 +287,12 @@ func _get_valid_target_balls() -> Array[Node]:
 	var target_balls := get_tree().get_nodes_in_group("BallType" + str(ai_ball_type))
 	var balls_full = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.FULL))
 	var balls_half = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.HALF))
+	var balls_eight = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.EIGHT))
 
 	# TODO handle end of game where 8 ball is target
 	match ai_ball_type:
+		Enums.BallType.EIGHT:
+			target_balls = balls_eight
 		Enums.BallType.FULL:
 			target_balls = balls_full
 		Enums.BallType.HALF:

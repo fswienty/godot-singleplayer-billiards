@@ -67,15 +67,16 @@ func _physics_process(_delta):
 			if ball_manager.are_balls_still():
 				var legal_play = _get_first_hit_legality() && !has_fouled
 				var go_again = legal_pocketing && legal_play
-				_on_balls_stopped(has_player_won, has_player_lost, legal_play)
+				_on_balls_stopped(legal_play)
 				if go_again:
-					var indicate_target = player_8_ball_target if is_player_turn() else ai_8_ball_target
-					table.indicate_pocket(indicate_target)
+					# var indicate_target = player_8_ball_target if is_player_turn() else ai_8_ball_target
+					# table.indicate_pocket(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
 					_on_turn_ended(legal_play)
 		Enums.GameState.BALL_IN_HAND:
-			var placed: bool = ball_manager.update_ball_in_hand(current_player_id == 1)
+			var placed: bool = ball_manager.reset_cue_ball()
+			# var placed: bool = ball_manager.update_ball_in_hand(current_player_id == 1)
 			if placed:
 				game_state = Enums.GameState.QUEUE
 
@@ -106,7 +107,7 @@ func _on_queue_hit(impulse: Vector2):
 
 func _on_turn_ended(legal_play: bool):
 	turn_number += 1
-	turn_number += 2 # let ai play every turn
+	# turn_number += 2 # let ai play every turn
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
@@ -116,13 +117,14 @@ func _on_turn_ended(legal_play: bool):
 		game_state = Enums.GameState.BALL_IN_HAND
 
 
-func _on_balls_stopped(has_player_won_: bool, has_player_lost_: bool, legal_play: bool):
+func _on_balls_stopped(legal_play: bool):
 	# check for game over
-	if has_player_won_ and legal_play:
-		game_finished_panel.display(1 if is_player_turn() else 2)
+	print("balls stopped ", "has_player_won: ", has_player_won, " has_player_lost: ", has_player_lost, " legal_play: ", legal_play)
+	if has_player_won and legal_play:
+		game_finished_panel.display(1)
 		return
-	if (has_player_won_ and not legal_play) or has_player_lost_:
-		game_finished_panel.display(2 if is_player_turn() else 1)
+	if (has_player_won and not legal_play) or has_player_lost:
+		game_finished_panel.display(2)
 		return
 
 	# reset for next turn
@@ -192,17 +194,23 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 	_check_last_non_8_ball(pocket)
 
 
-func _handle_8_ball_pocketed(pocket: Pocket):
+func _handle_8_ball_pocketed(_pocket: Pocket):
 	if is_player_turn():
-		if pocket.location == player_8_ball_target:
-			has_player_won = true
-		else:
-			has_player_lost = true
+		has_player_won = player_ball_type == Enums.BallType.EIGHT
+		has_player_lost = player_ball_type != Enums.BallType.EIGHT
 	else:
-		if pocket.location == ai_8_ball_target:
-			has_player_won = true
-		else:
-			has_player_lost = true
+		has_player_won = ai_ball_type != Enums.BallType.EIGHT
+		has_player_lost = ai_ball_type == Enums.BallType.EIGHT
+	# if is_player_turn():	
+	# 	if pocket.location == player_8_ball_target:
+	# 		has_player_won = true
+	# 	else:
+	# 		has_player_lost = true
+	# else:
+	# 	if pocket.location == ai_8_ball_target:
+	# 		has_player_won = true
+	# 	else:
+	# 		has_player_lost = true
 
 
 func _assign_ball_types(ball: Ball):
@@ -242,12 +250,15 @@ func _check_last_non_8_ball(pocket: Pocket):
 	var player_needs_8_target: bool = player_8_ball_target == Enums.PocketLocation.NONE
 	if player_all_pocketed and player_needs_8_target:
 		player_8_ball_target = table.get_opposite_pocket(pocket.location)
+		player_ball_type = Enums.BallType.EIGHT
 		print("player_all_pocketed!")
 
 	var ai_all_pocketed: bool = ball_manager.check_all_pocketed(ai_ball_type)
 	var ai_needs_8_target: bool = ai_8_ball_target == Enums.PocketLocation.NONE
 	if ai_all_pocketed and ai_needs_8_target:
 		ai_8_ball_target = table.get_opposite_pocket(pocket.location)
+		ai_ball_type = Enums.BallType.EIGHT
+		queue_controller.ai_ball_type = ai_ball_type
 		print("ai_all_pocketed!")
 
 

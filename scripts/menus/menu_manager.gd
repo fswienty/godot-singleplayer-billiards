@@ -24,7 +24,8 @@ func _ready():
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		Globals.queue_mode = Enums.QueueControl.TOUCH
 	else:
-		Globals.queue_mode = Enums.QueueControl.DRAG
+		# Globals.queue_mode = Enums.QueueControl.DRAG
+		Globals.queue_mode = Enums.QueueControl.TOUCH
 
 	Globals.player_infos = {
 		1: {name = "PLAYER", team = 1},

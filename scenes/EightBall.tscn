@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cprv64x6srfvm" path="res://assets/images/balls/cue_ball.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://wvhmr3o3ycg5" path="res://scenes/game_scenes/Ball.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://scenes/game_scenes/Table.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b1qjio4tp8gh1" path="res://scenes/game_scenes/Table.tscn" id="3"]
 [ext_resource type="Script" path="res://scripts/pool/game_manager_8_ball.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/pool/ball_in_hand.gd" id="7"]
 [ext_resource type="Script" path="res://scripts/pool/ball_placer.gd" id="8"]

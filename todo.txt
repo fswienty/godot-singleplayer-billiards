@@ -1,16 +1,9 @@
-soft shadows for balls and queue?
 credit tabler icons
 fix pocketed balls display
-accept 8 ball in any pocket
-
-custom physics solver
-    _integrate_forces?
+update game finished panel
 
 add ai in queue controller
     disallow large cut angles when distance is smaller
-    needs to handle 8ball
-
-add ai in ball manager for ball in hand
 
 chaos billiard:
     just do next turn immediately lol
