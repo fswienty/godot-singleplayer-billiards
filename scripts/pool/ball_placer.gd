@@ -2,8 +2,6 @@ extends Node
 
 signal ball_placed
 
-const ball_radius = 10
-
 var ball_holder: Node2D
 var new_ball: Ball
 var balls_to_place = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
@@ -95,23 +93,23 @@ func _get_positions() -> Dictionary:
 	#   4 5 6
 	#    ...
 
-	var row_dist: float = sqrt(3) * ball_radius
+	var row_dist: float = sqrt(3) * Globals.ball_radius
 	var positions_: Dictionary = {}
 	positions_["1"] = Vector2(0, 0)
-	positions_["2"] = Vector2(1 * row_dist, -1 * ball_radius)
-	positions_["3"] = Vector2(1 * row_dist, 1 * ball_radius)
-	positions_["4"] = Vector2(2 * row_dist, -2 * ball_radius)
-	positions_["5"] = Vector2(2 * row_dist, 0 * ball_radius)
-	positions_["6"] = Vector2(2 * row_dist, 2 * ball_radius)
-	positions_["7"] = Vector2(3 * row_dist, -3 * ball_radius)
-	positions_["8"] = Vector2(3 * row_dist, -1 * ball_radius)
-	positions_["9"] = Vector2(3 * row_dist, 1 * ball_radius)
-	positions_["10"] = Vector2(3 * row_dist, 3 * ball_radius)
-	positions_["11"] = Vector2(4 * row_dist, -4 * ball_radius)
-	positions_["12"] = Vector2(4 * row_dist, -2 * ball_radius)
-	positions_["13"] = Vector2(4 * row_dist, 0 * ball_radius)
-	positions_["14"] = Vector2(4 * row_dist, 2 * ball_radius)
-	positions_["15"] = Vector2(4 * row_dist, 4 * ball_radius)
+	positions_["2"] = Vector2(1 * row_dist, -1 * Globals.ball_radius)
+	positions_["3"] = Vector2(1 * row_dist, 1 * Globals.ball_radius)
+	positions_["4"] = Vector2(2 * row_dist, -2 * Globals.ball_radius)
+	positions_["5"] = Vector2(2 * row_dist, 0 * Globals.ball_radius)
+	positions_["6"] = Vector2(2 * row_dist, 2 * Globals.ball_radius)
+	positions_["7"] = Vector2(3 * row_dist, -3 * Globals.ball_radius)
+	positions_["8"] = Vector2(3 * row_dist, -1 * Globals.ball_radius)
+	positions_["9"] = Vector2(3 * row_dist, 1 * Globals.ball_radius)
+	positions_["10"] = Vector2(3 * row_dist, 3 * Globals.ball_radius)
+	positions_["11"] = Vector2(4 * row_dist, -4 * Globals.ball_radius)
+	positions_["12"] = Vector2(4 * row_dist, -2 * Globals.ball_radius)
+	positions_["13"] = Vector2(4 * row_dist, 0 * Globals.ball_radius)
+	positions_["14"] = Vector2(4 * row_dist, 2 * Globals.ball_radius)
+	positions_["15"] = Vector2(4 * row_dist, 4 * Globals.ball_radius)
 	return positions_
 
 

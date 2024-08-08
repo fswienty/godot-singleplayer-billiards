@@ -19,3 +19,6 @@ var queue_mode = Enums.QueueControl.DRAG
 var DEBUG_MODE: bool = false
 var DEBUG_HUD: bool = false
 var DEBUG_CONSOLE: bool = false
+
+var global_rotation = 0
+const ball_radius = 12

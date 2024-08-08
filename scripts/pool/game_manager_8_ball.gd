@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name GameManager8Ball
 
 var game_state = Enums.GameState.NONE
@@ -29,6 +29,9 @@ var ai_pocketed_balls: Array = []
 @onready var debug_hud = $UI/DEBUG_Hud_8Ball
 @onready var game_finished_panel = $UI/GameFinished
 
+
+func _init():
+	Globals.global_rotation = self.global_rotation
 
 func _ready():
 	randomize()

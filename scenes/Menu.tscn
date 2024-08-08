@@ -45,63 +45,51 @@ text = "Pool Alone"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="PlayQuitVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
+[node name="PlayQuitVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/PlayQuitVBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4")
 text = "Play"
 
-[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/PlayQuitVBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("4")
-text = "Quit"
-
-[node name="OpponentVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
+[node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4")
 icon = ExtResource("7")
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer/PanelContainer"]
+[node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Normal"
 horizontal_alignment = 1
 
-[node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/HBoxContainer/OpponentVBoxContainer/HBoxContainer"]
+[node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4")
 icon = ExtResource("3")
 icon_alignment = 1
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4")
+text = "Quit"
 
 [node name="MuteButton" type="Button" parent="."]
 anchors_preset = 3
@@ -109,10 +97,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -108.0
-offset_top = -87.0
-offset_right = -18.0
-offset_bottom = -17.0
+offset_left = -111.0
+offset_top = -95.0
+offset_right = -21.0
+offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
 icon = ExtResource("9")

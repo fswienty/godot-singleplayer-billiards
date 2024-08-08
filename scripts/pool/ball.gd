@@ -31,6 +31,7 @@ func _integrate_forces(_state):
 
 func _set_texture():
 	$Sprite2D.texture = BallTextures.get_texture(number)
+	$Sprite2D.rotation = -Globals.global_rotation
 
 
 func _set_type():

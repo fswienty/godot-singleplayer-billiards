@@ -8,7 +8,7 @@ signal queue_hit
 # @export var distance_at_rest: float = 15.0
 # @export var max_distance: float = 70.0
 # @export var force_mult: float = 1000.0
-var distance_at_rest: float = 50.0
+var distance_at_rest: float = 30.0
 var max_distance: float = 120.0
 var force_mult: float = 1200.0
 
@@ -55,10 +55,10 @@ func run(player_turn: bool):
 	# set visibility
 	self.visible = state[0]
 	# set queue sprite
-	queue.rotation = state[1]
+	queue.rotation = state[1] - Globals.global_rotation
 	queue.global_position = state[2]
 	# set line
-	line.rotation = state[1] + PI / 2
+	line.rotation = state[1] + PI / 2 - Globals.global_rotation
 	line.global_position = cue_ball.global_position
 
 
@@ -142,6 +142,8 @@ func _touch_mode() -> Array:
 	if Input.is_action_pressed("lmb"):
 		drag_vector = mouse_pos - initial_pos
 		dragged_distance = clamp(drag_vector.length(), 0, max_distance)
+		# DebugDraw2d.circle(initial_pos, radius = 10, resolution = 16, color = Color(1, 0, 1), line_width = 1, duration = 0.16)
+		DebugDraw2d.circle(initial_pos, distance_at_rest, 64, Color(1, 1, 1, 0.005), 3, 0.1)
 	if Input.is_action_just_released("lmb"):
 		var impulse: Vector2 = (
 			force_mult
@@ -157,7 +159,12 @@ func _touch_mode() -> Array:
 
 	var queue_pos = cue_ball.global_position + max(distance_at_rest, dragged_distance) * drag_vector.normalized()
 	var rot = drag_vector.angle() + PI
-	return [true, rot, queue_pos]
+
+	var show_queue = true
+	if dragged_distance < distance_at_rest:
+		show_queue = false
+	
+	return [show_queue, rot, queue_pos]
 
 
 func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
@@ -178,7 +185,7 @@ class ShotCandidate:
 	var score := -1.0  # how good the shot candidate is
 
 
-var ball_diameter := 20.0
+var ball_diameter := 2 * Globals.ball_radius
 var ai_thinking_time = 0.5
 var shot_candidates: Array[ShotCandidate] = []
 var best_shot: ShotCandidate
