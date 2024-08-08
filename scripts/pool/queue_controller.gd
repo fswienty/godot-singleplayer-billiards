@@ -142,8 +142,6 @@ func _touch_mode() -> Array:
 	if Input.is_action_pressed("lmb"):
 		drag_vector = mouse_pos - initial_pos
 		dragged_distance = clamp(drag_vector.length(), 0, max_distance)
-		# DebugDraw2d.circle(initial_pos, radius = 10, resolution = 16, color = Color(1, 0, 1), line_width = 1, duration = 0.16)
-		DebugDraw2d.circle(initial_pos, distance_at_rest, 64, Color(1, 1, 1, 0.005), 3, 0.1)
 	if Input.is_action_just_released("lmb"):
 		var impulse: Vector2 = (
 			force_mult
@@ -159,6 +157,13 @@ func _touch_mode() -> Array:
 
 	var queue_pos = cue_ball.global_position + max(distance_at_rest, dragged_distance) * drag_vector.normalized()
 	var rot = drag_vector.angle() + PI
+
+	if Input.is_action_pressed("lmb"):
+
+		DebugDraw2d.circle(initial_pos, distance_at_rest, 64, Color(1, 1, 1, 0.005), 3, 0.1)
+		if dragged_distance > distance_at_rest:
+			var on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * distance_at_rest
+			DebugDraw2d.line(on_circle, mouse_pos, Color(1, 1, 1, 0.005), 3, 0.1)
 
 	var show_queue = true
 	if dragged_distance < distance_at_rest:
