@@ -2,6 +2,9 @@ credit tabler icons
 fix pocketed balls display
 update game finished panel
 
+fix ball in hand on turned table
+disable buttons on transition
+
 add ai in queue controller
     disallow large cut angles when distance is smaller
 

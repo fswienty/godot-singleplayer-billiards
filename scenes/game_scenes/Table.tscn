@@ -15,7 +15,7 @@ script = ExtResource("2")
 
 [node name="PlayingField" type="Sprite2D" parent="Graphics"]
 z_as_relative = false
-scale = Vector2(0.527472, 0.496094)
+scale = Vector2(1.862, 1.752)
 texture = ExtResource("3")
 region_rect = Rect2(165, 51, 227, 30)
 
