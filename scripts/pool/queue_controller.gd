@@ -241,19 +241,18 @@ func _ai_mode() -> Array:
 			best_shot.final_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
 
 		initial_queue_direction = best_shot.final_direction.rotated(2 * (2*randf()-1))
-		# initial_queue_direction = Vector2.RIGHT
 
-		# visualize viable shots
-		for sc in shot_candidates:
-			DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 2, ai_thinking_time)
-			if sc.pocket:
-				DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 2, ai_thinking_time)
+		# # visualize viable shots
+		# for sc in shot_candidates:
+		# 	DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 2, ai_thinking_time)
+		# 	if sc.pocket:
+		# 		DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 2, ai_thinking_time)
 
-		# visualize best shot
-		if best_shot and best_shot.ball:
-			DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
-			if best_shot.pocket:
-				DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
+		# # visualize best shot
+		# if best_shot and best_shot.ball:
+		# 	DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
+		# 	if best_shot.pocket:
+		# 		DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
 
 	# take shot
 	# this sucks and i'm sorry
@@ -267,6 +266,7 @@ func _ai_mode() -> Array:
 
 	var thinking_progress = 1 - ai_thinking_timer.time_left / ai_thinking_time
 	var queue_offset_direction = initial_queue_direction.slerp(best_shot.final_direction, thinking_progress)
+	
 	return [
 		true,
 		-queue_offset_direction.angle_to(Vector2.RIGHT),
@@ -279,6 +279,7 @@ func _get_final_direction(sc: ShotCandidate):
 	var cue_to_target := final_target_position - cue_ball.global_position
 	return cue_to_target.normalized()
 
+
 func _rank_shot_candidates():
 	for sc in shot_candidates:
 		var total_distance = cue_ball.global_position.distance_to(sc.ball.global_position)
@@ -288,6 +289,7 @@ func _rank_shot_candidates():
 		sc.score = 1 / (total_distance + total_angle) # higher score is better
 	
 	shot_candidates.sort_custom(_compare_shot_candidates)
+
 
 func _compare_shot_candidates(sc_a: ShotCandidate, sc_b: ShotCandidate):
 	if sc_a.pocket != null and sc_b.pocket == null:

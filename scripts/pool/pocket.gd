@@ -29,6 +29,6 @@ func _ready():
 	ai_target = Node2D.new()
 	add_child(ai_target)
 	ai_target.global_position = self.global_position + ai_target_offset.rotated(Globals.global_rotation)
-	DebugDraw2d.cube_filled(ai_target.global_position, 5, Color.WHITE, 999999)
+	# DebugDraw2d.cube_filled(ai_target.global_position, 5, Color.WHITE, 999999)
 
 	target_direction = (self.global_position - ai_target.global_position).normalized()

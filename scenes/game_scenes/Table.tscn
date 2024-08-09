@@ -44,6 +44,7 @@ mesh = SubResource("ArrayMesh_pcr7q")
 texture = ExtResource("2_s4c6v")
 
 [node name="Border" type="Node2D" parent="Graphics"]
+z_index = 10
 scale = Vector2(0.556, 0.556)
 
 [node name="Sprite2D" type="MeshInstance2D" parent="Graphics/Border"]
