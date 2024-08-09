@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=52 format=3 uid="uid://yhb7lik07y3j"]
+[gd_resource type="VisualShader" load_steps=50 format=3 uid="uid://yhb7lik07y3j"]
 
 [ext_resource type="Texture2D" uid="uid://byad6vd7dmmmm" path="res://assets/images/balls/background.png" id="1"]
 
@@ -67,16 +67,8 @@ constant = 0.174
 [sub_resource type="VisualShaderNodeVectorFunc" id="30"]
 function = 26
 
-[sub_resource type="VisualShaderNodeFloatOp" id="33"]
-default_input_values = [0, 0.0, 1, 9.0]
-operator = 2
-
-[sub_resource type="VisualShaderNodeFloatOp" id="34"]
-default_input_values = [0, 0.0, 1, 9.0]
-operator = 2
-
 [sub_resource type="VisualShaderNodeFloatConstant" id="35"]
-constant = 7.0
+constant = 10.0
 
 [sub_resource type="VisualShaderNodeInput" id="36"]
 output_port_for_preview = 0
@@ -184,7 +176,7 @@ void fragment() {
 
 
 // FloatConstant:47
-	float n_out47p0 = 7.000000;
+	float n_out47p0 = 10.000000;
 
 
 // VectorCompose:9
@@ -437,7 +429,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-655.948, -349.353)
 mode = 1
 modes/blend = 5
 flags/unshaded = true
@@ -491,12 +482,8 @@ nodes/fragment/41/node = SubResource("29")
 nodes/fragment/41/position = Vector2(-280, 820)
 nodes/fragment/42/node = SubResource("30")
 nodes/fragment/42/position = Vector2(-460, 540)
-nodes/fragment/45/node = SubResource("33")
-nodes/fragment/45/position = Vector2(-500, -260)
-nodes/fragment/46/node = SubResource("34")
-nodes/fragment/46/position = Vector2(-500, -140)
 nodes/fragment/47/node = SubResource("35")
-nodes/fragment/47/position = Vector2(-680, -180)
+nodes/fragment/47/position = Vector2(-540, -180)
 nodes/fragment/48/node = SubResource("36")
 nodes/fragment/48/position = Vector2(-280, 1320)
 nodes/fragment/51/node = SubResource("38")
@@ -543,4 +530,4 @@ nodes/fragment/81/node = SubResource("67")
 nodes/fragment/81/position = Vector2(1500, 680)
 nodes/fragment/85/node = SubResource("VisualShaderNodeClamp_xmaob")
 nodes/fragment/85/position = Vector2(280, 980)
-nodes/fragment/connections = PackedInt32Array(12, 0, 11, 0, 12, 0, 11, 1, 2, 0, 14, 0, 38, 0, 37, 1, 39, 0, 36, 1, 41, 0, 39, 0, 41, 0, 39, 1, 41, 0, 39, 2, 40, 0, 38, 0, 40, 0, 38, 1, 40, 0, 38, 2, 21, 0, 42, 0, 42, 0, 37, 0, 27, 0, 21, 0, 30, 0, 21, 1, 34, 0, 21, 2, 37, 0, 36, 0, 16, 0, 15, 1, 47, 0, 45, 0, 47, 0, 46, 0, 15, 0, 17, 0, 14, 0, 15, 0, 52, 0, 63, 0, 63, 0, 58, 0, 54, 0, 52, 0, 55, 0, 52, 1, 56, 0, 52, 2, 58, 0, 57, 0, 65, 0, 54, 0, 65, 0, 55, 0, 65, 0, 56, 0, 66, 0, 65, 0, 67, 0, 27, 0, 67, 0, 30, 0, 67, 0, 34, 0, 39, 0, 57, 1, 38, 0, 58, 1, 70, 0, 77, 0, 77, 0, 76, 0, 77, 1, 76, 1, 76, 0, 78, 0, 78, 0, 79, 0, 17, 0, 80, 0, 68, 0, 70, 0, 68, 0, 81, 1, 22, 0, 66, 0, 22, 0, 67, 0, 48, 0, 73, 0, 7, 0, 12, 0, 12, 0, 11, 2, 11, 0, 8, 1, 6, 0, 8, 0, 3, 0, 6, 0, 8, 0, 2, 0, 79, 0, 80, 1, 73, 1, 51, 0, 64, 0, 17, 1, 80, 0, 0, 0, 51, 0, 64, 2, 57, 0, 85, 0, 85, 0, 64, 0, 36, 0, 64, 1, 81, 0, 70, 1, 9, 0, 6, 1, 47, 0, 9, 0, 47, 0, 9, 1)
+nodes/fragment/connections = PackedInt32Array(12, 0, 11, 0, 12, 0, 11, 1, 2, 0, 14, 0, 38, 0, 37, 1, 39, 0, 36, 1, 41, 0, 39, 0, 41, 0, 39, 1, 41, 0, 39, 2, 40, 0, 38, 0, 40, 0, 38, 1, 40, 0, 38, 2, 21, 0, 42, 0, 42, 0, 37, 0, 27, 0, 21, 0, 30, 0, 21, 1, 34, 0, 21, 2, 37, 0, 36, 0, 16, 0, 15, 1, 15, 0, 17, 0, 14, 0, 15, 0, 52, 0, 63, 0, 63, 0, 58, 0, 54, 0, 52, 0, 55, 0, 52, 1, 56, 0, 52, 2, 58, 0, 57, 0, 65, 0, 54, 0, 65, 0, 55, 0, 65, 0, 56, 0, 66, 0, 65, 0, 67, 0, 27, 0, 67, 0, 30, 0, 67, 0, 34, 0, 39, 0, 57, 1, 38, 0, 58, 1, 70, 0, 77, 0, 77, 0, 76, 0, 77, 1, 76, 1, 76, 0, 78, 0, 78, 0, 79, 0, 17, 0, 80, 0, 68, 0, 70, 0, 68, 0, 81, 1, 22, 0, 66, 0, 22, 0, 67, 0, 48, 0, 73, 0, 7, 0, 12, 0, 12, 0, 11, 2, 11, 0, 8, 1, 6, 0, 8, 0, 3, 0, 6, 0, 8, 0, 2, 0, 79, 0, 80, 1, 73, 1, 51, 0, 64, 0, 17, 1, 80, 0, 0, 0, 51, 0, 64, 2, 57, 0, 85, 0, 85, 0, 64, 0, 36, 0, 64, 1, 81, 0, 70, 1, 9, 0, 6, 1, 47, 0, 9, 0, 47, 0, 9, 1)

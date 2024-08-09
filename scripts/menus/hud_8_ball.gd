@@ -21,13 +21,16 @@ func update():
 	update_players_and_ball_type()
 	update_pocketed_balls()
 
+func _process(_delta):
+	current_team.text = "FPS: " + str(Engine.get_frames_per_second())
+
 
 func update_players_and_ball_type():
 	if manager.is_player_turn():
-		current_team.text = "Team 1"
+		# current_team.text = "Team 1"
 		ball_type.text = _get_ball_type_text(manager.player_ball_type, manager.player_8_ball_target)
 	else:
-		current_team.text = "Team 2"
+		# current_team.text = "Team 2"
 		ball_type.text = _get_ball_type_text(manager.ai_ball_type, manager.ai_8_ball_target)
 
 	if manager.current_player_id >= 0:

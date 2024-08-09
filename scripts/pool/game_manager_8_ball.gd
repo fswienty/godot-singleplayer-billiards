@@ -72,8 +72,6 @@ func _physics_process(_delta):
 				var go_again = legal_pocketing && legal_play
 				_on_balls_stopped(legal_play)
 				if go_again:
-					# var indicate_target = player_8_ball_target if is_player_turn() else ai_8_ball_target
-					# table.indicate_pocket(indicate_target)
 					game_state = Enums.GameState.QUEUE
 				else:
 					_on_turn_ended(legal_play)

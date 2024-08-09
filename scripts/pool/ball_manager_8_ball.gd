@@ -37,7 +37,7 @@ func hit_cue_ball(impulse: Vector2):
 func reset_cue_ball():
 	cue_ball.linear_velocity = Vector2.ZERO
 	var table = ball_placer.table
-	cue_ball.global_position = table.global_position + table.get_head_spot()
+	cue_ball.position = table.get_head_spot()
 	return true
 
 # func update_ball_in_hand(player_turn: bool) -> bool:

@@ -43,19 +43,3 @@ func get_opposite_pocket(pocket_location):
 		return Enums.PocketLocation.UP
 	elif pocket_location == Enums.PocketLocation.DOWN_RIGHT:
 		return Enums.PocketLocation.UP_LEFT
-
-
-func indicate_pocket(pocket_location):
-	match pocket_location:
-		Enums.PocketLocation.UP_LEFT:
-			ul_pocket.indicate()
-		Enums.PocketLocation.UP:
-			u_pocket.indicate()
-		Enums.PocketLocation.UP_RIGHT:
-			ur_pocket.indicate()
-		Enums.PocketLocation.DOWN_LEFT:
-			dl_pocket.indicate()
-		Enums.PocketLocation.DOWN:
-			d_pocket.indicate()
-		Enums.PocketLocation.DOWN_RIGHT:
-			dr_pocket.indicate()

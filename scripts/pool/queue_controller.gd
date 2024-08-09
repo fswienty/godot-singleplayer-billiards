@@ -4,6 +4,7 @@ class_name QueueController
 signal queue_hit
 
 @export var table: Table
+@export var touch_indicators: Control
 
 # @export var distance_at_rest: float = 15.0
 # @export var max_distance: float = 70.0
@@ -13,7 +14,7 @@ var max_distance: float = 120.0
 var force_mult: float = 1200.0
 
 var cue_ball: Ball
-
+var mouse_pos: Vector2
 
 # vars for mouse wheel mode
 var intensity: float = 0.0
@@ -23,7 +24,7 @@ var intensity_increment: float = 0.1
 var ai_ball_type: int = Enums.BallType.NONE
 @onready var ai_thinking_timer: Timer = $AiThinkingTimer
 
-@onready var queue: Sprite2D = $QueueSprite
+@onready var queue: MeshInstance2D = $QueueSprite
 @onready var line: Line2D = $LineMask/Line2D
 
 
@@ -32,12 +33,13 @@ func initialize(cue_ball_: Ball):
 
 
 func run(player_turn: bool):
+	# print("QUEUE" + (" PLAYER" if player_turn else " AI"))
 	if cue_ball == null:
 		printerr("missing cue ball!")
 		return
 
-	# print("QUEUE" + (" PLAYER" if player_turn else " AI"))
-
+	mouse_pos = get_viewport().get_mouse_position()
+	
 	var state = []  # [visible, rot, queue_pos]
 	if player_turn:
 		# let player control queue
@@ -66,7 +68,6 @@ func run(player_turn: bool):
 var dragged_distance: float = 0.0
 var start_hold_distance: float = 0.0
 func _drag_mode() -> Array:
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var ball_to_mouse: Vector2 = mouse_pos - cue_ball.global_position
 
 	# handle dragging while lmb pressed
@@ -92,9 +93,7 @@ func _drag_mode() -> Array:
 
 
 func _mouse_wheel_mode() -> Array:
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var ball_pos: Vector2 = cue_ball.global_position
-	var ball_to_mouse: Vector2 = mouse_pos - ball_pos
+	var ball_to_mouse: Vector2 = mouse_pos - cue_ball.global_position
 
 	if Input.is_action_just_released("mouse_wheel_up"):
 		intensity += intensity_increment
@@ -109,7 +108,7 @@ func _mouse_wheel_mode() -> Array:
 			return [false, 0, Vector2.ZERO]
 
 	var queue_pos = (
-		ball_pos
+		cue_ball.global_position
 		- (distance_at_rest + intensity * max_distance) * ball_to_mouse.normalized()
 	)
 	var rot = ball_to_mouse.angle()
@@ -133,9 +132,8 @@ func _input(event):
 
 var drag_vector := Vector2.LEFT
 var initial_pos: Vector2
+var on_circle: Vector2
 func _touch_mode() -> Array:
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-
 	# handle dragging while lmb pressed
 	if Input.is_action_just_pressed("lmb"):
 		initial_pos = mouse_pos
@@ -157,19 +155,23 @@ func _touch_mode() -> Array:
 
 	var queue_pos = cue_ball.global_position + max(distance_at_rest, dragged_distance) * drag_vector.normalized()
 	var rot = drag_vector.angle() + PI
-
 	if Input.is_action_pressed("lmb"):
-
-		DebugDraw2d.circle(initial_pos, distance_at_rest, 64, Color(1, 1, 1, 0.005), 3, 0.1)
-		if dragged_distance > distance_at_rest:
-			var on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * distance_at_rest
-			DebugDraw2d.line(on_circle, mouse_pos, Color(1, 1, 1, 0.005), 3, 0.1)
+		on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * (distance_at_rest + 2)
+		queue_redraw()
 
 	var show_queue = true
 	if dragged_distance < distance_at_rest:
 		show_queue = false
 	
 	return [show_queue, rot, queue_pos]
+
+func _draw():
+	draw_line(
+		(-self.global_position + on_circle).rotated(-Globals.global_rotation),
+		(-self.global_position + get_viewport().get_mouse_position()).rotated(-Globals.global_rotation),
+		Color(1, 1, 1, 0.3), 3, true)
+	draw_arc((initial_pos-self.global_position).rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
+
 
 
 func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:

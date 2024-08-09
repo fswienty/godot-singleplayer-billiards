@@ -1,48 +1,79 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1qjio4tp8gh1"]
 
-[ext_resource type="PackedScene" path="res://scenes/game_scenes/Pocket.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cipg2ymfdco2s" path="res://scenes/game_scenes/Pocket.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/pool/table.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://blnje5m220rxj" path="res://assets/images/table/playing_field.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://yuec6xp7rv07" path="res://assets/images/table/playing_field_border.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://c53qgtjv0enem" path="res://assets/images/table/playing_field_pockets.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://coy7nrfqe01h3" path="res://assets/images/table/playing_field_border_shadow.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://g1f7pwpdkktn" path="res://assets/images/table/playing_field_bg.png" id="2_s4c6v"]
+[ext_resource type="Texture2D" uid="uid://b6a0ffwq7kxxg" path="res://assets/images/table/playing_field_border_quarter.png" id="2_y235n"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pcr7q"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-256, -138.5, 0, 512, 277, 0),
+"attribute_data": PackedByteArray(0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0),
+"format": 34393296913,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 3, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 67, 0, 128, 10, 67, 0, 0, 128, 195, 0, 128, 10, 67, 0, 0, 128, 195, 0, 128, 10, 195, 0, 0, 128, 67, 0, 128, 10, 195)
+}]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vs4wj"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-219, -123.2, 0, 459, 258.2, 0),
+"attribute_data": PackedByteArray(0, 0, 128, 63, 155, 98, 84, 61, 0, 0, 128, 63, 121, 64, 50, 62, 222, 221, 125, 63, 47, 161, 61, 62, 222, 221, 125, 63, 116, 240, 66, 62, 191, 88, 122, 63, 186, 242, 128, 62, 242, 139, 121, 63, 186, 242, 128, 62, 174, 71, 117, 63, 203, 3, 146, 62, 177, 228, 115, 63, 203, 3, 146, 62, 75, 126, 109, 63, 154, 153, 153, 62, 137, 136, 104, 62, 154, 153, 153, 62, 137, 136, 104, 62, 108, 193, 150, 62, 102, 102, 70, 62, 41, 92, 143, 62, 102, 102, 70, 62, 229, 34, 140, 62, 250, 197, 34, 62, 57, 142, 99, 62, 51, 51, 19, 62, 57, 142, 99, 62, 233, 180, 17, 62, 27, 9, 120, 62, 119, 119, 55, 62, 102, 113, 167, 62, 119, 119, 55, 62, 239, 227, 173, 62, 222, 221, 61, 62, 116, 218, 192, 62, 222, 221, 61, 62, 116, 207, 127, 63, 188, 187, 59, 61, 0, 0, 128, 63, 51, 51, 51, 61, 229, 1, 73, 62, 48, 150, 60, 61, 229, 1, 73, 62, 185, 30, 69, 61, 63, 233, 19, 62, 250, 197, 82, 61, 63, 233, 19, 62, 164, 112, 125, 61, 155, 98, 212, 61, 185, 30, 133, 61, 155, 98, 212, 61, 99, 201, 175, 61, 137, 136, 136, 61, 14, 116, 186, 61, 137, 136, 136, 61, 6, 58, 237, 61, 254, 54, 69, 61, 51, 51, 115, 63, 254, 54, 69, 61, 51, 51, 115, 63, 168, 2, 51, 61),
+"format": 34393296913,
+"index_count": 90,
+"index_data": PackedByteArray(31, 0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 15, 0, 16, 0, 17, 0, 17, 0, 18, 0, 19, 0, 19, 0, 20, 0, 21, 0, 22, 0, 23, 0, 24, 0, 24, 0, 25, 0, 26, 0, 26, 0, 27, 0, 28, 0, 28, 0, 29, 0, 30, 0, 30, 0, 31, 0, 1, 0, 2, 0, 4, 0, 5, 0, 5, 0, 7, 0, 9, 0, 10, 0, 12, 0, 13, 0, 15, 0, 17, 0, 19, 0, 19, 0, 21, 0, 22, 0, 22, 0, 24, 0, 26, 0, 26, 0, 28, 0, 30, 0, 30, 0, 1, 0, 2, 0, 2, 0, 5, 0, 9, 0, 15, 0, 19, 0, 22, 0, 22, 0, 26, 0, 30, 0, 30, 0, 2, 0, 9, 0, 14, 0, 15, 0, 22, 0, 30, 0, 9, 0, 10, 0, 13, 0, 14, 0, 22, 0, 30, 0, 10, 0, 13, 0, 13, 0, 22, 0, 30, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray(0, 0, 112, 67, 0, 0, 242, 194, 0, 0, 112, 67, 0, 0, 176, 194, 0, 0, 108, 67, 0, 0, 170, 194, 0, 0, 108, 67, 51, 51, 167, 194, 102, 102, 101, 67, 0, 0, 134, 194, 102, 230, 99, 67, 0, 0, 134, 194, 102, 230, 91, 67, 0, 0, 104, 194, 204, 76, 89, 67, 0, 0, 104, 194, 204, 76, 77, 67, 0, 0, 88, 194, 0, 0, 3, 195, 0, 0, 88, 194, 0, 0, 3, 195, 0, 0, 94, 194, 0, 0, 19, 195, 154, 153, 109, 194, 0, 0, 19, 195, 102, 102, 116, 194, 51, 179, 35, 195, 0, 0, 150, 194, 0, 0, 43, 195, 0, 0, 150, 194, 51, 179, 43, 195, 51, 51, 139, 194, 0, 0, 26, 195, 204, 204, 58, 194, 0, 0, 26, 195, 52, 51, 45, 194, 0, 0, 23, 195, 52, 51, 5, 194, 0, 0, 23, 195, 204, 204, 6, 67, 0, 0, 90, 195, 0, 0, 7, 67, 0, 0, 91, 195, 0, 0, 164, 194, 102, 230, 89, 195, 0, 0, 164, 194, 102, 230, 88, 195, 0, 0, 192, 194, 205, 76, 87, 195, 0, 0, 192, 194, 205, 76, 82, 195, 0, 0, 214, 194, 205, 204, 80, 195, 0, 0, 214, 194, 205, 204, 70, 195, 0, 0, 234, 194, 205, 76, 68, 195, 0, 0, 234, 194, 102, 102, 56, 195, 0, 0, 244, 194, 0, 0, 88, 67, 0, 0, 244, 194, 0, 0, 88, 67, 102, 102, 246, 194)
+}]
 
 [node name="Table" type="Node2D"]
-scale = Vector2(1.5, 1.5)
 script = ExtResource("2")
 
 [node name="Graphics" type="Node2D" parent="."]
 
-[node name="PlayingField" type="Sprite2D" parent="Graphics"]
-z_as_relative = false
-scale = Vector2(1.862, 1.752)
-texture = ExtResource("3")
-region_rect = Rect2(165, 51, 227, 30)
+[node name="bg" type="MeshInstance2D" parent="Graphics"]
+scale = Vector2(0.943, 0.943)
+mesh = SubResource("ArrayMesh_pcr7q")
+texture = ExtResource("2_s4c6v")
 
-[node name="Pockets" type="Sprite2D" parent="Graphics"]
-z_index = 1
-z_as_relative = false
+[node name="Border" type="Node2D" parent="Graphics"]
 scale = Vector2(0.556, 0.556)
-texture = ExtResource("5")
-region_rect = Rect2(165, 51, 227, 30)
 
-[node name="Border" type="Sprite2D" parent="Graphics"]
-z_index = 10
-z_as_relative = false
-scale = Vector2(0.556, 0.556)
-texture = ExtResource("4")
+[node name="Sprite2D" type="MeshInstance2D" parent="Graphics/Border"]
+position = Vector2(-239.808, -134.293)
+mesh = SubResource("ArrayMesh_vs4wj")
+texture = ExtResource("2_y235n")
 
-[node name="Border" type="Sprite2D" parent="Graphics/Border"]
-self_modulate = Color(0.192157, 0.192157, 0.192157, 1)
-z_index = -30
-z_as_relative = false
-texture = ExtResource("6")
+[node name="Sprite2D2" type="MeshInstance2D" parent="Graphics/Border"]
+position = Vector2(239.808, 135.492)
+scale = Vector2(-1, -1)
+mesh = SubResource("ArrayMesh_vs4wj")
+texture = ExtResource("2_y235n")
+
+[node name="Sprite2D3" type="MeshInstance2D" parent="Graphics/Border"]
+position = Vector2(239.808, -134.293)
+scale = Vector2(-1, 1)
+mesh = SubResource("ArrayMesh_vs4wj")
+texture = ExtResource("2_y235n")
+
+[node name="Sprite2D4" type="MeshInstance2D" parent="Graphics/Border"]
+position = Vector2(-239.808, 135.492)
+scale = Vector2(1, -1)
+mesh = SubResource("ArrayMesh_vs4wj")
+texture = ExtResource("2_y235n")
 
 [node name="Rails" type="StaticBody2D" parent="." groups=["rail"]]
 visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rails"]
-polygon = PackedVector2Array(9.33334, 128, 4, 132, 0, 132, 0, 325.333, 544, 325.333, 544, -325.333, -544, -325.333, -544, 325.333, 0, 325.333, 0, 132, -4, 132, -9.33334, 128, -10.6667, 118.667, -14.6667, 112, -209.333, 112, -218.667, 121.333, -225.333, 125.333, -232, 125.333, -237.333, 120, -237.333, 113.333, -233.261, 106.594, -224, 97.3333, -224, -97.3333, -233.333, -106.667, -237.333, -113.333, -237.333, -120, -232, -125.333, -225.333, -125.333, -218.667, -121.333, -209.333, -112, -14.6667, -112, -10.6667, -118.667, -9.33334, -128, -4, -132, 4, -132, 9.33334, -128, 10.6667, -118.667, 14.6667, -112, 209.333, -112, 218.667, -121.333, 225.333, -125.333, 232, -125.333, 237.333, -120, 237.333, -113.333, 233.333, -106.667, 224, -97.3333, 224, 97.3333, 233.333, 106.667, 237.333, 113.333, 237.333, 120, 232, 125.333, 224, 125.333, 218.667, 121.333, 209.333, 112, 14.6667, 112, 10.6667, 118.667)
+polygon = PackedVector2Array(9.33333, 132, 0, 325.333, 544, 325.333, 544, -325.333, -544, -325.333, -544, 325.333, 0, 325.333, 8, 132, -8.66667, 132, -10.6667, 118.667, -14.6667, 112, -209.333, 112, -227.333, 130.667, -242.667, 115.333, -224, 97.3333, -224, -97.3333, -242, -115.333, -227.333, -130, -209.333, -112, -14.6667, -112, -10.6667, -118.667, -8.66667, -132, 9.33333, -132, 10.6667, -118.667, 14.6667, -112, 209.333, -112, 229.333, -130.667, 243.333, -116.667, 224, -97.3333, 224, 97.3333, 243.333, 116, 228.667, 131.333, 209.333, 112, 14.6667, 112, 10.6667, 118.667)
 
 [node name="Pockets" type="Node2D" parent="."]
 z_index = 10
@@ -52,42 +83,24 @@ z_as_relative = false
 position = Vector2(-228, -116)
 location = 1
 
-[node name="UL_AiTarget" type="Node2D" parent="Pockets/UL_Pocket"]
-position = Vector2(10, 10)
-
 [node name="U_Pocket" parent="Pockets" instance=ExtResource("1")]
 position = Vector2(0, -126.667)
 location = 2
-
-[node name="U_AiTarget" type="Node2D" parent="Pockets/U_Pocket"]
-position = Vector2(0, 12)
 
 [node name="UR_Pocket" parent="Pockets" instance=ExtResource("1")]
 position = Vector2(228, -116)
 location = 3
 
-[node name="UR_AiTarget" type="Node2D" parent="Pockets/UR_Pocket"]
-position = Vector2(-10, 10)
-
 [node name="DL_Pocket" parent="Pockets" instance=ExtResource("1")]
 position = Vector2(-228, 116)
-
-[node name="DL_AiTarget" type="Node2D" parent="Pockets/DL_Pocket"]
-position = Vector2(10, -10)
 
 [node name="D_Pocket" parent="Pockets" instance=ExtResource("1")]
 position = Vector2(0, 126.667)
 location = 5
 
-[node name="D_AiTarget" type="Node2D" parent="Pockets/D_Pocket"]
-position = Vector2(0, -12)
-
 [node name="DR_Pocket" parent="Pockets" instance=ExtResource("1")]
 position = Vector2(228, 116)
 location = 6
-
-[node name="DR_AiTarget" type="Node2D" parent="Pockets/DR_Pocket"]
-position = Vector2(-10, -10)
 
 [node name="HeadSpot" type="Node2D" parent="."]
 position = Vector2(-130, 0)
