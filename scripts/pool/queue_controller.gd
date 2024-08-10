@@ -87,7 +87,7 @@ func _drag_mode() -> Array:
 			emit_signal("queue_hit", impulse)
 			return [false, 0, Vector2.ZERO]
 
-	var queue_pos = cue_ball.global_position + (distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
+	var queue_pos = cue_ball.global_position + (170 + distance_at_rest + dragged_distance) * ball_to_mouse.normalized()
 	var rot = ball_to_mouse.angle() + PI
 	return [true, rot, queue_pos]
 
@@ -133,14 +133,22 @@ func _input(event):
 var drag_vector := Vector2.LEFT
 var initial_pos: Vector2
 var on_circle: Vector2
+var is_touch_active := false
 func _touch_mode() -> Array:
 	# handle dragging while lmb pressed
 	if Input.is_action_just_pressed("lmb"):
+		is_touch_active = true
 		initial_pos = mouse_pos
+	
+	# if the touch control mode has not properly been initialized by a just pressed event, abort
+	if not is_touch_active:
+		return [false, 0, Vector2.ZERO]
+
 	if Input.is_action_pressed("lmb"):
 		drag_vector = mouse_pos - initial_pos
 		dragged_distance = clamp(drag_vector.length(), 0, max_distance)
 	if Input.is_action_just_released("lmb"):
+		is_touch_active = false
 		var impulse: Vector2 = (
 			force_mult
 			* (dragged_distance / max_distance)
@@ -153,7 +161,7 @@ func _touch_mode() -> Array:
 			emit_signal("queue_hit", impulse)
 			return [false, 0, Vector2.ZERO]
 
-	var queue_pos = cue_ball.global_position + max(distance_at_rest, dragged_distance) * drag_vector.normalized()
+	var queue_pos = cue_ball.global_position + (170 + dragged_distance) * drag_vector.normalized()
 	var rot = drag_vector.angle() + PI
 	if Input.is_action_pressed("lmb"):
 		on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * (distance_at_rest + 2)
@@ -166,11 +174,12 @@ func _touch_mode() -> Array:
 	return [show_queue, rot, queue_pos]
 
 func _draw():
-	draw_line(
-		(-self.global_position + on_circle).rotated(-Globals.global_rotation),
-		(-self.global_position + get_viewport().get_mouse_position()).rotated(-Globals.global_rotation),
-		Color(1, 1, 1, 0.3), 3, true)
-	draw_arc((initial_pos-self.global_position).rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
+	if is_touch_active:
+		draw_line(
+			(-self.global_position + on_circle).rotated(-Globals.global_rotation),
+			(-self.global_position + get_viewport().get_mouse_position()).rotated(-Globals.global_rotation),
+			Color(1, 1, 1, 0.3), 3, true)
+		draw_arc((initial_pos-self.global_position).rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
 
 
 
@@ -240,7 +249,7 @@ func _ai_mode() -> Array:
 			best_shot = ShotCandidate.new()
 			best_shot.final_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
 
-		initial_queue_direction = best_shot.final_direction.rotated(2 * (2*randf()-1))
+		initial_queue_direction = best_shot.final_direction.rotated(0.3 * (2*randf()-1))
 
 		# # visualize viable shots
 		# for sc in shot_candidates:
@@ -270,7 +279,7 @@ func _ai_mode() -> Array:
 	return [
 		true,
 		-queue_offset_direction.angle_to(Vector2.RIGHT),
-		cue_ball.global_position - queue_offset_direction * 50
+		cue_ball.global_position - queue_offset_direction * 220
 	]
 
 

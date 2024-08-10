@@ -493,6 +493,7 @@ shape = SubResource("4")
 texture = ExtResource("1")
 
 [node name="QueueController" type="Node2D" parent="." node_paths=PackedStringArray("table", "touch_indicators")]
+z_index = 25
 position = Vector2(512, 288)
 script = ExtResource("10")
 table = NodePath("../Table")
@@ -513,7 +514,7 @@ z_as_relative = false
 position = Vector2(368, -24)
 rotation = 1.5708
 points = PackedVector2Array(0, 0, 0, -1500)
-width = 2.0
+width = 3.0
 default_color = Color(0.294118, 0.835294, 1, 0.376471)
 gradient = SubResource("5")
 antialiased = true
@@ -521,7 +522,7 @@ antialiased = true
 [node name="QueueSprite" type="MeshInstance2D" parent="QueueController"]
 z_index = 30
 z_as_relative = false
-position = Vector2(660, -216.996)
+position = Vector2(-2.00009, -260.998)
 scale = Vector2(0.7, 0.9)
 mesh = SubResource("ArrayMesh_fks73")
 texture = ExtResource("12")
