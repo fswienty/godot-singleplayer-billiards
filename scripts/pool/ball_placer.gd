@@ -64,7 +64,8 @@ func _place_in_rack(number, position):
 	new_ball = ball_scn.instantiate()
 	new_ball.number = number
 	balls_to_place.erase(number)
-	new_ball.position = table.get_foot_spot() + positions[position]
+	var randomization := Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
+	new_ball.position = table.get_foot_spot() + positions[position] + randomization * 0.5
 	var _discard = positions.erase(position)
 	_add_ball_to_scene(new_ball)
 
