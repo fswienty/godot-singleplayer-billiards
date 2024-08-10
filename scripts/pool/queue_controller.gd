@@ -21,6 +21,7 @@ var intensity: float = 0.0
 var intensity_increment: float = 0.1
 
 # vars for ai
+var ai_hits_this_round: int
 var ai_ball_type: int = Enums.BallType.NONE
 @onready var ai_thinking_timer: Timer = $AiThinkingTimer
 
@@ -41,8 +42,10 @@ func run(player_turn: bool):
 	mouse_pos = get_viewport().get_mouse_position()
 	
 	var state = []  # [visible, rot, queue_pos]
+
 	if player_turn:
 		# let player control queue
+		ai_hits_this_round = 0
 		match Globals.queue_mode:
 			Enums.QueueControl.DRAG:
 				state = _drag_mode()
@@ -183,7 +186,7 @@ func _draw():
 
 
 
-func _has_line_of_sight(node_a: Node2D, node_b: Node2D, space_state) -> bool:
+func _has_line_of_sight(node_a: Node2D, node_b: Node2D) -> bool:
 	var query = PhysicsRayQueryParameters2D.create(node_a.global_position, node_b.global_position)
 	query.exclude = [node_a, node_b]
 	var result = space_state.intersect_ray(query)
@@ -206,19 +209,20 @@ var ai_thinking_time = 0.5
 var shot_candidates: Array[ShotCandidate] = []
 var best_shot: ShotCandidate
 var initial_queue_direction: Vector2
+var space_state: PhysicsDirectSpaceState2D
 func _ai_mode() -> Array:
 	ai_thinking_timer.wait_time = ai_thinking_time
 
 	if ai_thinking_timer.is_stopped():
 		ai_thinking_timer.start()
 
-		var space_state := get_world_2d().direct_space_state
+		space_state = get_world_2d().direct_space_state
 		var valid_target_balls := _get_valid_target_balls()
 
 		### find some possible shots ###
 		shot_candidates = []
 		for ball in valid_target_balls:
-			if not _has_line_of_sight(cue_ball, ball, space_state):
+			if not _has_line_of_sight(cue_ball, ball):
 				continue
 
 			for pocket in table.pockets:
@@ -229,14 +233,16 @@ func _ai_mode() -> Array:
 				var ball_to_pocket: Vector2 = pocket.ai_target.global_position - ball.global_position
 				var cut_angle := rad_to_deg(cue_to_ball.angle_to(ball_to_pocket))
 				var pocket_angle := rad_to_deg(ball_to_pocket.angle_to(pocket.target_direction))
-				if abs(cut_angle) < 60 and abs(pocket_angle) < 45:
-					if _has_line_of_sight(ball, pocket.ai_target, space_state):
-						shot_candidate.pocket = pocket
-						shot_candidate.cue_to_ball = cue_to_ball
-						shot_candidate.ball_to_pocket = ball_to_pocket
-						shot_candidate.final_direction = _get_final_direction(shot_candidate)
-				else:
+				var final_direction = _get_final_direction(shot_candidate)
+				if abs(cut_angle) < 60 and abs(pocket_angle) < 45 and final_direction != Vector2.ZERO:
+					# if _has_line_of_sight(ball, pocket.ai_target):
+					shot_candidate.pocket = pocket
+					shot_candidate.cue_to_ball = cue_to_ball
+					shot_candidate.ball_to_pocket = ball_to_pocket
 					shot_candidate.final_direction = _get_final_direction(shot_candidate)
+				else:
+					# add shots the don't put the ball in a pocket anyway as backup
+					shot_candidate.final_direction = cue_to_ball.normalized()
 				shot_candidates.push_back(shot_candidate)
 		
 		### evaluate shots ###
@@ -253,24 +259,23 @@ func _ai_mode() -> Array:
 
 		# # visualize viable shots
 		# for sc in shot_candidates:
-		# 	DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 2, ai_thinking_time)
+		# 	DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 1, ai_thinking_time)
 		# 	if sc.pocket:
-		# 		DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 2, ai_thinking_time)
+		# 		DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 1, ai_thinking_time)
 
 		# # visualize best shot
 		# if best_shot and best_shot.ball:
-		# 	DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 2, ai_thinking_time)
+		# 	DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 1, ai_thinking_time)
 		# 	if best_shot.pocket:
-		# 		DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 2, ai_thinking_time)
+		# 		DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 1, ai_thinking_time)
 
 	# take shot
 	# this sucks and i'm sorry
 	if ai_thinking_timer.time_left < 0.1:
-		if best_shot == null:
-			var random_direction = Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
-			emit_signal("queue_hit", force_mult * random_direction)
-		else:
-			emit_signal("queue_hit", force_mult * best_shot.final_direction)
+		var ai_incompetence: float = Globals.ai_levels[Globals.current_ai_level].incompetence
+		var randomization := ai_incompetence * 0.008 * sqrt(ai_hits_this_round) * Vector2(2 * randf() - 1, 2 * randf() - 1).normalized()
+		emit_signal("queue_hit", force_mult * (best_shot.final_direction + randomization))
+		ai_hits_this_round += 1
 		return [false, 0, cue_ball.global_position]
 
 	var thinking_progress = 1 - ai_thinking_timer.time_left / ai_thinking_time
@@ -286,6 +291,20 @@ func _ai_mode() -> Array:
 func _get_final_direction(sc: ShotCandidate):
 	var final_target_position: Vector2 = sc.ball.global_position - sc.ball_to_pocket.normalized() * ball_diameter
 	var cue_to_target := final_target_position - cue_ball.global_position
+
+	# check if cue_to_target is possible
+	var offsets = [
+		Globals.ball_radius * cue_to_target.normalized().rotated(PI/2),
+		Globals.ball_radius * cue_to_target.normalized().rotated(-PI/2),
+	]
+	for offset in offsets:
+		# DebugDraw2d.line(cue_ball.global_position+offset, final_target_position+offset, Color.RED, 1, ai_thinking_time)
+		var query = PhysicsRayQueryParameters2D.create(cue_ball.global_position+offset, final_target_position+offset)
+		query.exclude = [cue_ball, sc.ball]
+		var result = space_state.intersect_ray(query)
+		if not result.is_empty():
+			return Vector2.ZERO
+
 	return cue_to_target.normalized()
 
 

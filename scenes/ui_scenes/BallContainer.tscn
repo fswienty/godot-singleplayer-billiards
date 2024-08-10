@@ -1,23 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cfxotaq8l4jmb"]
 
-[ext_resource path="res://assets/images/balls/blue_full_2.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://c7gb7tuasuexb" path="res://assets/images/balls/blue_full_2.png" id="1"]
 
 [node name="BallContainer" type="Control"]
-__meta__ = {
-"_edit_use_anchors_": false
-}
+layout_mode = 3
+anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-scale = Vector2( 0.13, 0.13 )
+offset_left = -17.0
+offset_top = -17.0
+offset_right = 246.0
+offset_bottom = 246.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.13, 0.13)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1
 stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}

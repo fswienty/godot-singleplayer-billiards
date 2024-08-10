@@ -76,7 +76,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 20
 
-[node name="TeamLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+[node name="FpsLabel" type="Label" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -140,6 +140,7 @@ theme_override_constants/separation = 35
 layout_mode = 2
 
 [node name="NextPlayerLabel" type="Label" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -150,6 +151,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="VSeparator2" type="VSeparator" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="AiBallContainer" type="HBoxContainer" parent="UI/Hud_8Ball/BottomBarContainer/HBoxContainer"]

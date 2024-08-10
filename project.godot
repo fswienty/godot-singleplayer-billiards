@@ -24,7 +24,7 @@ Globals="*res://scripts/autoload/globals.gd"
 Animations="*res://scripts/autoload/animations.gd"
 GlobalUi="*res://scenes/autoload/GlobalUi.tscn"
 Utils="*res://scripts/autoload/utils.gd"
-DebugDraw2d="res://addons/debugdraw2d/DebugDraw2D.gd"
+DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
 
 [debug]
 
