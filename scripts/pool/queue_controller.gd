@@ -259,17 +259,17 @@ func _ai_mode() -> Array:
 
 		initial_queue_direction = best_shot.final_direction.rotated(0.3 * (2*randf()-1))
 
-		# visualize viable shots
-		for sc in shot_candidates:
-			DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 1, ai_thinking_time)
-			if sc.pocket:
-				DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 1, ai_thinking_time)
+		# # visualize viable shots
+		# for sc in shot_candidates:
+		# 	DebugDraw2d.line(cue_ball.global_position, sc.ball.global_position, Color.RED, 1, ai_thinking_time)
+		# 	if sc.pocket:
+		# 		DebugDraw2d.line(sc.ball.global_position, sc.pocket.ai_target.global_position, Color.BLUE, 1, ai_thinking_time)
 
-		# visualize best shot
-		if best_shot and best_shot.ball:
-			DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 1, ai_thinking_time)
-			if best_shot.pocket:
-				DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 1, ai_thinking_time)
+		# # visualize best shot
+		# if best_shot and best_shot.ball:
+		# 	DebugDraw2d.line(cue_ball.global_position, best_shot.ball.global_position, Color.GOLD, 1, ai_thinking_time)
+		# 	if best_shot.pocket:
+		# 		DebugDraw2d.line(best_shot.ball.global_position, best_shot.pocket.ai_target.global_position, Color.GOLD, 1, ai_thinking_time)
 
 	# take shot
 	# this sucks and i'm sorry
@@ -300,7 +300,7 @@ func _get_final_direction(sc: ShotCandidate):
 		Globals.ball_radius * cue_to_target.normalized().rotated(-PI/2),
 	]
 	for offset in offsets:
-		DebugDraw2d.line(cue_ball.global_position+offset, final_target_position+offset, Color.RED, 1, ai_thinking_time)
+		# DebugDraw2d.line(cue_ball.global_position+offset, final_target_position+offset, Color.RED, 1, ai_thinking_time)
 		var query = PhysicsRayQueryParameters2D.create(cue_ball.global_position+offset, final_target_position+offset)
 		query.exclude = [cue_ball, sc.ball]
 		var result = space_state.intersect_ray(query)

@@ -68,7 +68,7 @@ constant = 0.174
 function = 26
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="35"]
-constant = 10.0
+constant = 40.0
 
 [sub_resource type="VisualShaderNodeInput" id="36"]
 output_port_for_preview = 0
@@ -176,7 +176,7 @@ void fragment() {
 
 
 // FloatConstant:47
-	float n_out47p0 = 10.000000;
+	float n_out47p0 = 40.000000;
 
 
 // VectorCompose:9
@@ -429,6 +429,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-905.345, -355.094)
 mode = 1
 modes/blend = 5
 flags/unshaded = true

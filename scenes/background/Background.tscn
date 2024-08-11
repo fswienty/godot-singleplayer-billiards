@@ -19,5 +19,5 @@ z_index = -4096
 texture_repeat = 2
 material = ExtResource("2")
 position = Vector2(278, 462)
-scale = Vector2(16, 16)
+scale = Vector2(64, 64)
 texture = ExtResource("2_qy30f")

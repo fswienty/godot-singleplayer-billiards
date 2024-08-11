@@ -28,8 +28,8 @@ func _ready():
 		Globals.queue_mode = Enums.QueueControl.TOUCH
 
 	Globals.player_infos = {
-		1: {name = "PLAYER", team = 1},
-		2: {name = "AI", team = 2},
+		1: {name = "Your turn!", team = 1},
+		2: {name = "Opponent turn", team = 2},
 	}
 
 	if DEBUG_MODE:

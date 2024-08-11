@@ -21,13 +21,22 @@ func _ready():
 	decrease_diffuculty_button.connect("pressed", Callable(self, "_on_DecreaseDifficultyButton_pressed"))
 	quit_button.connect("pressed", Callable(self, "_on_QuitButton_pressed"))
 	modulate = Color.TRANSPARENT
+	_set_buttons_enabled(true)
 
 
 func _update_difficulty_label():
 	difficulty_label.text = Globals.ai_levels[Globals.current_ai_level]["name"]
 
 
+func _set_buttons_enabled(enabled: bool):
+	play_button.disabled = not enabled
+	increase_diffuculty_button.disabled = not enabled
+	decrease_diffuculty_button.disabled = not enabled
+	quit_button.disabled = not enabled
+
+
 func _on_PlayButton_pressed():
+	_set_buttons_enabled(false)
 	SoundManager.click()
 	emit_signal("game_started")
 
@@ -47,5 +56,6 @@ func _on_DecreaseDifficultyButton_pressed():
 
 
 func _on_QuitButton_pressed():
+	_set_buttons_enabled(false)
 	SoundManager.click()
 	emit_signal("game_quit")

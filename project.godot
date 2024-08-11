@@ -24,7 +24,7 @@ Globals="*res://scripts/autoload/globals.gd"
 Animations="*res://scripts/autoload/animations.gd"
 GlobalUi="*res://scenes/autoload/GlobalUi.tscn"
 Utils="*res://scripts/autoload/utils.gd"
-DebugDraw2d="*res://addons/debugdraw2d/DebugDraw2D.gd"
+DebugDraw2d="res://addons/debugdraw2d/DebugDraw2D.gd"
 
 [debug]
 
@@ -35,6 +35,7 @@ gdscript/warnings/unused_variable=false
 window/size/viewport_width=576
 window/size/viewport_height=1024
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [global]
