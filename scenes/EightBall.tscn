@@ -454,9 +454,7 @@ text = "disable table"
 script = ExtResource("7_c03ni")
 
 [node name="Background" parent="." instance=ExtResource("14")]
-offset_left = 1024.0
-offset_right = 1024.0
-offset_bottom = 0.0
+position = Vector2(512, 288)
 rotation = 1.5708
 
 [node name="Table" parent="." instance=ExtResource("3")]
