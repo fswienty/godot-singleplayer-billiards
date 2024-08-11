@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1qjio4tp8gh1"]
+[gd_scene load_steps=8 format=3 uid="uid://b1qjio4tp8gh1"]
 
 [ext_resource type="PackedScene" uid="uid://cipg2ymfdco2s" path="res://scenes/game_scenes/Pocket.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/pool/table.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bk5vwo68j2jl2" path="res://assets/images/table/playing_field_single.png" id="2_k00hk"]
 [ext_resource type="Texture2D" uid="uid://g1f7pwpdkktn" path="res://assets/images/table/playing_field_bg.png" id="2_s4c6v"]
 [ext_resource type="Texture2D" uid="uid://b6a0ffwq7kxxg" path="res://assets/images/table/playing_field_border_quarter.png" id="2_y235n"]
 
@@ -35,6 +36,14 @@ _surfaces = [{
 
 [node name="Table" type="Node2D"]
 script = ExtResource("2")
+
+[node name="Graphics2" type="Node2D" parent="."]
+visible = false
+
+[node name="bg" type="MeshInstance2D" parent="Graphics2"]
+scale = Vector2(1.03906, 1.08303)
+mesh = SubResource("ArrayMesh_pcr7q")
+texture = ExtResource("2_k00hk")
 
 [node name="Graphics" type="Node2D" parent="."]
 

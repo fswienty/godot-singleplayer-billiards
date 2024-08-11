@@ -14,8 +14,6 @@ var pockets: Array[Pocket]
 @onready var dr_pocket: Pocket = $Pockets/DR_Pocket
 
 func _ready():
-	print("Viewport Resolution is: ", get_viewport().get_visible_rect().size)
-
 	pockets.push_back(ul_pocket)
 	pockets.push_back(u_pocket)
 	pockets.push_back(ur_pocket)

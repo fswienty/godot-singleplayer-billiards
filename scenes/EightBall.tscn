@@ -1,10 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://7xg6mrkwevfw"]
+[gd_scene load_steps=22 format=3 uid="uid://7xg6mrkwevfw"]
 
 [ext_resource type="Texture2D" uid="uid://cprv64x6srfvm" path="res://assets/images/balls/cue_ball.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://wvhmr3o3ycg5" path="res://scenes/game_scenes/Ball.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://b1qjio4tp8gh1" path="res://scenes/game_scenes/Table.tscn" id="3"]
 [ext_resource type="Script" path="res://scripts/pool/game_manager_8_ball.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/debug/bgbutton.gd" id="6_jy6ky"]
 [ext_resource type="Script" path="res://scripts/pool/ball_in_hand.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/debug/tablebutton.gd" id="7_c03ni"]
 [ext_resource type="Script" path="res://scripts/pool/ball_placer.gd" id="8"]
 [ext_resource type="Script" path="res://scripts/menus/hud_8_ball.gd" id="9"]
 [ext_resource type="Script" path="res://scripts/pool/queue_controller.gd" id="10"]
@@ -435,6 +437,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "Back to Menu"
 
+[node name="bgbutton" type="Button" parent="UI"]
+offset_left = 62.0
+offset_top = 944.0
+offset_right = 206.0
+offset_bottom = 1018.0
+text = "disable bg"
+script = ExtResource("6_jy6ky")
+
+[node name="tablebutton" type="Button" parent="UI"]
+offset_left = 332.0
+offset_top = 939.0
+offset_right = 502.0
+offset_bottom = 1013.0
+text = "disable table"
+script = ExtResource("7_c03ni")
+
 [node name="Background" parent="." instance=ExtResource("14")]
 offset_left = 1024.0
 offset_right = 1024.0
@@ -508,3 +526,6 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(288, -512)
+
+[connection signal="pressed" from="UI/bgbutton" to="UI/bgbutton" method="_on_pressed"]
+[connection signal="pressed" from="UI/tablebutton" to="UI/tablebutton" method="_on_pressed"]
