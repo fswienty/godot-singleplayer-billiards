@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://jxekvhprpbin"]
+
+[ext_resource type="FontFile" path="res://assets/fonts/ui_font_24.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://stdx5fgq8j6x" path="res://assets/images/ui/trophy.png" id="2"]
+[ext_resource type="Script" path="res://scripts/menus/game_finished_message_container.gd" id="3"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrophyLeftContainer/TrophyLeft:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 12.5664]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TrophyRightContainer/TrophyRight:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, -12.5664]
+}
+
+[sub_resource type="Animation" id="Animation_vdjgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrophyRightContainer/TrophyRight:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-720.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qv2i1"]
+_data = {
+"RESET": SubResource("Animation_vdjgx"),
+"win": SubResource("1")
+}
+
+[node name="MessageContainer" type="HBoxContainer"]
+process_mode = 3
+offset_right = 200.0
+offset_bottom = 50.0
+size_flags_horizontal = 6
+script = ExtResource("3")
+
+[node name="TrophyLeftContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TrophyLeft" type="TextureRect" parent="TrophyLeftContainer"]
+self_modulate = Color(1, 0.854902, 0.188235, 1)
+layout_mode = 2
+texture = ExtResource("2")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(140, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1")
+text = "message"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="TrophyRightContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="TrophyRight" type="TextureRect" parent="TrophyRightContainer"]
+self_modulate = Color(1, 0.854902, 0.188235, 1)
+layout_mode = 2
+texture = ExtResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qv2i1")
+}

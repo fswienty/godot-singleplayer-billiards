@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://bduxmeenb8ffk"]
 
 [ext_resource type="FontFile" uid="uid://ctdsyevoue50x" path="res://assets/fonts/ui_font.tres" id="1"]
-[ext_resource type="StyleBox" path="res://ui_theme/style_boxes/inactive.tres" id="2"]
-[ext_resource type="StyleBox" path="res://ui_theme/style_boxes/normal.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://bqh8awjue6uqo" path="res://ui_theme/style_boxes/inactive.tres" id="2"]
+[ext_resource type="StyleBox" uid="uid://q0kbeybnhp40" path="res://ui_theme/style_boxes/normal.tres" id="3"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/flat_panel.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/pressed.tres" id="5"]
-[ext_resource type="StyleBox" path="res://ui_theme/style_boxes/hover.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://dwqbixn76hvx6" path="res://ui_theme/style_boxes/hover.tres" id="6"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/pressed_tab.tres" id="7"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/normal_tab.tres" id="8"]
 
@@ -15,7 +15,7 @@
 
 [resource]
 default_font = ExtResource("1")
-default_font_size = 18
+default_font_size = 24
 Button/colors/font_color_pressed = Color(0.0745098, 0.698039, 0.113725, 1)
 Button/constants/hseparation = 2
 Button/fonts/font = ExtResource("1")

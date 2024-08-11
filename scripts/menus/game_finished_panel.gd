@@ -1,47 +1,26 @@
 extends Control
 
-@onready var player_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/PlayerContainer/Team
-@onready var ai_team_label: GameFinishedTeamLabel = $VBoxContainer/HBoxContainer/AiContainer/Team
-@onready var player_list: VBoxContainer = $VBoxContainer/HBoxContainer/PlayerContainer/Players
-@onready var ai_list: VBoxContainer = $VBoxContainer/HBoxContainer/AiContainer/Players
-@onready var lobby_button: Button = $VBoxContainer/LobbyButton
-@onready var waiting_label: Label = $VBoxContainer/WaitingLabel
+@onready var message_container: GameFinishedMessageContainer = $GameFinishedPanel/VBoxContainer/MessageContainer
+@onready var menu_button: Button = $GameFinishedPanel/VBoxContainer/MenuButton
 
 
 func initialize():
 	hide()
-	lobby_button.connect("pressed", Callable(self, "_on_LobbyButton_pressed"))
-	player_team_label.initialize("Team 1")
-	ai_team_label.initialize("Team 2")
-	# add players to lists
-	for info in Globals.player_infos.values():
-		var player_name = info.name
-		var player_team = info.team
-		var label = Label.new()
-		label.clip_text = true
-		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		label.text = str(player_name)
-		if player_team == 1:
-			player_list.add_child(label)
-		elif player_team == 2:
-			ai_list.add_child(label)
-
-	lobby_button.show()
-	waiting_label.hide()
+	menu_button.connect("pressed", _on_MenuButton_pressed)
 
 
-func display(winning_team: int):
+func display(has_player_won: bool):
 	get_tree().paused = true
 	show()
-	# show win animation
-	match winning_team:
-		1:
-			player_team_label.show_as_winner()
-		2:
-			ai_team_label.show_as_winner()
+	if has_player_won:
+		message_container.set_message("You won! :)")
+		message_container.show_animation()
+	else:
+		message_container.set_message("You lost :(")
+		message_container.show_animation()
 
 
-func _on_LobbyButton_pressed():
+func _on_MenuButton_pressed():
 	SoundManager.click()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

@@ -10,8 +10,8 @@ var main_menu_open_anim: AnimationPlayer
 
 
 func _ready():
-	main_menu.connect("game_started", Callable(self, "_on_game_started"))
-	main_menu.connect("game_quit", Callable(self, "_on_game_quit"))
+	main_menu.connect("game_started", _on_game_started)
+	main_menu.connect("game_quit", _on_game_quit)
 
 	main_menu_open_anim = Animations.fade_in_anim(main_menu, Globals.menu_transition_time)
 

@@ -29,7 +29,7 @@ script = ExtResource("2")
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 70
 
 [node name="TitleLabel" type="Label" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
@@ -50,7 +50,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 20
+theme_override_constants/separation = 30
 
 [node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
 unique_name_in_owner = true
@@ -65,12 +65,15 @@ alignment = 1
 [node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4")
 icon = ExtResource("7")
+icon_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
 
 [node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
@@ -81,6 +84,7 @@ horizontal_alignment = 1
 [node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4")
 icon = ExtResource("3")
 icon_alignment = 1

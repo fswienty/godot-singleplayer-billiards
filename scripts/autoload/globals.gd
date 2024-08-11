@@ -8,8 +8,8 @@ const menu_transition_time: float = 0.3
 var player_infos: Dictionary = {}
 
 const ai_levels: Dictionary = {
-    1: {name = "Amateur", incompetence = 5.0},
-    2: {name = "Normal", incompetence = 2.0},
+    1: {name = "Amateur", incompetence = 7.0},
+    2: {name = "Normal", incompetence = 3.0},
     3: {name = "Pro", incompetence = 0.1},
 }
 var current_ai_level: int = 2

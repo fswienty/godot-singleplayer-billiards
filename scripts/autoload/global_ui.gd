@@ -8,7 +8,7 @@ var show_error_anim: AnimationPlayer
 
 
 func _ready():
-	error_label_timer.connect("timeout", Callable(self, "_slide_out_error_label"))
+	error_label_timer.connect("timeout", _slide_out_error_label)
 
 	show_error_anim = Animations.slide_in_anim(error_label, "y", 100, Globals.menu_transition_time)
 	hide_error()

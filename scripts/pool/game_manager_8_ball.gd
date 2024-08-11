@@ -27,7 +27,7 @@ var ai_pocketed_balls: Array = []
 @onready var queue_controller: QueueController = $QueueController
 @onready var hud = $UI/Hud_8Ball
 @onready var debug_hud = $UI/DEBUG_Hud_8Ball
-@onready var game_finished_panel = $UI/GameFinished
+@onready var game_finished_panel = $UI/GameFinishedMenu
 
 
 func _init():
@@ -38,8 +38,8 @@ func _ready():
 	seed(randi())
 
 	# connect signals
-	ball_manager.ball_placer.connect("ball_placed", Callable(self, "_on_BallPlacer_ball_placed"))
-	queue_controller.connect("queue_hit", Callable(self, "_on_queue_hit"))
+	ball_manager.ball_placer.connect("ball_placed", _on_BallPlacer_ball_placed)
+	queue_controller.connect("queue_hit", _on_queue_hit)
 
 	# initialize nodes
 	ball_manager.initialize()
@@ -122,10 +122,10 @@ func _on_balls_stopped(legal_play: bool):
 	# check for game over
 	print("balls stopped ", "has_player_won: ", has_player_won, " has_player_lost: ", has_player_lost, " legal_play: ", legal_play)
 	if has_player_won and legal_play:
-		game_finished_panel.display(1)
+		game_finished_panel.display(true)
 		return
 	if (has_player_won and not legal_play) or has_player_lost:
-		game_finished_panel.display(2)
+		game_finished_panel.display(false)
 		return
 
 	# reset for next turn
@@ -264,5 +264,5 @@ func _check_last_non_8_ball(pocket: Pocket):
 
 
 func _on_BallPlacer_ball_placed(ball: Ball):
-	ball.connect("ball_pocketed", Callable(self, "_on_ball_pocketed"))
-	ball.connect("ball_hit", Callable(self, "_on_ball_hit"))
+	ball.connect("ball_pocketed", _on_ball_pocketed)
+	ball.connect("ball_hit", _on_ball_hit)

@@ -16,10 +16,10 @@ var scroll_wheel_tab_title: String = "Scroll Wheel"
 
 
 func _ready():
-	play_button.connect("pressed", Callable(self, "_on_PlayButton_pressed"))
-	increase_diffuculty_button.connect("pressed", Callable(self, "_on_IncreaseDifficultyButton_pressed"))
-	decrease_diffuculty_button.connect("pressed", Callable(self, "_on_DecreaseDifficultyButton_pressed"))
-	quit_button.connect("pressed", Callable(self, "_on_QuitButton_pressed"))
+	play_button.connect("pressed", _on_PlayButton_pressed)
+	increase_diffuculty_button.connect("pressed", _on_IncreaseDifficultyButton_pressed)
+	decrease_diffuculty_button.connect("pressed", _on_DecreaseDifficultyButton_pressed)
+	quit_button.connect("pressed", _on_QuitButton_pressed)
 	modulate = Color.TRANSPARENT
 	_set_buttons_enabled(true)
 
