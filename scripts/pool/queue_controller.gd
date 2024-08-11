@@ -4,11 +4,8 @@ class_name QueueController
 signal queue_hit
 
 @export var table: Table
-@export var touch_indicators: Control
+@export var touch_visualisation: Node2D
 
-# @export var distance_at_rest: float = 15.0
-# @export var max_distance: float = 70.0
-# @export var force_mult: float = 1000.0
 var distance_at_rest: float = 30.0
 var max_distance: float = 120.0
 var force_mult: float = 1200.0
@@ -119,13 +116,6 @@ func _mouse_wheel_mode() -> Array:
 
 
 func _input(event):
-	# if event is InputEventMouseButton:
-	# 	if event.button_index == BUTTON_LEFT:
-	# 		if event.pressed:
-	# 			Input.action_press("lmb")
-	# 			initial_pos = event.position
-	# 		else:
-	# 			Input.action_release("lmb")
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			Input.action_press("lmb")
@@ -168,7 +158,8 @@ func _touch_mode() -> Array:
 	var rot = drag_vector.angle() + PI
 	if Input.is_action_pressed("lmb"):
 		on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * (distance_at_rest + 2)
-		queue_redraw()
+		# queue_redraw()
+		# touch_visualisation.queue_redraw()
 
 	var show_queue = true
 	if dragged_distance < distance_at_rest:
@@ -177,12 +168,34 @@ func _touch_mode() -> Array:
 	return [show_queue, rot, queue_pos]
 
 func _draw():
+	return
 	if is_touch_active:
-		draw_line(
-			(-self.global_position + on_circle).rotated(-Globals.global_rotation),
-			(-self.global_position + get_viewport().get_mouse_position()).rotated(-Globals.global_rotation),
-			Color(1, 1, 1, 0.3), 3, true)
-		draw_arc((initial_pos-self.global_position).rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
+		var resolution = get_window().size
+		var resolution2 = get_viewport().get_visible_rect().size
+		var x_diff = resolution2.x - 576
+		var y_diff = resolution2.y - 1024
+		var diff = Vector2(resolution2) - Vector2(576, 1024)
+		var ratio = Vector2(resolution2.x / 576.0, resolution2.y / 1024.0)
+		
+		# var line_from =  on_circle - self.global_position
+		# var line_to = get_viewport().get_mouse_position() - self.global_position
+		# line_from *= ratio
+		# line_to *= ratio
+		# draw_line(
+		# 	line_from.rotated(-Globals.global_rotation),
+		# 	line_to.rotated(-Globals.global_rotation),
+		# 	Color(1, 1, 1, 0.3), 3, true)
+
+		# var circle_center = initial_pos - (self.global_position)
+		# circle_center *= ratio
+		# draw_arc(circle_center.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
+		
+		# print("resolution: ", resolution, " ", x_diff, " ", y_diff, " ", diff, " ", ratio)
+		print("res: ", resolution, "res2: ", resolution2, " global_pos: ", self.global_position, " mouse_pos", mouse_pos, " differnce: ", diff)
+		
+		var circle_center = mouse_pos - (self.global_position)
+		draw_arc(circle_center.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
+		draw_arc(mouse_pos.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
 
 
 

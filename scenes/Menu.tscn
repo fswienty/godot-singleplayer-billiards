@@ -16,6 +16,7 @@
 script = ExtResource("5")
 
 [node name="Background" parent="." instance=ExtResource("6")]
+position = Vector2(402, 716)
 
 [node name="MainMenu" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -116,6 +117,6 @@ sound_off_icon = ExtResource("10")
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(288.87, 514)
+position = Vector2(288, 512)
 
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]
