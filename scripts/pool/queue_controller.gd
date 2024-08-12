@@ -31,7 +31,6 @@ func initialize(cue_ball_: Ball):
 
 
 func run(player_turn: bool):
-	# print("QUEUE" + (" PLAYER" if player_turn else " AI"))
 	if cue_ball == null:
 		printerr("missing cue ball!")
 		return
@@ -125,23 +124,22 @@ func _input(event):
 
 var drag_vector := Vector2.LEFT
 var initial_pos: Vector2
-var on_circle: Vector2
-var is_touch_active := false
 func _touch_mode() -> Array:
 	# handle dragging while lmb pressed
 	if Input.is_action_just_pressed("lmb"):
-		is_touch_active = true
+		touch_visualisation.is_touch_active = true
 		initial_pos = mouse_pos
 	
 	# if the touch control mode has not properly been initialized by a just pressed event, abort
-	if not is_touch_active:
+	if not touch_visualisation.is_touch_active:
 		return [false, 0, Vector2.ZERO]
 
 	if Input.is_action_pressed("lmb"):
 		drag_vector = mouse_pos - initial_pos
 		dragged_distance = clamp(drag_vector.length(), 0, max_distance)
 	if Input.is_action_just_released("lmb"):
-		is_touch_active = false
+		touch_visualisation.is_touch_active = false
+		touch_visualisation.queue_redraw()
 		var impulse: Vector2 = (
 			force_mult
 			* (dragged_distance / max_distance)
@@ -157,46 +155,15 @@ func _touch_mode() -> Array:
 	var queue_pos = cue_ball.global_position + (170 + dragged_distance) * drag_vector.normalized()
 	var rot = drag_vector.angle() + PI
 	if Input.is_action_pressed("lmb"):
-		on_circle = initial_pos + (mouse_pos - initial_pos).normalized() * (distance_at_rest + 2)
-		# queue_redraw()
-		# touch_visualisation.queue_redraw()
+		touch_visualisation.initial_pos = initial_pos
+		touch_visualisation.distance_at_rest = distance_at_rest
+		touch_visualisation.queue_redraw()
 
 	var show_queue = true
 	if dragged_distance < distance_at_rest:
 		show_queue = false
 	
 	return [show_queue, rot, queue_pos]
-
-func _draw():
-	return
-	if is_touch_active:
-		var resolution = get_window().size
-		var resolution2 = get_viewport().get_visible_rect().size
-		var x_diff = resolution2.x - 576
-		var y_diff = resolution2.y - 1024
-		var diff = Vector2(resolution2) - Vector2(576, 1024)
-		var ratio = Vector2(resolution2.x / 576.0, resolution2.y / 1024.0)
-		
-		# var line_from =  on_circle - self.global_position
-		# var line_to = get_viewport().get_mouse_position() - self.global_position
-		# line_from *= ratio
-		# line_to *= ratio
-		# draw_line(
-		# 	line_from.rotated(-Globals.global_rotation),
-		# 	line_to.rotated(-Globals.global_rotation),
-		# 	Color(1, 1, 1, 0.3), 3, true)
-
-		# var circle_center = initial_pos - (self.global_position)
-		# circle_center *= ratio
-		# draw_arc(circle_center.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
-		
-		# print("resolution: ", resolution, " ", x_diff, " ", y_diff, " ", diff, " ", ratio)
-		print("res: ", resolution, "res2: ", resolution2, " global_pos: ", self.global_position, " mouse_pos", mouse_pos, " differnce: ", diff)
-		
-		var circle_center = mouse_pos - (self.global_position)
-		draw_arc(circle_center.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
-		draw_arc(mouse_pos.rotated(-Globals.global_rotation), distance_at_rest, 0, 2*PI, 32, Color(1, 1, 1, 0.3), 3, true)
-
 
 
 func _has_line_of_sight(node_a: Node2D, node_b: Node2D) -> bool:
