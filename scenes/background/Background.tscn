@@ -10,6 +10,6 @@ lightmap_size_hint = Vector2i(7, 7)
 texture_repeat = 2
 material = ExtResource("2")
 position = Vector2(288, 512)
-scale = Vector2(806.4, -1433.6)
+scale = Vector2(1152, -2048)
 mesh = SubResource("QuadMesh_m4mh4")
 texture = ExtResource("2_qy30f")

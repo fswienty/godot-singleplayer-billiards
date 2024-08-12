@@ -141,6 +141,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-371.905, -301.957)
 mode = 1
 modes/blend = 5
 flags/unshaded = true
@@ -149,15 +150,15 @@ nodes/fragment/0/position = Vector2(1120, 340)
 nodes/fragment/2/node = SubResource("1")
 nodes/fragment/2/position = Vector2(240, -180)
 nodes/fragment/3/node = SubResource("2")
-nodes/fragment/3/position = Vector2(-240, -340)
+nodes/fragment/3/position = Vector2(-280, -340)
 nodes/fragment/7/node = SubResource("7")
-nodes/fragment/7/position = Vector2(-600, 40)
+nodes/fragment/7/position = Vector2(-580, 40)
 nodes/fragment/9/node = SubResource("9")
-nodes/fragment/9/position = Vector2(-140, -180)
+nodes/fragment/9/position = Vector2(-140, -220)
 nodes/fragment/11/node = SubResource("5")
-nodes/fragment/11/position = Vector2(-140, 0)
+nodes/fragment/11/position = Vector2(-120, -20)
 nodes/fragment/12/node = SubResource("6")
-nodes/fragment/12/position = Vector2(-300, 20)
+nodes/fragment/12/position = Vector2(-280, 0)
 nodes/fragment/17/node = SubResource("13")
 nodes/fragment/17/position = Vector2(880, 320)
 nodes/fragment/48/node = SubResource("36")
@@ -170,4 +171,4 @@ nodes/fragment/89/node = SubResource("VisualShaderNodeColorConstant_ex0dx")
 nodes/fragment/89/position = Vector2(320, 500)
 nodes/fragment/90/node = SubResource("VisualShaderNodeMultiplyAdd_8vdi3")
 nodes/fragment/90/position = Vector2(80, -180)
-nodes/fragment/connections = PackedInt32Array(12, 0, 11, 0, 12, 0, 11, 1, 7, 0, 12, 0, 12, 0, 11, 2, 64, 0, 17, 1, 2, 0, 17, 0, 17, 0, 0, 0, 88, 0, 64, 0, 89, 0, 64, 1, 48, 2, 64, 2, 3, 0, 90, 0, 9, 0, 90, 1, 11, 0, 90, 2, 90, 0, 2, 0)
+nodes/fragment/connections = PackedInt32Array(12, 0, 11, 0, 12, 0, 11, 1, 7, 0, 12, 0, 12, 0, 11, 2, 64, 0, 17, 1, 2, 0, 17, 0, 17, 0, 0, 0, 88, 0, 64, 0, 89, 0, 64, 1, 48, 2, 64, 2, 3, 0, 90, 0, 11, 0, 90, 2, 90, 0, 2, 0, 9, 0, 90, 1)
