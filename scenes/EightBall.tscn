@@ -131,6 +131,7 @@ vertical_alignment = 1
 layout_mode = 2
 
 [node name="PauseButton" type="Button" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gurtp")
 icon = ExtResource("3_ib52b")
@@ -456,34 +457,45 @@ process_mode = 3
 layout_mode = 2
 text = "Back to Menu"
 
-[node name="PauseMenu" type="CenterContainer" parent="UI" node_paths=PackedStringArray("pause_button")]
+[node name="PauseMenu" type="Button" parent="UI" node_paths=PackedStringArray("pause_button")]
+process_mode = 3
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 3
+flat = true
 script = ExtResource("7_a87wd")
 pause_button = NodePath("../Hud_8Ball/TopBarContainer/HBoxContainer/PauseButton")
 
-[node name="PauseMenuPanel" type="PanelContainer" parent="UI/PauseMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/PauseMenu/CenterContainer"]
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/PauseMenuPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu/CenterContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="RestartMenu" type="Button" parent="UI/PauseMenu/PauseMenuPanel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="UI/PauseMenu/CenterContainer/PanelContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Restart"
 
-[node name="HSeparator" type="HSeparator" parent="UI/PauseMenu/PauseMenuPanel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="UI/PauseMenu/CenterContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MenuButton" type="Button" parent="UI/PauseMenu/PauseMenuPanel/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="UI/PauseMenu/CenterContainer/PanelContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
 text = "Back to Menu"

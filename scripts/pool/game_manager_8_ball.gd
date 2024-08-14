@@ -27,9 +27,6 @@ var ai_pocketed_balls: Array = []
 @onready var queue_controller: QueueController = $QueueController
 @onready var hud = $UI/Hud_8Ball
 @onready var debug_hud = $UI/DEBUG_Hud_8Ball
-
-# @onready var pause_panel: Control = $UI/PauseMenu
-# @onready var pause_button: Button = $UI/Hud_8Ball/TopBarContainer/HBoxContainer/PauseButton
 @onready var game_finished_panel = $UI/GameFinishedMenu
 
 
@@ -43,7 +40,6 @@ func _ready():
 	# connect signals
 	ball_manager.ball_placer.connect("ball_placed", _on_BallPlacer_ball_placed)
 	queue_controller.connect("queue_hit", _on_queue_hit)
-	# pause_button.connect("pressed", _on_pause_button_pressed)
 
 	# initialize nodes
 	ball_manager.initialize()
@@ -115,6 +111,7 @@ func _on_queue_hit(impulse: Vector2):
 func _on_turn_ended(legal_play: bool):
 	turn_number += 1
 	# turn_number += 2 # let ai play every turn
+	
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)
 	hud.update()
@@ -208,17 +205,6 @@ func _handle_8_ball_pocketed(_pocket: Pocket):
 	else:
 		has_player_won = ai_ball_type != Enums.BallType.EIGHT
 		has_player_lost = ai_ball_type == Enums.BallType.EIGHT
-	# if is_player_turn():	
-	# 	if pocket.location == player_8_ball_target:
-	# 		has_player_won = true
-	# 	else:
-	# 		has_player_lost = true
-	# else:
-	# 	if pocket.location == ai_8_ball_target:
-	# 		has_player_won = true
-	# 	else:
-	# 		has_player_lost = true
-
 
 func _assign_ball_types(ball: Ball):
 	if is_player_turn() and ball.type == Enums.BallType.FULL:
@@ -272,8 +258,3 @@ func _check_last_non_8_ball(pocket: Pocket):
 func _on_BallPlacer_ball_placed(ball: Ball):
 	ball.connect("ball_pocketed", _on_ball_pocketed)
 	ball.connect("ball_hit", _on_ball_hit)
-
-
-# func _on_pause_button_pressed():
-# 	SoundManager.click()
-# 	pause_panel.visible = not pause_panel.visible
