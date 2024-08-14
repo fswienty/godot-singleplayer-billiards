@@ -7,13 +7,14 @@ extends Button
 
 func _ready():
 	hide()
-	pause_button.connect("pressed", _on_PauseButton_pressed)
+	pause_button.connect("pressed", _toggle_pause)
+	self.connect("pressed", _toggle_pause)
 	restart_button.connect("pressed", _on_RestartButton_pressed)
 	menu_button.connect("pressed", _on_MenuButton_pressed)
-	self.connect("pressed", _on_container_pressed)
 
 
 func _toggle_pause():
+	SoundManager.click()
 	if self.visible:
 		self.visible = false
 		get_tree().paused = false
@@ -21,19 +22,11 @@ func _toggle_pause():
 		self.visible = true
 		get_tree().paused = true
 
-func _on_container_pressed():
-	SoundManager.click()
-	_toggle_pause()
-
-func _on_PauseButton_pressed():
-	SoundManager.click()
-	_toggle_pause()
-
 
 func _on_RestartButton_pressed():
 	SoundManager.click()
 	get_tree().paused = false
-	print("todo")
+	get_tree().change_scene_to_file("res://scenes/EightBall.tscn")
 
 
 func _on_MenuButton_pressed():

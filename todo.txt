@@ -1,10 +1,4 @@
-credit tabler icons
-difficulty buttons
-    save current diff
-finish pause menu
-    restart
-    back to menu
-
+credit tabler icons and godot engine
 
 chaos billiard:
     just do next turn immediately lol

@@ -12,7 +12,7 @@ var player_infos: Dictionary = {}
 # should be numbered consecutively starting at 0
 const ai_levels: Dictionary = {
 	0: {name = "Amateur", icon = "mood-sing", incompetence = 10.0},
-	1: {name = "Normal", icon = "mood-smile-beam", incompetence = 4.0},
+	1: {name = "Good", icon = "mood-smile-beam", incompetence = 4.0},
 	2: {name = "Pro", icon = "mood-neutral", incompetence = 0.1},
 }
 var current_ai_level: int = 1:

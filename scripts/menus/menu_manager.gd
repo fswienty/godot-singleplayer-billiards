@@ -6,7 +6,8 @@ var main_menu_open_anim: AnimationPlayer
 @export var DEBUG_HUD: bool = false
 @export var DEBUG_CONSOLE: bool = false
 
-@onready var main_menu = $MainMenu
+@onready var main_menu: CenterContainer = $MainMenu
+@onready var click_blocker: Control = $ClickBlocker
 
 
 func _ready():
@@ -41,6 +42,7 @@ func _ready():
 
 
 func _on_game_started():
+	click_blocker.visible = true
 	GlobalUi.hide_error()
 	main_menu_open_anim.play_backwards("anim")
 	await main_menu_open_anim.animation_finished
@@ -48,6 +50,7 @@ func _on_game_started():
 
 
 func _on_game_quit():
+	click_blocker.visible = true
 	GlobalUi.hide_error()
 	main_menu_open_anim.play_backwards("anim")
 	await main_menu_open_anim.animation_finished

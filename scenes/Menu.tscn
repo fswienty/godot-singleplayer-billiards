@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=14 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
 [ext_resource type="Script" path="res://scripts/menus/menu_manager.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://hc5wol3p1jq5" path="res://scenes/background/Background.tscn" id="6"]
+[ext_resource type="Script" path="res://scripts/menus/licence_screen.gd" id="6_lyiei"]
+[ext_resource type="FontFile" uid="uid://c4cus7ae4oav1" path="res://assets/fonts/Lobster-Regular.ttf" id="6_njfy6"]
+[ext_resource type="Script" path="res://scripts/menus/licences.gd" id="7_f1i3t"]
 [ext_resource type="Script" path="res://scripts/menus/mute_button.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://ssytt4hja0sv" path="res://assets/images/ui/volume.svg" id="8_0s4le"]
 [ext_resource type="Texture2D" uid="uid://bdpdh28fcnnxg" path="res://assets/images/ui/info-circle.svg" id="8_f74ri"]
@@ -15,12 +18,14 @@
 script = ExtResource("5")
 
 [node name="Background" parent="." instance=ExtResource("6")]
-position = Vector2(402, 716)
+position = Vector2(576, 1024)
+metadata/_edit_lock_ = true
 
 [node name="MainMenu" type="CenterContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -142.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(0, 300)
@@ -40,8 +45,9 @@ theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 91
-text = "Pool Alone"
+theme_override_font_sizes/font_size = 130
+text = "Simple
+Pool"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -70,9 +76,6 @@ visible = false
 layout_mode = 2
 theme = ExtResource("4")
 text = "Quit"
-
-[node name="Spacer" type="Control" parent="MainMenu/VBoxContainer"]
-layout_mode = 2
 
 [node name="InfoButton" type="Button" parent="."]
 texture_filter = 6
@@ -105,11 +108,85 @@ script = ExtResource("8")
 sound_on_icon = ExtResource("8_0s4le")
 sound_off_icon = ExtResource("10_bl3i5")
 
+[node name="InfoPanel" type="Button" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+script = ExtResource("6_lyiei")
+
+[node name="PanelContainer" type="PanelContainer" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 61.0
+offset_top = 70.0
+offset_right = -61.0
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_njfy6")
+theme_override_font_sizes/font_size = 56
+text = "Simple Pool"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "by DivineDev"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Licences"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/PanelContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+fit_content = true
+autowrap_mode = 2
+script = ExtResource("7_f1i3t")
+
+[node name="ClickBlocker" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="GlobalUi" parent="." instance=ExtResource("11_o5u3k")]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 512)
 
-[connection signal="pressed" from="InfoButton" to="InfoButton" method="_on_MuteButton_pressed"]
+[connection signal="pressed" from="InfoButton" to="InfoPanel" method="toggle_visible"]
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]
