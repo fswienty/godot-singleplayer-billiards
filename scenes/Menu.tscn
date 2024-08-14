@@ -62,10 +62,12 @@ theme = ExtResource("4")
 text = "Play"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_tc2br")
 
@@ -105,6 +107,11 @@ size_flags_horizontal = 3
 theme = ExtResource("4")
 icon = ExtResource("3")
 icon_alignment = 1
+
+[node name="DifficultyOptionButton" type="OptionButton" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true

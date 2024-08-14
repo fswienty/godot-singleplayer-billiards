@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://jxekvhprpbin"]
 
 [ext_resource type="FontFile" path="res://assets/fonts/ui_font_24.tres" id="1"]
-[ext_resource type="Texture2D" uid="uid://stdx5fgq8j6x" path="res://assets/images/ui/trophy.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bhjjprup8a6e" path="res://assets/images/ui/trophy.svg" id="2_ych2b"]
 [ext_resource type="Script" path="res://scripts/menus/game_finished_message_container.gd" id="3"]
 
 [sub_resource type="Animation" id="Animation_vdjgx"]
@@ -65,7 +65,7 @@ layout_mode = 2
 [node name="TrophyLeft" type="TextureRect" parent="TrophyLeftContainer"]
 self_modulate = Color(1, 0.854902, 0.188235, 1)
 layout_mode = 2
-texture = ExtResource("2")
+texture = ExtResource("2_ych2b")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(140, 50)
@@ -84,7 +84,7 @@ layout_mode = 2
 [node name="TrophyRight" type="TextureRect" parent="TrophyRightContainer"]
 self_modulate = Color(1, 0.854902, 0.188235, 1)
 layout_mode = 2
-texture = ExtResource("2")
+texture = ExtResource("2_ych2b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cprv64x6srfvm" path="res://assets/images/balls/cue_ball.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://wvhmr3o3ycg5" path="res://scenes/game_scenes/Ball.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://b1qjio4tp8gh1" path="res://scenes/game_scenes/Table.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://146mow8om8h0" path="res://assets/images/ui/player-pause.png" id="3_kedew"]
+[ext_resource type="Texture2D" uid="uid://giv5pr7yyw15" path="res://assets/images/ui/player-pause.svg" id="3_ib52b"]
 [ext_resource type="Script" path="res://scripts/pool/game_manager_8_ball.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/debug/bgbutton.gd" id="6_jy6ky"]
 [ext_resource type="Script" path="res://scripts/pool/ball_in_hand.gd" id="7"]
@@ -133,7 +133,7 @@ layout_mode = 2
 [node name="PauseButton" type="Button" parent="UI/Hud_8Ball/TopBarContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_gurtp")
-icon = ExtResource("3_kedew")
+icon = ExtResource("3_ib52b")
 flat = true
 icon_alignment = 1
 
@@ -425,7 +425,6 @@ offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="GameFinishedMenu" type="CenterContainer" parent="UI"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

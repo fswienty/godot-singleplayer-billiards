@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://stdx5fgq8j6x"
-path="res://.godot/imported/trophy.png-e81af1ea055f708aa2c2c9b2108a2f1d.ctex"
+uid="uid://giv5pr7yyw15"
+path="res://.godot/imported/player-pause.svg-75e3ef1e796fe408df4a2567e343dba9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ui/trophy.png"
-dest_files=["res://.godot/imported/trophy.png-e81af1ea055f708aa2c2c9b2108a2f1d.ctex"]
+source_file="res://assets/images/ui/player-pause.svg"
+dest_files=["res://.godot/imported/player-pause.svg-75e3ef1e796fe408df4a2567e343dba9.ctex"]
 
 [params]
 
@@ -25,10 +25,13 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=50
+process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

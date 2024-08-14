@@ -1,6 +1,6 @@
 credit tabler icons
 difficulty buttons
-    jsut use three buttons, one per diff
+    save current diff
 finish pause menu
     restart
     back to menu

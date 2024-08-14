@@ -1,11 +1,12 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bduxmeenb8ffk"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bduxmeenb8ffk"]
 
 [ext_resource type="FontFile" uid="uid://ctdsyevoue50x" path="res://assets/fonts/ui_font.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://bqh8awjue6uqo" path="res://ui_theme/style_boxes/inactive.tres" id="2"]
 [ext_resource type="StyleBox" uid="uid://q0kbeybnhp40" path="res://ui_theme/style_boxes/normal.tres" id="3"]
-[ext_resource type="StyleBox" path="res://ui_theme/style_boxes/flat_panel.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://d06wnb7852rjx" path="res://ui_theme/style_boxes/flat_panel.tres" id="4"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/pressed.tres" id="5"]
 [ext_resource type="StyleBox" uid="uid://dwqbixn76hvx6" path="res://ui_theme/style_boxes/hover.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://xp6cdujt4t8i" path="res://assets/images/ui/chevron-down.svg" id="6_wb81v"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/pressed_tab.tres" id="7"]
 [ext_resource type="StyleBox" path="res://ui_theme/style_boxes/normal_tab.tres" id="8"]
 
@@ -34,6 +35,7 @@ MarginContainer/constants/margin_bottom = 5
 MarginContainer/constants/margin_left = 5
 MarginContainer/constants/margin_right = 5
 MarginContainer/constants/margin_top = 5
+OptionButton/icons/arrow = ExtResource("6_wb81v")
 PanelContainer/styles/panel = ExtResource("3")
 ProgressBar/styles/bg = ExtResource("3")
 RoundedPanel/base_type = &"PanelContainer"
