@@ -1,5 +1,7 @@
 credit tabler icons
-pause menu
+difficulty buttons
+    jsut use three buttons, one per diff
+finish pause menu
     restart
     back to menu
 

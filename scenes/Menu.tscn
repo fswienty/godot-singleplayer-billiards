@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=14 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://wqfkom15nwup" path="res://assets/images/ui/arrow-big-right.svg" id="3"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
 [ext_resource type="Script" path="res://scripts/menus/menu_manager.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://hc5wol3p1jq5" path="res://scenes/background/Background.tscn" id="6"]
+[ext_resource type="StyleBox" uid="uid://d06wnb7852rjx" path="res://ui_theme/style_boxes/flat_panel.tres" id="6_tc2br"]
 [ext_resource type="Texture2D" uid="uid://2hcbhonhpwwe" path="res://assets/images/ui/arrow-big-left.svg" id="7"]
 [ext_resource type="Script" path="res://scripts/menus/mute_button.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://ssytt4hja0sv" path="res://assets/images/ui/volume.svg" id="8_0s4le"]
+[ext_resource type="Texture2D" uid="uid://bdpdh28fcnnxg" path="res://assets/images/ui/info-circle.svg" id="8_f74ri"]
 [ext_resource type="Texture2D" uid="uid://btyn7yclkexd5" path="res://assets/images/ui/volume-off.svg" id="10_bl3i5"]
 [ext_resource type="FontFile" uid="uid://mtlexfimdp2g" path="res://assets/fonts/title_font.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="11_o5u3k"]
@@ -46,24 +48,38 @@ text = "Pool Alone"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayQuitVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer"]
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 30
 
-[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4")
 text = "Play"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_tc2br")
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+text = "AI Difficulty"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
+[node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -71,18 +87,18 @@ theme = ExtResource("4")
 icon = ExtResource("7")
 icon_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer/PanelContainer"]
+[node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Normal"
 horizontal_alignment = 1
 
-[node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer/HBoxContainer"]
+[node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -90,15 +106,28 @@ theme = ExtResource("4")
 icon = ExtResource("3")
 icon_alignment = 1
 
-[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("4")
 text = "Quit"
 
-[node name="Control" type="Control" parent="MainMenu/VBoxContainer"]
+[node name="Spacer" type="Control" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
+
+[node name="InfoButton" type="Button" parent="."]
+texture_filter = 6
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -109.0
+offset_right = 100.0
+offset_bottom = -21.0
+grow_vertical = 0
+icon = ExtResource("8_f74ri")
+icon_alignment = 1
 
 [node name="MuteButton" type="Button" parent="."]
 anchors_preset = 3
@@ -106,10 +135,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -83.0
-offset_top = -89.0
-offset_right = -21.0
-offset_bottom = -25.0
+offset_left = -97.0
+offset_top = -109.0
+offset_right = -19.0
+offset_bottom = -21.0
 grow_horizontal = 0
 grow_vertical = 0
 icon = ExtResource("8_0s4le")
@@ -124,4 +153,5 @@ visible = false
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 512)
 
+[connection signal="pressed" from="InfoButton" to="InfoButton" method="_on_MuteButton_pressed"]
 [connection signal="pressed" from="MuteButton" to="MuteButton" method="_on_MuteButton_pressed"]

@@ -45,11 +45,11 @@ func _get_ball_type_text(team_ball_type: int, team_8_ball_target: int) -> String
 			Enums.BallType.HALF:
 				return "Stripes"
 			Enums.BallType.NONE:
-				return "Undetermined"
+				return "Any"
 			_:
 				return "error, this should never be shown"
 	else:
-		return "Eight Ball" # + Enums.PocketLocation.keys()[team_8_ball_target]
+		return "8-Ball" # + Enums.PocketLocation.keys()[team_8_ball_target]
 
 
 func update_pocketed_balls():
