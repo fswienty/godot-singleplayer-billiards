@@ -1,12 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=11 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://wqfkom15nwup" path="res://assets/images/ui/arrow-big-right.svg" id="3"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
 [ext_resource type="Script" path="res://scripts/menus/menu_manager.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://hc5wol3p1jq5" path="res://scenes/background/Background.tscn" id="6"]
-[ext_resource type="StyleBox" uid="uid://d06wnb7852rjx" path="res://ui_theme/style_boxes/flat_panel.tres" id="6_tc2br"]
-[ext_resource type="Texture2D" uid="uid://2hcbhonhpwwe" path="res://assets/images/ui/arrow-big-left.svg" id="7"]
 [ext_resource type="Script" path="res://scripts/menus/mute_button.gd" id="8"]
 [ext_resource type="Texture2D" uid="uid://ssytt4hja0sv" path="res://assets/images/ui/volume.svg" id="8_0s4le"]
 [ext_resource type="Texture2D" uid="uid://bdpdh28fcnnxg" path="res://assets/images/ui/info-circle.svg" id="8_f74ri"]
@@ -61,57 +58,11 @@ layout_mode = 2
 theme = ExtResource("4")
 text = "Play"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_styles/panel = ExtResource("6_tc2br")
-
-[node name="Label" type="Label" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-text = "AI Difficulty"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 12
-alignment = 1
-
-[node name="DecreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4")
-icon = ExtResource("7")
-icon_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-
-[node name="AiDifficultyLabel" type="Label" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Normal"
-horizontal_alignment = 1
-
-[node name="IncreaseDifficultyButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4")
-icon = ExtResource("3")
-icon_alignment = 1
-
 [node name="DifficultyOptionButton" type="OptionButton" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+allow_reselect = true
 
 [node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/ButtonVBoxContainer"]
 unique_name_in_owner = true

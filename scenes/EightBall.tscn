@@ -425,6 +425,7 @@ offset_bottom = 26.0
 text = "aaaaaa"
 
 [node name="GameFinishedMenu" type="CenterContainer" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

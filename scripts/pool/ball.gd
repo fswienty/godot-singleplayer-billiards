@@ -6,7 +6,6 @@ signal ball_hit
 
 var number: int = -1
 var type = Enums.BallType.NONE
-var current_velocity: Vector2
 var impulse: Vector2 = Vector2.ZERO
 
 
@@ -23,7 +22,6 @@ func _physics_process(_delta):
 	if impulse != Vector2.ZERO:
 		apply_central_impulse(impulse)
 		impulse = Vector2.ZERO
-		# current_velocity = linear_velocity  # TODO check if necessary?
 
 
 func _integrate_forces(_state):

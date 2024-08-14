@@ -315,7 +315,6 @@ func _get_valid_target_balls() -> Array[Node]:
 	var balls_half = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.HALF))
 	var balls_eight = get_tree().get_nodes_in_group("BallType" + str(Enums.BallType.EIGHT))
 
-	# TODO handle end of game where 8 ball is target
 	match ai_ball_type:
 		Enums.BallType.EIGHT:
 			target_balls = balls_eight
