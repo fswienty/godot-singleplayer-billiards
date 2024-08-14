@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://hc5wol3p1jq5" path="res://scenes/background/Background.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://2hcbhonhpwwe" path="res://assets/images/ui/arrow-big-left.svg" id="7"]
 [ext_resource type="Script" path="res://scripts/menus/mute_button.gd" id="8"]
-[ext_resource type="Texture2D" uid="uid://dtektw0lthuhh" path="res://assets/images/ui/audioOn.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://db6bmlrrg4whd" path="res://assets/images/ui/audioOff.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://ssytt4hja0sv" path="res://assets/images/ui/volume.svg" id="8_0s4le"]
+[ext_resource type="Texture2D" uid="uid://btyn7yclkexd5" path="res://assets/images/ui/volume-off.svg" id="10_bl3i5"]
 [ext_resource type="FontFile" uid="uid://mtlexfimdp2g" path="res://assets/fonts/title_font.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="11_o5u3k"]
 
@@ -92,9 +92,13 @@ icon_alignment = 1
 
 [node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer/PlayQuitVBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("4")
 text = "Quit"
+
+[node name="Control" type="Control" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
 
 [node name="MuteButton" type="Button" parent="."]
 anchors_preset = 3
@@ -102,16 +106,17 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -95.0
+offset_left = -83.0
+offset_top = -89.0
 offset_right = -21.0
 offset_bottom = -25.0
 grow_horizontal = 0
 grow_vertical = 0
-icon = ExtResource("9")
+icon = ExtResource("8_0s4le")
+icon_alignment = 1
 script = ExtResource("8")
-sound_on_icon = ExtResource("9")
-sound_off_icon = ExtResource("10")
+sound_on_icon = ExtResource("8_0s4le")
+sound_off_icon = ExtResource("10_bl3i5")
 
 [node name="GlobalUi" parent="." instance=ExtResource("11_o5u3k")]
 visible = false

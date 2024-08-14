@@ -53,7 +53,9 @@ func _ready():
 		debug_hud.initialize(self)
 	game_finished_panel.initialize()
 
+	### DEBUG ###
 	# turn_number += 1 # to make ai go first
+	# game_finished_panel.display(true) # immediately show game finished panel
 
 	current_player_id = _get_player_id_for_turn(turn_number)
 	next_player_id = _get_player_id_for_turn(turn_number + 1)

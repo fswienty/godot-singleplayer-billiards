@@ -2,6 +2,10 @@
 
 .vscode
 
+# Android gradle export
+android/build
+android/.build_version
+
 # Godot 4+ specific ignores
 .godot/
 

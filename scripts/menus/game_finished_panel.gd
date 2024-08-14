@@ -17,7 +17,6 @@ func display(has_player_won: bool):
 		message_container.show_animation()
 	else:
 		message_container.set_message("You lost :(")
-		message_container.show_animation()
 
 
 func _on_MenuButton_pressed():

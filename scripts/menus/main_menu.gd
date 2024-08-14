@@ -24,8 +24,17 @@ func _ready():
 	_set_buttons_enabled(true)
 
 
-func _update_difficulty_label():
+func _update_difficulty():
 	difficulty_label.text = Globals.ai_levels[Globals.current_ai_level]["name"]
+	print(Globals.current_ai_level)
+	if Globals.current_ai_level == 1:
+		decrease_diffuculty_button.disabled = true
+	else:
+		decrease_diffuculty_button.disabled = false
+	if Globals.current_ai_level == Globals.ai_levels.size():
+		increase_diffuculty_button.disabled = true
+	else:
+		increase_diffuculty_button.disabled = false
 
 
 func _set_buttons_enabled(enabled: bool):
@@ -45,14 +54,14 @@ func _on_IncreaseDifficultyButton_pressed():
 	SoundManager.click()
 	if Globals.current_ai_level < Globals.ai_levels.size():
 		Globals.current_ai_level += 1
-	_update_difficulty_label()
+	_update_difficulty()
 
 
 func _on_DecreaseDifficultyButton_pressed():
 	SoundManager.click()
 	if Globals.current_ai_level > 1:
 		Globals.current_ai_level -= 1
-	_update_difficulty_label()
+	_update_difficulty()
 
 
 func _on_QuitButton_pressed():
