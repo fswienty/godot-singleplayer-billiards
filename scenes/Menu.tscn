@@ -109,7 +109,6 @@ sound_on_icon = ExtResource("8_0s4le")
 sound_off_icon = ExtResource("10_bl3i5")
 
 [node name="InfoPanel" type="Button" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -151,6 +150,7 @@ layout_mode = 2
 [node name="Label3" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Licences"
+horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
