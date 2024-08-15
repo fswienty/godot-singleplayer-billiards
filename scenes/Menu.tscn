@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=13 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://ssytt4hja0sv" path="res://assets/images/ui/volume.svg" id="8_0s4le"]
 [ext_resource type="Texture2D" uid="uid://bdpdh28fcnnxg" path="res://assets/images/ui/info-circle.svg" id="8_f74ri"]
 [ext_resource type="Texture2D" uid="uid://btyn7yclkexd5" path="res://assets/images/ui/volume-off.svg" id="10_bl3i5"]
-[ext_resource type="FontFile" uid="uid://mtlexfimdp2g" path="res://assets/fonts/title_font.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="11_o5u3k"]
 
 [node name="Menu" type="CanvasLayer"]
@@ -44,7 +43,7 @@ theme_override_colors/font_outline_color = Color(0.0939458, 0.0919693, 0.0911199
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11")
+theme_override_fonts/font = ExtResource("6_njfy6")
 theme_override_font_sizes/font_size = 130
 text = "Simple
 Pool"
@@ -109,6 +108,7 @@ sound_on_icon = ExtResource("8_0s4le")
 sound_off_icon = ExtResource("10_bl3i5")
 
 [node name="InfoPanel" type="Button" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -131,6 +131,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -169,6 +170,9 @@ alignment = 1
 layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 16
+text = "test123
+
+licenses here"
 fit_content = true
 autowrap_mode = 2
 script = ExtResource("7_f1i3t")

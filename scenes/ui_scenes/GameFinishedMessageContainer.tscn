@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://jxekvhprpbin"]
+[gd_scene load_steps=6 format=3 uid="uid://jxekvhprpbin"]
 
-[ext_resource type="FontFile" path="res://assets/fonts/ui_font_24.tres" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhjjprup8a6e" path="res://assets/images/ui/trophy.svg" id="2_ych2b"]
 [ext_resource type="Script" path="res://scripts/menus/game_finished_message_container.gd" id="3"]
 
@@ -72,7 +71,6 @@ custom_minimum_size = Vector2(140, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("1")
 text = "message"
 horizontal_alignment = 1
 vertical_alignment = 1

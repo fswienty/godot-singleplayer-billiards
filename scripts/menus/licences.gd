@@ -2,10 +2,11 @@ extends RichTextLabel
 
 
 func _ready():
+	self.text = ""
 	self.append_text("[center][b]Godot Engine[/b][/center]\n")
 	self.append_text(Engine.get_license_text())
-	
-	self.append_text("\n[center][b]Tabler Icons[/b][/center]\n")
+
+	self.append_text("\n\n[center][b]Tabler Icons[/b][/center]\n")
 	var tabler_text = load_from_file("res://assets/licenses/tabler.txt")
 	self.append_text(tabler_text)
 
