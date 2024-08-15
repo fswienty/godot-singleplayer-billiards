@@ -108,7 +108,6 @@ sound_on_icon = ExtResource("8_0s4le")
 sound_off_icon = ExtResource("10_bl3i5")
 
 [node name="InfoPanel" type="Button" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -174,7 +173,14 @@ text = "test123
 
 licenses here"
 fit_content = true
+scroll_active = false
 autowrap_mode = 2
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+threaded = true
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
 script = ExtResource("7_f1i3t")
 
 [node name="ClickBlocker" type="Control" parent="."]
