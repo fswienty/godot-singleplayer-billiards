@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuhgt8fgqamll"]
+[gd_scene load_steps=14 format=3 uid="uid://cuhgt8fgqamll"]
 
 [ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="2"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="4"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bdpdh28fcnnxg" path="res://assets/images/ui/info-circle.svg" id="8_f74ri"]
 [ext_resource type="Texture2D" uid="uid://btyn7yclkexd5" path="res://assets/images/ui/volume-off.svg" id="10_bl3i5"]
 [ext_resource type="PackedScene" uid="uid://dmmgcu5g0iott" path="res://scenes/autoload/GlobalUi.tscn" id="11_o5u3k"]
+
+[sub_resource type="SystemFont" id="SystemFont_tvu3v"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("5")
@@ -40,9 +42,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.901961, 0.901961, 0.901961, 1)
 theme_override_colors/font_shadow_color = Color(0.054902, 0.054902, 0.054902, 1)
 theme_override_colors/font_outline_color = Color(0.0939458, 0.0919693, 0.0911199, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 15
 theme_override_fonts/font = ExtResource("6_njfy6")
 theme_override_font_sizes/font_size = 130
 text = "Simple
@@ -147,6 +149,13 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
+[node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+text = "I'm sorry but this panel might be very laggy on your device. The license text below is very long, and frankly I'm too lazy to fix this."
+fit_content = true
+scroll_active = false
+
 [node name="Label3" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Licences"
@@ -168,7 +177,8 @@ alignment = 1
 [node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/PanelContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 16
+theme_override_fonts/normal_font = SubResource("SystemFont_tvu3v")
+theme_override_font_sizes/normal_font_size = 12
 text = "test123
 
 licenses here"
