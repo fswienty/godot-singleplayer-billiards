@@ -1,4 +1,0 @@
-credit tabler icons and godot engine
-
-chaos billiard:
-    just do next turn immediately lol

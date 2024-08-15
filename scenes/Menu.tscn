@@ -141,6 +141,12 @@ theme_override_font_sizes/font_size = 56
 text = "Simple Pool"
 horizontal_alignment = 1
 
+[node name="Label4" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Version 0.1.7"
+horizontal_alignment = 1
+
 [node name="Label2" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "by DivineDev"
