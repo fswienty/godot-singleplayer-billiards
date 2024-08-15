@@ -151,8 +151,8 @@ layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 12
-text = "I'm sorry but this panel might be very laggy on your device. The license text below is very long, and frankly I'm too lazy to fix this."
+theme_override_font_sizes/normal_font_size = 13
+text = "I'm sorry but this panel might be very laggy on your device. It's due to the license text below being very long, and frankly I'm too lazy to fix it."
 fit_content = true
 scroll_active = false
 
@@ -178,7 +178,7 @@ alignment = 1
 layout_mode = 2
 mouse_filter = 2
 theme_override_fonts/normal_font = SubResource("SystemFont_tvu3v")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 13
 text = "test123
 
 licenses here"
