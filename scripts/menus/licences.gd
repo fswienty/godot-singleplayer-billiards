@@ -24,6 +24,13 @@ func _ready():
 				self.append_text(license_infos[license])
 		self.append_text("\n\n")
 
+	
+	# add add privacy policy
+	_add_privacy_policy()
+
+	# add imprint
+	_add_imprint()
+
 
 func _license_type_to_array(licenses: String) -> Array[String]:
 	var licenses_array: Array[String] = []
@@ -44,7 +51,7 @@ func _license_type_to_array(licenses: String) -> Array[String]:
 
 func _add_tabler_license():
 	self.append_text("[center][b]Tabler Icons[/b][/center]\n")
-	var tabler_text = """MIT License
+	var tabler_license = """MIT License
 
 Copyright (c) 2020-2024 Paweł Kuna
 
@@ -66,4 +73,37 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 
-	self.append_text(tabler_text)
+	self.append_text(tabler_license)
+	self.append_text("\n\n")
+
+
+func _add_privacy_policy():
+	self.append_text("\n[center][b]Privacy Policy[/b][/center]\n")
+	self.append_text("""The app Simple Pool does not collect, store, or share any personal information or data from users.
+
+**Data Collection**
+I do not collect any personal information from users. My app does not use any third-party services that collect data.
+
+**Permissions**
+While the app may request certain permissions, these are solely to provide core functionality and are not used to collect any personal data.
+
+**Children's Privacy**
+My app complies with the Children's Online Privacy Protection Act (COPPA) and does not collect any personal information from children under the age of 13.
+
+**Third-Party Services**
+I do not use any third-party services that collect user data.
+
+**Changes to This Policy**
+I may update the Privacy Policy from time to time. I will notify users of any changes by updating the policy on this page.""")
+	self.append_text("\n\n")
+
+func _add_imprint():
+	self.append_text("\n[center][b]Imprint[/b][/center]\n")
+	self.append_text("""fswienty@gmail.com
+
+
+Florian Swienty
+An den Reben 31
+55122 Mainz
+Germany""")
+	self.append_text("\n\n")

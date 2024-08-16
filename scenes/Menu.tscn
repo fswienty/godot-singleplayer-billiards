@@ -158,13 +158,13 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 13
-text = "I'm sorry but this panel might be very laggy on your device. It's due to the license text below being very long, and frankly I'm too lazy to fix it."
+text = "I'm sorry but this panel might be very laggy on your device. It's due to the legal text below being very long, and frankly I'm too lazy to fix it."
 fit_content = true
 scroll_active = false
 
 [node name="Label3" type="Label" parent="InfoPanel/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Licences"
+text = "Legal"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="InfoPanel/PanelContainer/VBoxContainer"]
