@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://2ex36aor2wex"]
 
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="1"]
-[ext_resource type="Script" path="res://scripts/menus/player_container.gd" id="2"]
+[ext_resource type="Script" uid="uid://dcwdj3decvnp2" path="res://scripts/menus/player_container.gd" id="2"]
 
 [node name="PlayerContainer" type="PanelContainer"]
 offset_top = 36.0

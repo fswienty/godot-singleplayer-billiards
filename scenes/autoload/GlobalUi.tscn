@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://ellxrisr0mfk" path="res://assets/fonts/Nunito-Bold.ttf" id="1"]
 [ext_resource type="Theme" uid="uid://bduxmeenb8ffk" path="res://ui_theme/ui_theme_1.tres" id="2"]
-[ext_resource type="Script" path="res://scripts/autoload/global_ui.gd" id="3"]
+[ext_resource type="Script" uid="uid://c6gipaflds24u" path="res://scripts/autoload/global_ui.gd" id="3"]
 
 [sub_resource type="FontFile" id="4"]
 fallbacks = Array[Font]([ExtResource("1")])

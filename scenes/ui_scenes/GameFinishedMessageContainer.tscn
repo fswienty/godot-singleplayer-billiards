@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://jxekvhprpbin"]
 
 [ext_resource type="Texture2D" uid="uid://bhjjprup8a6e" path="res://assets/images/ui/trophy.svg" id="2_ych2b"]
-[ext_resource type="Script" path="res://scripts/menus/game_finished_message_container.gd" id="3"]
+[ext_resource type="Script" uid="uid://mb08jedceuut" path="res://scripts/menus/game_finished_message_container.gd" id="3"]
 
 [sub_resource type="Animation" id="Animation_vdjgx"]
 length = 0.001
@@ -47,8 +47,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qv2i1"]
 _data = {
-"RESET": SubResource("Animation_vdjgx"),
-"win": SubResource("1")
+&"RESET": SubResource("Animation_vdjgx"),
+&"win": SubResource("1")
 }
 
 [node name="MessageContainer" type="HBoxContainer"]
