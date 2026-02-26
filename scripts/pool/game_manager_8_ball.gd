@@ -191,11 +191,11 @@ func _on_ball_pocketed(ball: Ball, pocket: Pocket):
 
 	# handle pocketing
 	_handle_pocketing(ball)
-	hud.update()
 	ball_manager.remove(ball)
 
 	# check if the pocketed ball was the last non-8-ball for some team
 	_check_last_non_8_ball(pocket)
+	hud.update()
 
 
 func _handle_8_ball_pocketed(_pocket: Pocket):
